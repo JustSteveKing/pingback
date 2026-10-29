@@ -1,8 +1,10 @@
-name: ci-tests
+name: api ci-tests
 
 on:
   push:
+    paths: ['api/**', '.github/workflows/api-*.yml']
   pull_request:
+    paths: ['api/**', '.github/workflows/api-*.yml']
 
 permissions:
   contents: read
@@ -10,6 +12,9 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - name: Checkout
@@ -61,6 +66,9 @@ jobs:
 
   image:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - name: Checkout

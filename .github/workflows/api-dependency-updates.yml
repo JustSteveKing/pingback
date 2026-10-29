@@ -1,4 +1,4 @@
-name: dependency-updates
+name: api dependency-updates
 
 on:
   schedule:
@@ -12,6 +12,9 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - name: Checkout
@@ -81,10 +84,11 @@ jobs:
         with:
           commit-message: 'bot: dependency updates'
           title: 'bot: dependency updates'
-          body-path: pr-body.md
+          # Action inputs are relative to the repository, not to the job's working directory.
+          body-path: api/pr-body.md
           add-paths: |
-            composer.json
-            composer.lock
-            vet.json
+            api/composer.json
+            api/composer.lock
+            api/vet.json
           branch: bot/dependency-updates
           delete-branch: true
