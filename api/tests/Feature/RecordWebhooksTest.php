@@ -8,6 +8,9 @@ use App\Models\Organization;
 use App\Models\WebhookEvent as StoredEvent;
 use App\Models\WebhookSubscription;
 use App\Webhooks\DeliverWebhook;
+use App\Webhooks\Events\ExportCompleted;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\HostResolver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 
@@ -81,3 +84,17 @@ it('announces a refused change to nobody', function (): void {
 
     expect(sentEvents())->toBe([]);
 });
+
+it('lets a subscription ask for every event Pingback sends', function (string $type): void {
+    app()->instance(HostResolver::class, new class implements HostResolver {
+        public function addresses(string $host): array
+        {
+            return ['93.184.216.34'];
+        }
+    });
+    $token = $this->account->owner->createToken('test', ['webhooks:write'])->plainTextToken;
+
+    $this->withToken($token)
+        ->postJson('/v1/webhooks', ['url' => 'https://hooks.example.com/pingback', 'events' => [$type]])
+        ->assertCreated();
+})->with([...RecordChanged::TYPES, ExportCompleted::TYPE]);

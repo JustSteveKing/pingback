@@ -54,7 +54,7 @@ final class CreateExportController
     public function __invoke(#[CurrentUser] User $user, Operations $operations, Preferences $preferences): Responsable|RedirectResponse
     {
         $export = $user->account()->firstOrFail()->exports()->create();
-        $accepted = $operations->dispatch(new ExportContacts($export->id));
+        $accepted = $operations->dispatch(new ExportContacts($export->id, route('v1.exports.show', $export)));
 
         if ($preferences->respondAsync()) {
             return $accepted;

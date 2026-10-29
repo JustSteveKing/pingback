@@ -16,6 +16,7 @@ final readonly class ExportCompleted implements WebhookEvent
 
     public function __construct(
         private Export $export,
+        private string $url,
     ) {}
 
     public function type(): string
@@ -36,7 +37,7 @@ final readonly class ExportCompleted implements WebhookEvent
         return [
             'id' => $this->export->id,
             'rows' => $this->export->rows,
-            'url' => route('v1.exports.show', $this->export),
+            'url' => $this->url,
             'expires_at' => $this->export->expires_at?->toAtomString(),
         ];
     }

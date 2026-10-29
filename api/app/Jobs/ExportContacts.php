@@ -28,8 +28,14 @@ final class ExportContacts implements ShouldQueue
      */
     public const array COLUMNS = ['id', 'first_name', 'last_name', 'email', 'phone', 'organization', 'address', 'city', 'region', 'country', 'postal_code'];
 
+    /**
+     * @param  string  $url  where the file will be, built while there is a request to build it
+     *                       from: a queue worker only knows APP_URL, which need not be the host the
+     *                       client used
+     */
     public function __construct(
         public string $exportId,
+        public string $url,
     ) {}
 
     public function handle(CurrentOperation $operation, Webhooks $webhooks): void
@@ -69,7 +75,7 @@ final class ExportContacts implements ShouldQueue
         Storage::put($path, $csv);
         fclose($csv);
 
-        DB::transaction(static function () use ($export, $path, $rows, $webhooks): void {
+        DB::transaction(function () use ($export, $path, $rows, $webhooks): void {
             $export->update([
                 'path' => $path,
                 'rows' => $rows,
@@ -80,10 +86,10 @@ final class ExportContacts implements ShouldQueue
             $owner = $export->account->owner;
 
             if (null !== $owner) {
-                $webhooks->dispatch($owner, new ExportCompleted($export));
+                $webhooks->dispatch($owner, new ExportCompleted($export, $this->url));
             }
         });
 
-        $operation->resultAt(route('v1.exports.show', $export));
+        $operation->resultAt($this->url);
     }
 }

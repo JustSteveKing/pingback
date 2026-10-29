@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Webhooks\Events\ExportCompleted;
 use App\Webhooks\Events\RecordChanged;
 
 return [
@@ -19,6 +20,7 @@ return [
 
     'events' => [
         ...RecordChanged::TYPES,
+        ExportCompleted::TYPE,
     ],
 
     /*

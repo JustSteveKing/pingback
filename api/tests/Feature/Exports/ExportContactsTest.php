@@ -110,7 +110,8 @@ it('announces a finished export', function (): void {
     Queue::fake();
     WebhookSubscription::factory()->for($this->account->owner)->create(['events' => ['export.completed']]);
 
-    new ExportContacts(Export::factory()->for($this->account)->create()->id)->handle(app(CurrentOperation::class), app(Webhooks::class));
+    $export = Export::factory()->for($this->account)->create();
+    new ExportContacts($export->id, 'https://pingback.example/v1/exports/' . $export->id)->handle(app(CurrentOperation::class), app(Webhooks::class));
 
     $event = StoredEvent::query()->sole();
     $export = Export::query()->sole();
@@ -120,7 +121,7 @@ it('announces a finished export', function (): void {
         ->and($event->data)->toBe([
             'id' => $export->id,
             'rows' => 0,
-            'url' => route('v1.exports.show', $export),
+            'url' => 'https://pingback.example/v1/exports/' . $export->id,
             'expires_at' => $export->expires_at?->toAtomString(),
         ]);
 });
@@ -168,4 +169,13 @@ it('requires the export abilities', function (): void {
     $this->withToken($token)->postJson('/v1/exports')->assertProblem(403);
     $this->withToken($token)->getJson('/v1/exports/01jbd2c3e4f5g6h7j8k9m0n1p2')->assertProblem(403);
     $this->withToken($token)->getJson('/v1/operations/01jbd2c3e4f5g6h7j8k9m0n1p2')->assertProblem(403);
+});
+
+it('tells the job where the file will be on the host the client used, not APP_URL', function (): void {
+    Queue::fake();
+    config(['app.url' => 'https://elsewhere.example']);
+
+    $this->withToken($this->token)->postJson('http://127.0.0.1:8000/v1/exports', [], ['Prefer' => 'respond-async'])->assertAccepted();
+
+    Queue::assertPushed(ExportContacts::class, static fn(ExportContacts $job): bool => str_starts_with($job->url, 'http://127.0.0.1:8000/v1/exports/'));
 });
