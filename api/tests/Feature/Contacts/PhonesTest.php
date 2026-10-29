@@ -87,7 +87,7 @@ it('refuses a malformed phone or list of phones', function (array $body, string 
 ]);
 
 it('moves each existing phone onto the list when it migrates', function (): void {
-    $migration = require database_path('migrations/2026_10_30_090000_give_contacts_a_list_of_phones.php');
+    $migration = require database_path('migrations/2026_10_29_160000_give_contacts_a_list_of_phones.php');
     $migration->down();
 
     DB::table('contacts')->insert([
