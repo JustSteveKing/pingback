@@ -1,0 +1,72 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "GET",
+                "path": "/v1/account",
+                "uri": "http://127.0.0.1:8000/v1/account",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 403,
+                "reason": "Forbidden",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:19:31 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18762-f3f7-73c4-b40d-5d4f2405d69a"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\",\"instance\":\"urn:uuid:01a18762-f3f7-73c4-b40d-5d4f2405d69a\"}"
+            }
+        }
+    ]
+}
