@@ -8,6 +8,9 @@ servers:
     url: 'http://localhost:8000'
 tags:
   -
+    name: Account
+    description: ''
+  -
     name: Authentication
     description: ''
   -
@@ -23,6 +26,77 @@ security:
   -
     default: []
 paths:
+  /v1/account:
+    get:
+      summary: 'Get the Account'
+      operationId: getTheAccount
+      description: 'Return the account the bearer token works in: everything Pingback stores belongs to it. The response carries an ETag: send it back in If-None-Match and an unchanged account returns 304 with no body.'
+      parameters:
+        -
+          in: header
+          name: If-None-Match
+          description: 'An ETag from an earlier response. While it still matches, the answer is 304 Not Modified with no body, so you can re-fetch cheaply.'
+          example: '"a1b2c3d4e5f6"'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'The account.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: null
+                    name: 'Price Ltd'
+                    created_at: null
+                    updated_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: null
+                        nullable: true
+                      name:
+                        type: string
+                        example: 'Price Ltd'
+                      created_at:
+                        type: string
+                        example: null
+                        nullable: true
+                      updated_at:
+                        type: string
+                        example: null
+                        nullable: true
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Account
   /v1/auth/register:
     post:
       summary: Register
@@ -45,10 +119,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63ny1qjgh5jqxeqkz152gwb
+                    id: 01m63p141njsjtmz1xjht989jv
                     name: 'Justina Gaylord'
                     email: lafayette.considine@example.com
-                    email_verified_at: '2026-10-29T11:15:14+00:00'
+                    email_verified_at: '2026-10-29T11:16:54+00:00'
                     created_at: null
                     updated_at: null
                   meta:
@@ -61,7 +135,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63ny1qjgh5jqxeqkz152gwb
+                        example: 01m63p141njsjtmz1xjht989jv
                       name:
                         type: string
                         example: 'Justina Gaylord'
@@ -70,7 +144,7 @@ paths:
                         example: lafayette.considine@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:15:14+00:00'
+                        example: '2026-10-29T11:16:54+00:00'
                       created_at:
                         type: string
                         example: null
@@ -173,10 +247,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63ny1qxhsvad6vehrfrzpra
+                    id: 01m63p141xdtr19a753ehevms5
                     name: 'Justina Gaylord'
                     email: cormier.nick@example.com
-                    email_verified_at: '2026-10-29T11:15:14+00:00'
+                    email_verified_at: '2026-10-29T11:16:54+00:00'
                     created_at: null
                     updated_at: null
                   meta:
@@ -189,7 +263,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63ny1qxhsvad6vehrfrzpra
+                        example: 01m63p141xdtr19a753ehevms5
                       name:
                         type: string
                         example: 'Justina Gaylord'
@@ -198,7 +272,7 @@ paths:
                         example: cormier.nick@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:15:14+00:00'
+                        example: '2026-10-29T11:16:54+00:00'
                       created_at:
                         type: string
                         example: null
@@ -636,10 +710,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63ny1rtnnvbh0g6zt2j8sne
+                    id: 01m63p142yc3hnsqvwqe1k4gf3
                     name: 'Morgan Hirthe'
                     email: dare.emelie@example.com
-                    email_verified_at: '2026-10-29T11:15:14+00:00'
+                    email_verified_at: '2026-10-29T11:16:55+00:00'
                     created_at: null
                     updated_at: null
                 properties:
@@ -648,7 +722,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63ny1rtnnvbh0g6zt2j8sne
+                        example: 01m63p142yc3hnsqvwqe1k4gf3
                       name:
                         type: string
                         example: 'Morgan Hirthe'
@@ -657,7 +731,7 @@ paths:
                         example: dare.emelie@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:15:14+00:00'
+                        example: '2026-10-29T11:16:55+00:00'
                       created_at:
                         type: string
                         example: null

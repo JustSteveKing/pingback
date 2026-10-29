@@ -84,6 +84,7 @@ return [
 
     'abilities' => [
         'available' => [
+            'account:read',
             'auth:me',
             'auth:logout',
             'auth:verification:send',
@@ -94,6 +95,7 @@ return [
             'webhooks:write',
         ],
         'default' => [
+            'account:read',
             'auth:me',
             'auth:logout',
             'auth:verification:send',

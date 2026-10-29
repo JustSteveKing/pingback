@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\V1\Account\ShowAccountController;
 use App\Http\Controllers\Api\V1\Auth\CreateTokenController;
 use App\Http\Controllers\Api\V1\Auth\DeleteAllTokensController;
 use App\Http\Controllers\Api\V1\Auth\DeleteTokenController;
@@ -61,6 +62,9 @@ Route::post('/webhooks/{webhook}/consent', GrantWebhookConsentController::class)
     ->name('v1.webhooks.consent.grant');
 
 Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (): void {
+    Route::get('/account', ShowAccountController::class)
+        ->middleware(['abilities:account:read', 'conditional'])
+        ->name('v1.account.show');
     Route::get('/auth/me', MeController::class)
         ->middleware(['abilities:auth:me', 'conditional'])
         ->name('v1.auth.me');
