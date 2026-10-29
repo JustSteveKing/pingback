@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "43796364-b3c4-49fb-b318-fbccc6101bbe",
+        "_postman_id": "9659639d-91e8-4a47-a906-e04c04b92363",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63ryew8qt644nhx4b6mjbt4\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63vv2yx1hdm5q84n06q4m96\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63ryewg4nrg9gde4hebtwfc\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63vv2z5t8901mdb5z3gexn1\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63ryexg1k99jnt139bhhwgf\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63vv303psewa7vw4dhpk26f\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -778,7 +778,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "[{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}]",
+                            "body": "[{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}]",
                             "name": "One page of contacts."
                         },
                         {
@@ -827,7 +827,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
+                            "raw": "{\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
                         },
                         "description": "Add a contact to the account, at one of its organisations or none. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the contact with its ETag, and its URL in Location."
                     },
@@ -835,7 +835,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
                             "name": "Contact created."
                         },
                         {
@@ -897,7 +897,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
                             "name": "The contact, with its ETag."
                         },
                         {
@@ -954,7 +954,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
+                            "raw": "{\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
                         },
                         "description": "Change a contact with a JSON Merge Patch (application\/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the contact after the change, with its new ETag."
                     },
@@ -962,7 +962,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
                             "name": "The contact after the change."
                         },
                         {
@@ -1118,7 +1118,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
                             "name": "The contact, restored."
                         },
                         {

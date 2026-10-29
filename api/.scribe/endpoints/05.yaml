@@ -81,7 +81,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '[{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
+        content: '[{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
         headers: []
         description: 'One page of contacts.'
       -
@@ -128,13 +128,24 @@ endpoints:
       '[].phone':
         custom: []
         name: '[].phone'
-        description: 'A phone number, or null.'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
         required: true
         example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      '[].phones':
+        custom: []
+        name: '[].phones'
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
       '[].address':
         custom: []
@@ -281,10 +292,22 @@ endpoints:
       phone:
         custom: []
         name: phone
-        description: 'Up to 50 characters, or null.'
+        description: 'Deprecated: send phones instead. One number, up to 50 characters, which replaces the list; null empties it. Never with phones.'
         required: false
         example: '+1 555 0101'
         type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phones:
+        custom: []
+        name: phones
+        description: 'Up to 10 phone numbers, which replace the list.'
+        required: false
+        example:
+          - []
+        type: 'object[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
@@ -344,12 +367,38 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
+      'phones[].number':
+        custom: []
+        name: 'phones[].number'
+        description: 'Up to 50 characters.'
+        required: true
+        example: '+1 555 0101'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'phones[].label':
+        custom: []
+        name: 'phones[].label'
+        description: 'Up to 25 characters, such as work or mobile, or null.'
+        required: false
+        example: work
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
       organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
       first_name: Ada
       last_name: Lovelace
       email: ada@rippin.example
       phone: '+1 555 0101'
+      phones:
+        -
+          number: '+1 555 0101'
+          label: work
       address: '742 Evergreen Terrace'
       city: Springfield
       region: Oregon
@@ -360,7 +409,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
         description: 'Contact created.'
       -
@@ -407,13 +456,24 @@ endpoints:
       data.phone:
         custom: []
         name: data.phone
-        description: 'A phone number, or null.'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
         required: true
         example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      data.phones:
+        custom: []
+        name: data.phones
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
       data.address:
         custom: []
@@ -531,7 +591,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
         description: 'The contact, with its ETag.'
       -
@@ -578,13 +638,24 @@ endpoints:
       data.phone:
         custom: []
         name: data.phone
-        description: 'A phone number, or null.'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
         required: true
         example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      data.phones:
+        custom: []
+        name: data.phones
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
       data.address:
         custom: []
@@ -743,10 +814,22 @@ endpoints:
       phone:
         custom: []
         name: phone
-        description: 'Up to 50 characters, or null.'
+        description: 'Deprecated: send phones instead. One number, up to 50 characters, which replaces the list; null empties it. Never with phones.'
         required: false
         example: '+1 555 0101'
         type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phones:
+        custom: []
+        name: phones
+        description: 'Up to 10 phone numbers, which replace the list.'
+        required: false
+        example:
+          - []
+        type: 'object[]'
         enumValues: []
         exampleWasSpecified: false
         nullable: false
@@ -806,12 +889,38 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
+      'phones[].number':
+        custom: []
+        name: 'phones[].number'
+        description: 'Up to 50 characters.'
+        required: true
+        example: '+1 555 0101'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'phones[].label':
+        custom: []
+        name: 'phones[].label'
+        description: 'Up to 25 characters, such as work or mobile, or null.'
+        required: false
+        example: work
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
       organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
       first_name: Ada
       last_name: Lovelace
       email: ada@rippin.example
       phone: '+1 555 0101'
+      phones:
+        -
+          number: '+1 555 0101'
+          label: work
       address: '742 Evergreen Terrace'
       city: Springfield
       region: Oregon
@@ -822,7 +931,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
         description: 'The contact after the change.'
       -
@@ -893,13 +1002,24 @@ endpoints:
       data.phone:
         custom: []
         name: data.phone
-        description: 'A phone number, or null.'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
         required: true
         example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      data.phones:
+        custom: []
+        name: data.phones
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
       data.address:
         custom: []
@@ -1100,7 +1220,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
         description: 'The contact, restored.'
       -
@@ -1147,13 +1267,24 @@ endpoints:
       data.phone:
         custom: []
         name: data.phone
-        description: 'A phone number, or null.'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
         required: true
         example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      data.phones:
+        custom: []
+        name: data.phones
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
       data.address:
         custom: []

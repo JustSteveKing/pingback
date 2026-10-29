@@ -21,6 +21,7 @@ final class ContactResource extends JsonResource
         'last_name' => 'Lovelace',
         'email' => 'ada@rippin.example',
         'phone' => '+1 555 0101',
+        'phones' => [['number' => '+1 555 0101', 'label' => 'work'], ['number' => '+1 555 0102', 'label' => 'mobile']],
         'address' => '742 Evergreen Terrace',
         'city' => 'Springfield',
         'region' => 'Oregon',
@@ -45,7 +46,9 @@ final class ContactResource extends JsonResource
             'first_name' => $contact->first_name,
             'last_name' => $contact->last_name,
             'email' => $contact->email,
-            'phone' => $contact->phone,
+            // Deprecated (ADR-0007): the first of phones, kept so existing clients keep working.
+            'phone' => $contact->primaryPhone(),
+            'phones' => array_map(static fn(array $phone): array => ['number' => $phone['number'], 'label' => $phone['label']], $contact->phones),
             'address' => $contact->address,
             'city' => $contact->city,
             'region' => $contact->region,

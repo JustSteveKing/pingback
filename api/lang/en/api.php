@@ -26,6 +26,7 @@ return [
         'https_required' => 'HTTPS is required for this endpoint.',
     ],
     'contacts' => [
+        'phone_with_phones' => 'Send phones or phone, not both. phone is deprecated: use phones.',
         'organization_unknown' => 'The organisation is not one of this account\'s, or it is deleted.',
     ],
     'exports' => [

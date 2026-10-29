@@ -16,7 +16,8 @@ final readonly class UpdateContactPayload
         public string $firstName,
         public string $lastName,
         public ?string $email,
-        public ?string $phone,
+        /** @var list<array{number: string, label: string|null}> */
+        public array $phones,
         public ?string $address,
         public ?string $city,
         public ?string $region,
@@ -33,7 +34,7 @@ final readonly class UpdateContactPayload
             firstName: Arr::string($data, 'first_name'),
             lastName: Arr::string($data, 'last_name'),
             email: self::optional($data, 'email'),
-            phone: self::optional($data, 'phone'),
+            phones: self::phones($data),
             address: self::optional($data, 'address'),
             city: self::optional($data, 'city'),
             region: self::optional($data, 'region'),
@@ -45,7 +46,7 @@ final readonly class UpdateContactPayload
     /**
      * Every field, for the model: a field left out of the request is stored as null.
      *
-     * @return array<string, string|null>
+     * @return array<string, mixed>
      */
     public function attributes(): array
     {
@@ -54,13 +55,30 @@ final readonly class UpdateContactPayload
             $this->firstName,
             $this->lastName,
             $this->email,
-            $this->phone,
+            $this->phones,
             $this->address,
             $this->city,
             $this->region,
             $this->country,
             $this->postalCode,
         ]);
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return list<array{number: string, label: string|null}>
+     */
+    private static function phones(array $data): array
+    {
+        $phones = [];
+
+        foreach (is_array($data['phones'] ?? null) ? $data['phones'] : [] as $phone) {
+            if (is_array($phone) && is_string($phone['number'] ?? null)) {
+                $phones[] = ['number' => $phone['number'], 'label' => is_string($phone['label'] ?? null) ? $phone['label'] : null];
+            }
+        }
+
+        return $phones;
     }
 
     /**

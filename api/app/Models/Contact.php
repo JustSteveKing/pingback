@@ -22,7 +22,7 @@ use Override;
  * @property string $first_name
  * @property string $last_name
  * @property string|null $email
- * @property string|null $phone
+ * @property list<array{number: string, label: string|null}> $phones
  * @property string|null $address
  * @property string|null $city
  * @property string|null $region
@@ -46,15 +46,16 @@ final class Contact extends Model implements HasValidators
     /**
      * Every field a client writes, in the order the API shows them.
      */
-    public const array FIELDS = ['organization_id', 'first_name', 'last_name', 'email', 'phone', 'address', 'city', 'region', 'country', 'postal_code'];
+    public const array FIELDS = ['organization_id', 'first_name', 'last_name', 'email', 'phones', 'address', 'city', 'region', 'country', 'postal_code'];
 
     /**
-     * The database defaults, so a model fresh from create() has an ETag without a reload.
+     * The database defaults, so a model fresh from create() has an ETag without a reload, and a
+     * list of phones that is empty rather than null.
      *
-     * @var array<string, int>
+     * @var array<string, int|string>
      */
     #[Override]
-    protected $attributes = ['revision' => 1];
+    protected $attributes = ['revision' => 1, 'phones' => '[]'];
 
     /**
      * @var list<string>
@@ -81,6 +82,14 @@ final class Contact extends Model implements HasValidators
     }
 
     /**
+     * The first number, which is what the deprecated phone field shows (ADR-0007).
+     */
+    public function primaryPhone(): ?string
+    {
+        return $this->phones[0]['number'] ?? null;
+    }
+
+    /**
      * @return array<string, string>
      */
     #[Override]
@@ -88,6 +97,7 @@ final class Contact extends Model implements HasValidators
     {
         return [
             'revision' => 'integer',
+            'phones' => 'array',
         ];
     }
 }

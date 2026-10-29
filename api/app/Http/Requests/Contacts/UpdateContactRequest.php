@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Contacts;
 
 use App\Models\Contact;
+use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 use JustSteveKing\Toolbox\MergePatch\MergePatch;
 
@@ -35,6 +36,17 @@ final class UpdateContactRequest extends FormRequest
     }
 
     /**
+     * @return list<Closure>
+     */
+    public function after(): array
+    {
+        /** @var array<string, mixed> $sent */
+        $sent = $this->all();
+
+        return [ContactRules::notBothPhones($sent)];
+    }
+
+    /**
      * @return array<string, string>
      */
     public function messages(): array
@@ -58,8 +70,10 @@ final class UpdateContactRequest extends FormRequest
 
         /** @var array<string, mixed> $document */
         $document = is_array($merged) ? $merged : [];
+        /** @var array<string, mixed> $sent */
+        $sent = $this->all();
 
-        return $document;
+        return ContactRules::phoneAsPhones($document, $sent);
     }
 
     private function contact(): ?Contact

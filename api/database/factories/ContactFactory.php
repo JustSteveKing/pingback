@@ -26,7 +26,7 @@ final class ContactFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
+            'phones' => [['number' => fake()->phoneNumber(), 'label' => fake()->randomElement(['work', 'mobile', null])]],
             'address' => fake()->streetAddress(),
             'city' => fake()->city(),
             'region' => fake()->state(),

@@ -81,7 +81,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01m63ryew8qt644nhx4b6mjbt4","name":"Justina Gaylord","email":"lafayette.considine@example.com","email_verified_at":"2026-10-29T12:07:53+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
+        content: '{"data":{"id":"01m63vv2yx1hdm5q84n06q4m96","name":"Justina Gaylord","email":"lafayette.considine@example.com","email_verified_at":"2026-10-29T12:58:28+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
         headers: []
         description: 'Registration succeeded.'
       -
@@ -160,7 +160,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01m63ryewg4nrg9gde4hebtwfc","name":"Justina Gaylord","email":"cormier.nick@example.com","email_verified_at":"2026-10-29T12:07:53+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
+        content: '{"data":{"id":"01m63vv2z5t8901mdb5z3gexn1","name":"Justina Gaylord","email":"cormier.nick@example.com","email_verified_at":"2026-10-29T12:58:28+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
         headers: []
         description: 'Login succeeded.'
       -
@@ -492,7 +492,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01m63ryexg1k99jnt139bhhwgf","name":"Morgan Hirthe","email":"dare.emelie@example.com","email_verified_at":"2026-10-29T12:07:53+00:00","created_at":null,"updated_at":null}}'
+        content: '{"data":{"id":"01m63vv303psewa7vw4dhpk26f","name":"Morgan Hirthe","email":"dare.emelie@example.com","email_verified_at":"2026-10-29T12:58:28+00:00","created_at":null,"updated_at":null}}'
         headers: []
         description: 'Authenticated user profile.'
       -

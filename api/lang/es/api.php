@@ -26,6 +26,7 @@ return [
         'https_required' => 'HTTPS es obligatorio para este endpoint.',
     ],
     'contacts' => [
+        'phone_with_phones' => 'Envia phones o phone, no los dos. phone esta obsoleto: usa phones.',
         'organization_unknown' => 'La organizacion no es de esta cuenta, o esta eliminada.',
     ],
     'exports' => [

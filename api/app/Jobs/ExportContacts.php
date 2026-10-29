@@ -59,7 +59,7 @@ final class ExportContacts implements ShouldQueue
                     $contact->first_name,
                     $contact->last_name,
                     $contact->email,
-                    $contact->phone,
+                    $contact->primaryPhone(),
                     $contact->organization?->name,
                     $contact->address,
                     $contact->city,

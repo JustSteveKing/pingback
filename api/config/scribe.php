@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Support\DeprecatedFieldsOpenApiGenerator;
 use App\Support\HeaderDescriptionsOpenApiGenerator;
 use App\Support\MediaTypesOpenApiGenerator;
 use App\Support\NoContentOpenApiGenerator;
@@ -187,6 +188,7 @@ return [
             NoContentOpenApiGenerator::class,
             MediaTypesOpenApiGenerator::class,
             ResponseFieldsOpenApiGenerator::class,
+            DeprecatedFieldsOpenApiGenerator::class,
             HeaderDescriptionsOpenApiGenerator::class,
         ],
     ],

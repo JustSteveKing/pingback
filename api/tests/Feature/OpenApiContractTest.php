@@ -510,7 +510,7 @@ it('keeps contact responses aligned with their documented schemas, nulls include
     $account = Account::factory()->create();
     $organization = Organization::factory()->for($account)->create();
 
-    $bare = Contact::factory()->for($account)->create(array_fill_keys(['organization_id', 'email', 'phone', 'address', 'city', 'region', 'country', 'postal_code'], null));
+    $bare = Contact::factory()->for($account)->create([...array_fill_keys(['organization_id', 'email', 'address', 'city', 'region', 'country', 'postal_code'], null), 'phones' => []]);
     $full = Contact::factory()->for($account)->create(['organization_id' => $organization->id]);
     $deleted = Contact::factory()->for($account)->create();
     $deleted->delete();
@@ -538,6 +538,19 @@ it('keeps contact responses aligned with their documented schemas, nulls include
         expect($schema)->not->toBeNull(sprintf('%s %s documents no %d.', $method, $documented, $status));
         assertMatchesOpenApiSchema($spec, (array) $schema, $response->json(), '$');
     }
+});
+
+it('marks a contact\'s phone deprecated in the contract, and nothing else (ADR-0007)', function (): void {
+    $spec = generateOpenApiSpec(forceGenerate: true);
+
+    $contact = documentedResponseSchema($spec, '/v1/contacts/{contact}', 'GET', 200);
+    $organization = documentedResponseSchema($spec, '/v1/organizations/{organization}', 'GET', 200);
+    $body = $spec['paths']['/v1/contacts']['post']['requestBody']['content']['application/json']['schema']['properties'] ?? [];
+
+    expect($contact['properties']['data']['properties']['phone']['deprecated'] ?? null)->toBeTrue()
+        ->and($contact['properties']['data']['properties']['phones'] ?? null)->not->toHaveKey('deprecated')
+        ->and($body['phone']['deprecated'] ?? null)->toBeTrue()
+        ->and($organization['properties']['data']['properties']['phone'] ?? null)->not->toHaveKey('deprecated');
 });
 
 it('describes every request header it documents', function (): void {
