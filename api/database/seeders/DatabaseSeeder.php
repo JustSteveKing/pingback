@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Account;
+use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,9 @@ final class DatabaseSeeder extends Seeder
             'password' => 'secret-pingback-demo',
         ]);
 
-        Account::factory()->for($owner, 'owner')->create(['name' => 'Acme Corporation']);
+        $account = Account::factory()->for($owner, 'owner')->create(['name' => 'Acme Corporation']);
+
+        // Ping CRM seeds a hundred organisations, enough that a list has more than one page.
+        Organization::factory()->count(100)->for($account)->create();
     }
 }

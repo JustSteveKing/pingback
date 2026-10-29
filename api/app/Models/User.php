@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -43,6 +44,16 @@ final class User extends Authenticatable implements MustVerifyEmail
      */
     #[Override]
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * The account this user owns. Every user has one: registering creates it (ADR-0003).
+     *
+     * @return HasOne<Account, $this>
+     */
+    public function account(): HasOne
+    {
+        return $this->hasOne(Account::class, 'owner_id');
+    }
 
     /**
      * @return HasMany<WebhookSubscription, $this>

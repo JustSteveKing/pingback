@@ -16,6 +16,12 @@ use App\Http\Controllers\Api\V1\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\V1\Auth\SendEmailVerificationNotificationController;
 use App\Http\Controllers\Api\V1\Auth\ShowResetPasswordTokenController;
 use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\V1\Organizations\CreateOrganizationController;
+use App\Http\Controllers\Api\V1\Organizations\DeleteOrganizationController;
+use App\Http\Controllers\Api\V1\Organizations\ListOrganizationsController;
+use App\Http\Controllers\Api\V1\Organizations\RestoreOrganizationController;
+use App\Http\Controllers\Api\V1\Organizations\ShowOrganizationController;
+use App\Http\Controllers\Api\V1\Organizations\UpdateOrganizationController;
 use App\Http\Controllers\Api\V1\Webhooks\CreateWebhookController;
 use App\Http\Controllers\Api\V1\Webhooks\DeleteWebhookController;
 use App\Http\Controllers\Api\V1\Webhooks\GrantWebhookConsentController;
@@ -126,4 +132,27 @@ Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (
         ->whereUlid(['webhook', 'delivery'])
         ->middleware(['abilities:webhooks:write', 'throttle:6,1'])
         ->name('v1.webhooks.deliveries.redeliver');
+
+    Route::get('/organizations', ListOrganizationsController::class)
+        ->middleware('abilities:organizations:read')
+        ->name('v1.organizations.index');
+    Route::post('/organizations', CreateOrganizationController::class)
+        ->middleware(['abilities:organizations:write', 'idempotent'])
+        ->name('v1.organizations.store');
+    Route::get('/organizations/{organization}', ShowOrganizationController::class)
+        ->whereUlid('organization')
+        ->middleware(['abilities:organizations:read', 'conditional'])
+        ->name('v1.organizations.show');
+    Route::patch('/organizations/{organization}', UpdateOrganizationController::class)
+        ->whereUlid('organization')
+        ->middleware(['abilities:organizations:write', 'consumes:application/merge-patch+json', 'merge-patch', 'conditional', 'preconditions.required'])
+        ->name('v1.organizations.update');
+    Route::delete('/organizations/{organization}', DeleteOrganizationController::class)
+        ->whereUlid('organization')
+        ->middleware(['abilities:organizations:write', 'conditional', 'preconditions.required'])
+        ->name('v1.organizations.destroy');
+    Route::post('/organizations/{organization}/restore', RestoreOrganizationController::class)
+        ->whereUlid('organization')
+        ->middleware('abilities:organizations:write')
+        ->name('v1.organizations.restore');
 });

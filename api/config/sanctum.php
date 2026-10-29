@@ -85,6 +85,8 @@ return [
     'abilities' => [
         'available' => [
             'account:read',
+            'organizations:read',
+            'organizations:write',
             'auth:me',
             'auth:logout',
             'auth:verification:send',
@@ -96,6 +98,8 @@ return [
         ],
         'default' => [
             'account:read',
+            'organizations:read',
+            'organizations:write',
             'auth:me',
             'auth:logout',
             'auth:verification:send',

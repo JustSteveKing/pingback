@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\Account;
+use App\Models\Organization;
 use App\Models\User;
 use App\Models\WebhookDelivery;
 use App\Models\WebhookEvent;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Symfony\Component\Yaml\Yaml;
 
 uses(RefreshDatabase::class);
@@ -462,6 +465,41 @@ it('keeps authenticated webhook responses aligned with their documented schemas,
         $schema = documentedResponseSchema($spec, $documented, $method, 200);
 
         expect($schema)->not->toBeNull();
+        assertMatchesOpenApiSchema($spec, (array) $schema, $response->json(), '$');
+    }
+});
+
+it('keeps organisation responses aligned with their documented schemas, nulls included', function (): void {
+    $spec = generateOpenApiSpec(forceGenerate: true);
+    $account = Account::factory()->create();
+
+    // One with every optional field empty, and one deleted, so null and non-null are both checked.
+    $bare = Organization::factory()->for($account)->create(array_fill_keys(['email', 'phone', 'address', 'city', 'region', 'country', 'postal_code'], null));
+    $full = Organization::factory()->for($account)->create();
+    $deleted = Organization::factory()->for($account)->create();
+    $deleted->delete();
+
+    $token = $account->owner->createToken('contract', ['organizations:read', 'organizations:write'])->plainTextToken;
+    $etag = fn(Organization $organization): string => (string) $this->withToken($token)->getJson('/v1/organizations/' . $organization->id)->headers->get('ETag');
+
+    $checks = [
+        ['GET', '/v1/organizations', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/organizations?trashed=with')],
+        ['GET', '/v1/organizations/{organization}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/organizations/' . $bare->id)],
+        ['GET', '/v1/organizations/{organization}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/organizations/' . $deleted->id)],
+        ['POST', '/v1/organizations', 201, fn(): TestResponse => $this->withToken($token)->postJson('/v1/organizations', ['name' => 'Contract'])],
+        ['POST', '/v1/organizations', 422, fn(): TestResponse => $this->withToken($token)->postJson('/v1/organizations', [])],
+        ['PATCH', '/v1/organizations/{organization}', 200, fn(): TestResponse => mergePatch('/v1/organizations/' . $full->id, ['city' => null], $token, ['If-Match' => $etag($full)])],
+        ['PATCH', '/v1/organizations/{organization}', 412, fn(): TestResponse => mergePatch('/v1/organizations/' . $full->id, ['city' => null], $token, ['If-Match' => '"stale"'])],
+        ['PATCH', '/v1/organizations/{organization}', 428, fn(): TestResponse => mergePatch('/v1/organizations/' . $full->id, ['city' => null], $token)],
+        ['POST', '/v1/organizations/{organization}/restore', 200, fn(): TestResponse => $this->withToken($token)->postJson('/v1/organizations/' . $deleted->id . '/restore')],
+        ['DELETE', '/v1/organizations/{organization}', 404, fn(): TestResponse => $this->withToken($token)->deleteJson('/v1/organizations/01jbd0x4qsm2cf4c8m3x6y1v7z', [], ['If-Match' => '"x"'])],
+    ];
+
+    foreach ($checks as [$method, $documented, $status, $send]) {
+        $response = $send()->assertStatus($status);
+        $schema = documentedResponseSchema($spec, $documented, $method, $status);
+
+        expect($schema)->not->toBeNull(sprintf('%s %s documents no %d.', $method, $documented, $status));
         assertMatchesOpenApiSchema($spec, (array) $schema, $response->json(), '$');
     }
 });

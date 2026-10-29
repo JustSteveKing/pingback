@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "e6d4090b-83a5-424a-affa-0073584dd1c3",
+        "_postman_id": "47c9939b-30b1-44d4-bff0-c56332c922fb",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63p141njsjtmz1xjht989jv\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T11:16:54+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63pxktagzdb6q9wsm2x0rc0\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T11:32:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63p141xdtr19a753ehevms5\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T11:16:54+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63pxktjjwqtyhx5sh9g7hm3\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T11:32:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63p142yc3hnsqvwqe1k4gf3\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T11:16:55+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63pxkvkzwv5h496zn2zef9k\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T11:32:28+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -717,6 +717,421 @@
                                     "name": "Authentication failed."
                                 }
                             ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Organizations",
+            "description": "",
+            "item": [
+                {
+                    "name": "List Organizations",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations",
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "acme",
+                                    "description": "Only organisations whose name or email contains this text, ignoring case. Must not be greater than 100 characters.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "trashed",
+                                    "value": "with",
+                                    "description": "Deleted organisations are left out unless this is \"with\" (include them) or \"only\" (nothing else).",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "cursor",
+                                    "value": "architecto",
+                                    "description": "Opaque cursor from a Link header. Omit it for the first page.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/v1\/organizations?search=acme&trashed=with&cursor=architecto"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "List the account's organisations, ordered by name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search organisations, or to find one's ID. Returns an array of organisations; follow the Link header's rel=\"next\" for the next page, which keeps the same search and filter."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}]",
+                            "name": "One page of organisations."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"The selected trashed is invalid.\",\"errors\":{\"trashed\":[\"The selected trashed is invalid.\"]}}",
+                            "name": "The trashed filter is not \"with\" or \"only\", or the search is longer than 100 characters."
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Organization",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/organizations"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Idempotency-Key",
+                                "value": "\"organization-retry-1\""
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
+                        },
+                        "description": "Add an organisation to the account. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the organisation with its ETag, and its URL in Location."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "name": "Organisation created."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:write ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"The name field is required.\",\"errors\":{\"name\":[\"The name field is required.\"]}}",
+                            "name": "A field is missing, too long or malformed."
+                        }
+                    ]
+                },
+                {
+                    "name": "Show Organization",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations\/:organization",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/organizations\/:organization",
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+                                    "description": "The organisation ID, a ULID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "If-None-Match",
+                                "value": "\"a1b2c3d4e5f6\""
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Fetch one organisation by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the organisation, or 304 with no body when If-None-Match still matches."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "name": "The organisation, with its ETag."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No organisation with this ID belongs to the authenticated account."
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Organization",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations\/:organization",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/organizations\/:organization",
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+                                    "description": "The organisation ID, a ULID."
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "If-Match",
+                                "value": "\"a1b2c3d4e5f6\""
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\"}"
+                        },
+                        "description": "Change an organisation with a JSON Merge Patch (application\/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the organisation after the change, with its new ETag."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "name": "The organisation after the change."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:write ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No organisation with this ID belongs to the authenticated account."
+                        },
+                        {
+                            "header": [],
+                            "code": 412,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\"}",
+                            "name": "If-Match does not match the current ETag: someone else changed it first."
+                        },
+                        {
+                            "header": [],
+                            "code": 415,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unsupported-media-type\",\"title\":\"Unsupported Media Type\",\"status\":415,\"detail\":\"The Content-Type 'application\\\/json' is not supported. Supported content types: application\\\/merge-patch+json.\"}",
+                            "name": "The body is not application\/merge-patch+json."
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"The name field is required.\",\"errors\":{\"name\":[\"The name field is required.\"]}}",
+                            "name": "A field is too long or malformed, or the name was cleared."
+                        },
+                        {
+                            "header": [],
+                            "code": 428,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\"}",
+                            "name": "The request has no If-Match."
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Organization",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations\/:organization",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/organizations\/:organization",
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+                                    "description": "The organisation ID, a ULID."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "If-Match",
+                                "value": "\"a1b2c3d4e5f6\""
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Delete an organisation. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": null,
+                            "name": "Organisation deleted."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:write ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No organisation with this ID belongs to the authenticated account."
+                        },
+                        {
+                            "header": [],
+                            "code": 412,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\"}",
+                            "name": "If-Match does not match the current ETag: someone else changed it first."
+                        },
+                        {
+                            "header": [],
+                            "code": 428,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\"}",
+                            "name": "The request has no If-Match."
+                        }
+                    ]
+                },
+                {
+                    "name": "Restore Organization",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations\/:organization\/restore",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/organizations\/:organization\/restore",
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+                                    "description": "The organisation ID, a ULID."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Bring back a deleted organisation, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the organisation with its new ETag."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "name": "The organisation, restored."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the organizations:write ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No organisation with this ID belongs to the authenticated account."
                         }
                     ]
                 }

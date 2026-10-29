@@ -25,6 +25,9 @@ return [
         'too_many_requests' => 'Too many requests. Please try again later.',
         'https_required' => 'HTTPS is required for this endpoint.',
     ],
+    'organizations' => [
+        'country_format' => 'Countries are two-letter ISO 3166-1 codes in capitals, such as GB.',
+    ],
     'webhooks' => [
         'target_not_https' => 'Webhook URLs must use https.',
         'target_unresolvable' => 'The webhook URL\'s host does not resolve.',

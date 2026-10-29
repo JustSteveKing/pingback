@@ -25,6 +25,9 @@ return [
         'too_many_requests' => 'Demasiadas solicitudes. Intentalo de nuevo mas tarde.',
         'https_required' => 'HTTPS es obligatorio para este endpoint.',
     ],
+    'organizations' => [
+        'country_format' => 'Los paises son codigos ISO 3166-1 de dos letras en mayusculas, como GB.',
+    ],
     'webhooks' => [
         'target_not_https' => 'Las URL de webhook deben usar https.',
         'target_unresolvable' => 'El host de la URL del webhook no se resuelve.',

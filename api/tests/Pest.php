@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Models\Account;
+use App\Models\Organization;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 /*
@@ -43,7 +46,38 @@ expect()->extend('toBeOne', fn() => $this->toBe(1));
 |
 */
 
-function something(): void
+/**
+ * A bearer token for the account's owner, holding the organisation abilities unless told otherwise.
+ *
+ * @param  list<string>  $abilities
+ */
+function ownerToken(Account $account, array $abilities = ['organizations:read', 'organizations:write']): string
 {
-    // ..
+    return $account->owner->createToken('test', $abilities)->plainTextToken;
+}
+
+/**
+ * Sends a JSON Merge Patch (RFC 7396), which the JSON helpers cannot: they always send
+ * application/json.
+ *
+ * @param  array<string, mixed>  $patch
+ * @param  array<string, string>  $headers
+ */
+function mergePatch(string $uri, array $patch, string $token, array $headers = []): TestResponse
+{
+    $server = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/json', 'HTTP_AUTHORIZATION' => "Bearer {$token}"];
+
+    foreach ($headers as $name => $value) {
+        $server['HTTP_' . mb_strtoupper(str_replace('-', '_', $name))] = $value;
+    }
+
+    return test()->call('PATCH', $uri, [], [], [], $server, json_encode($patch, JSON_THROW_ON_ERROR));
+}
+
+/**
+ * The organisation's current ETag, read the way a client would.
+ */
+function etagOf(Organization $organization, string $token): string
+{
+    return (string) test()->withToken($token)->getJson("/v1/organizations/{$organization->id}")->headers->get('ETag');
 }

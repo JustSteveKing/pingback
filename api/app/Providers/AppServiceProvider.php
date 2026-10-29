@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Organization;
 use App\Models\User;
 use App\Support\ProductionSecurityChecks;
 use App\Webhooks\DnsHostResolver;
@@ -11,10 +12,12 @@ use App\Webhooks\HostResolver;
 use App\Webhooks\SubscriptionSigningKeys;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use JustSteveKing\Toolbox\Idempotency\Http\Middleware\EnsureIdempotency;
 use JustSteveKing\Toolbox\MessageSignatures\Contracts\KeyResolver;
@@ -64,6 +67,8 @@ final class AppServiceProvider extends ServiceProvider
             Scribe::normalizeEndpointUrlUsing(static fn(string $uri): string => $uri);
         }
 
+        $this->bindRouteParameters();
+
         RateLimiter::for('auth-register', fn(Request $request): array => [
             Limit::perMinute(10)->by($request->ip()),
         ]);
@@ -81,5 +86,24 @@ final class AppServiceProvider extends ServiceProvider
                 $request->user() instanceof User ? $request->user()->id : (string) $request->ip(),
             ),
         ]);
+    }
+
+    /**
+     * Records are bound to the route, because api-toolbox finds a resource's ETag in the bound
+     * parameters. Each binding resolves within the authenticated user's account, so another
+     * account's organisation is a 404, exactly like one that does not exist (ADR-0003). Deleted
+     * records still resolve: they can be read, changed and restored, as in Ping CRM.
+     */
+    private function bindRouteParameters(): void
+    {
+        Route::bind('organization', static function (string $id): Organization {
+            $account = request()->user()?->account;
+
+            if (null === $account) {
+                throw new ModelNotFoundException()->setModel(Organization::class);
+            }
+
+            return $account->organizations()->withTrashed()->whereKey($id)->firstOrFail();
+        });
     }
 }
