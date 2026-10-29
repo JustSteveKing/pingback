@@ -30,9 +30,13 @@ final readonly class ListContacts implements HasQuery, Request
         return Method::Get;
     }
 
+    /**
+     * The contacts at one organisation are their own resource. The organization_id filter on
+     * /contacts that came before it is deprecated (Pingback's ADR-0008), so it is never sent.
+     */
     public function path(): string
     {
-        return '/contacts';
+        return $this->organizationId === null ? '/contacts' : '/organizations/'.rawurlencode($this->organizationId).'/contacts';
     }
 
     public function query(): array
@@ -40,7 +44,6 @@ final readonly class ListContacts implements HasQuery, Request
         return [
             'search' => $this->search,
             'trashed' => $this->trashed?->value,
-            'organization_id' => $this->organizationId,
         ];
     }
 

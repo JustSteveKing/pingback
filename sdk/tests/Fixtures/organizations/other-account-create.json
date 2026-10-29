@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"ed528c32-e799-43ed-9eee-55338d82b21d\""
+                        "\"455efda0-f3bb-4cae-aa8c-49b5bddb8d89\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:09 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"1342cd86a3c2f31f10345d3b8410814c\""
+                        "\"1fd4d0e48a7994421edea6d187f032a6\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63sym36gsvsnyn34tpn1taf"
+                        "http://127.0.0.1:8000/v1/organizations/01m63w5fk5xhtqjtvshpt3hne8"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "530"
+                        "528"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,10 +80,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-505c-7128-bd79-c472a0b75602"
+                        "01a187c2-be5a-71a8-93cf-0abefe2a089b"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sym36gsvsnyn34tpn1taf\",\"name\":\"Contract Private Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w5fk5xhtqjtvshpt3hne8\",\"name\":\"Contract Private Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:09+00:00\",\"updated_at\":\"2026-10-29T13:04:09+00:00\",\"deleted_at\":null}}"
             }
         }
     ]

@@ -1,0 +1,176 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/contacts",
+                "uri": "http://127.0.0.1:8000/v1/contacts",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"12d206ca-253b-46e7-ad70-b251ebe6807a\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"phones\":[{\"number\":\"+44 20 7946 0000\",\"label\":\"work\"}]}"
+            },
+            "response": {
+                "status": 201,
+                "reason": "Created",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"3f32156144557734af23621a7a4de87d\""
+                    ],
+                    "location": [
+                        "http://127.0.0.1:8000/v1/contacts/01m63w5a2k5kd7cf7sr0a88bnv"
+                    ],
+                    "x-ratelimit-limit": [
+                        "600"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "571"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a187c2-a848-7075-874b-6ca001e74fcb"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63w5a2k5kd7cf7sr0a88bnv\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":\"+44 20 7946 0000\",\"phones\":[{\"number\":\"+44 20 7946 0000\",\"label\":\"work\"}],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "PATCH",
+                "path": "/v1/contacts/01m63w5a2k5kd7cf7sr0a88bnv",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w5a2k5kd7cf7sr0a88bnv",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/merge-patch+json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"3f32156144557734af23621a7a4de87d\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"phones\":[{\"number\":\"+44 7700 900000\",\"label\":\"mobile\"},{\"number\":\"+44 20 7946 0000\",\"label\":\"work\"}]}"
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"58fb3a49700d23fbbc396a3e39bb0817\""
+                    ],
+                    "accept-patch": [
+                        "application/merge-patch+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "600"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "570"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a187c2-a867-70f6-b685-a5c82996b519"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63w5a2k5kd7cf7sr0a88bnv\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":\"+44 7700 900000\",\"phones\":[{\"number\":\"+44 7700 900000\",\"label\":\"mobile\"},{\"number\":\"+44 20 7946 0000\",\"label\":\"work\"}],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
+            }
+        }
+    ]
+}

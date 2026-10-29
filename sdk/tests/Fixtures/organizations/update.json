@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"cebdb632-a3f5-42c5-94c7-0fa6955b1c31\""
+                        "\"fc66b33f-f4ea-406b-b746-a9637b5d619a\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:26 GMT"
+                        "Thu, 29 Oct 2026 13:04:08 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"dd76c1e6b6539f8b3ecaa3e2f26619f2\""
+                        "\"363959b74078eb08ef6a26c697473789\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63sykpe16nbfbpa4mg8ne2j"
+                        "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "549"
+                        "547"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,17 +80,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4ec3-72e0-b3a4-038b6d0c18a0"
+                        "01a187c2-bca8-7218-8d20-b3ada51d4ad3"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sykpe16nbfbpa4mg8ne2j\",\"name\":\"Contract Update Ltd\",\"email\":\"hello@contract.example\",\"phone\":null,\"address\":null,\"city\":\"York\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:26+00:00\",\"updated_at\":\"2026-10-29T12:25:26+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":\"hello@contract.example\",\"phone\":null,\"address\":null,\"city\":\"York\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63sykpe16nbfbpa4mg8ne2j",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykpe16nbfbpa4mg8ne2j",
+                "path": "/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -105,7 +105,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"dd76c1e6b6539f8b3ecaa3e2f26619f2\""
+                        "\"363959b74078eb08ef6a26c697473789\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -130,13 +130,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:08 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"1745d72642de137ee870457640bc431a\""
+                        "\"9912ab797a17f2c98ca445b784b73abd\""
                     ],
                     "accept-patch": [
                         "application/merge-patch+json"
@@ -145,7 +145,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "548"
+                        "546"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4ee0-73fe-81fd-2f7bf28629e7"
+                        "01a187c2-bcc3-7160-8eea-f6669ba34f87"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sykpe16nbfbpa4mg8ne2j\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:26+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/organizations/01m63sykpe16nbfbpa4mg8ne2j",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykpe16nbfbpa4mg8ne2j",
+                "path": "/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -210,22 +210,22 @@
                         "private, must-revalidate"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:08 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"1745d72642de137ee870457640bc431a\""
+                        "\"9912ab797a17f2c98ca445b784b73abd\""
                     ],
                     "last-modified": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:08 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "547"
+                        "545"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -246,10 +246,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4ef8-7185-9e90-ef2dfca9ec28"
+                        "01a187c2-bcda-7322-a4bd-39d048f05c88"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sykpe16nbfbpa4mg8ne2j\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:26+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
             }
         }
     ]

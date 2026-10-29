@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"b73db8c1-811f-43f7-b05c-1e9f110400a1\""
+                        "\"c7dfe656-bbf4-4c2c-8acc-7751bf53d5c0\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,16 +44,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"dbab297f22f5dd76108f6ad80203b40c\""
+                        "\"6e062210c92db8365f606c1ef11d3690\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63sye6kh68s19efpmcqj1k4"
+                        "http://127.0.0.1:8000/v1/organizations/01m63w59jx773fsd93dfd7q925"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -80,10 +80,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-38c9-722e-8e7c-05dc61497b40"
+                        "01a187c2-a652-70b7-b002-16c5afc5a4d2"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye6kh68s19efpmcqj1k4\",\"name\":\"Contract Closing Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59jx773fsd93dfd7q925\",\"name\":\"Contract Closing Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         },
         {
@@ -105,13 +105,13 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"250a2e5e-fec7-4fd5-b86a-8d8729dcdcc2\""
+                        "\"b0a8465c-8427-4b66-a53d-350c07082412\""
                     ],
                     "Authorization": [
                         "[redacted]"
                     ]
                 },
-                "body": "{\"organization_id\":\"01m63sye6kh68s19efpmcqj1k4\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\"}"
+                "body": "{\"organization_id\":\"01m63w59jx773fsd93dfd7q925\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"phones\":[]}"
             },
             "response": {
                 "status": 201,
@@ -130,16 +130,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"4d662ae4d8f5d8dd32cdb9f7b6f90895\""
+                        "\"b22aa44532bc7d55d7f736bd0e76aea3\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/contacts/01m63sye7ftwyh7es3kezn6kgd"
+                        "http://127.0.0.1:8000/v1/contacts/01m63w59ktewvw2kygdjj99tvr"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-38e5-736a-8dc0-41ac3c1e87aa"
+                        "01a187c2-a66f-71fb-a62f-cf590b6b6da8"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye7ftwyh7es3kezn6kgd\",\"organization_id\":\"01m63sye6kh68s19efpmcqj1k4\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59ktewvw2kygdjj99tvr\",\"organization_id\":\"01m63w59jx773fsd93dfd7q925\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "DELETE",
-                "path": "/v1/organizations/01m63sye6kh68s19efpmcqj1k4",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sye6kh68s19efpmcqj1k4",
+                "path": "/v1/organizations/01m63w59jx773fsd93dfd7q925",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w59jx773fsd93dfd7q925",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -188,7 +188,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"dbab297f22f5dd76108f6ad80203b40c\""
+                        "\"6e062210c92db8365f606c1ef11d3690\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -213,7 +213,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -240,7 +240,7 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-3901-70c9-9d2a-a184bac20648"
+                        "01a187c2-a68d-736c-9ca8-b645b8335a67"
                     ]
                 },
                 "body": ""
@@ -249,8 +249,8 @@
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/contacts/01m63sye7ftwyh7es3kezn6kgd",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye7ftwyh7es3kezn6kgd",
+                "path": "/v1/contacts/01m63w59ktewvw2kygdjj99tvr",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59ktewvw2kygdjj99tvr",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -265,7 +265,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"4d662ae4d8f5d8dd32cdb9f7b6f90895\""
+                        "\"b22aa44532bc7d55d7f736bd0e76aea3\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -290,13 +290,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"c0568a096660a542524142ec48b77b6c\""
+                        "\"4e5bf2249fb61fd5f332ae50e80acb10\""
                     ],
                     "accept-patch": [
                         "application/merge-patch+json"
@@ -326,10 +326,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-3914-7324-80c6-ff6f140c4321"
+                        "01a187c2-a6a1-70d4-97c1-678fd232272d"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye7ftwyh7es3kezn6kgd\",\"organization_id\":\"01m63sye6kh68s19efpmcqj1k4\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59ktewvw2kygdjj99tvr\",\"organization_id\":\"01m63w59jx773fsd93dfd7q925\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         }
     ]

@@ -19,13 +19,13 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"a46e6bc1-7398-454a-b8bf-c9452ff5f25d\""
+                        "\"1d590e15-b3c2-4608-b4af-2fb39fa6aa41\""
                     ],
                     "Authorization": [
                         "[redacted]"
                     ]
                 },
-                "body": "{\"first_name\":\"Ada\",\"last_name\":\"Lovelace\"}"
+                "body": "{\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"phones\":[]}"
             },
             "response": {
                 "status": 201,
@@ -44,16 +44,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"9aa277cfbccfeadf38a47c59734d3fce\""
+                        "\"4d211c7a9aaad458598ea7e6a8778fd3\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7"
+                        "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -80,17 +80,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-392b-73f5-b353-c40d72e3e858"
+                        "01a187c2-a6ba-711c-974d-8412c92c4562"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye9ne3r9rt122rh30gv7\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59p53mepbrpwvdsweyk6\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -105,7 +105,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"9aa277cfbccfeadf38a47c59734d3fce\""
+                        "\"4d211c7a9aaad458598ea7e6a8778fd3\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -130,13 +130,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"f48c963418a5101362b0cc18af6fd9ec\""
+                        "\"4e4cfd8668e6c7fb9a8fa41d775b2f5d\""
                     ],
                     "accept-patch": [
                         "application/merge-patch+json"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-3947-7078-af66-336307c62705"
+                        "01a187c2-a6d7-7121-8aee-cea3da79f2e9"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye9ne3r9rt122rh30gv7\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59p53mepbrpwvdsweyk6\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -191,7 +191,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"9aa277cfbccfeadf38a47c59734d3fce\""
+                        "\"4d211c7a9aaad458598ea7e6a8778fd3\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -213,13 +213,13 @@
                         "PHP/8.5.12"
                     ],
                     "etag": [
-                        "\"f48c963418a5101362b0cc18af6fd9ec\""
+                        "\"4e4cfd8668e6c7fb9a8fa41d775b2f5d\""
                     ],
                     "cache-control": [
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -252,17 +252,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-395d-73ea-a83f-8b7bc7e427a8"
+                        "01a187c2-a6f0-70ff-be55-f1c2a45fcc55"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a1879f-395d-73ea-a83f-8b7bc7e427a8\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a187c2-a6f0-70ff-be55-f1c2a45fcc55\"}"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -296,16 +296,16 @@
                         "private, must-revalidate"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"f48c963418a5101362b0cc18af6fd9ec\""
+                        "\"4e4cfd8668e6c7fb9a8fa41d775b2f5d\""
                     ],
                     "last-modified": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -332,17 +332,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-396e-7150-a966-20982fd142dd"
+                        "01a187c2-a702-737d-b0ae-5d1472d4555e"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye9ne3r9rt122rh30gv7\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59p53mepbrpwvdsweyk6\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "DELETE",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -354,7 +354,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"f48c963418a5101362b0cc18af6fd9ec\""
+                        "\"4e4cfd8668e6c7fb9a8fa41d775b2f5d\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -379,7 +379,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -406,7 +406,7 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-397f-7388-a231-df26890a09a3"
+                        "01a187c2-a719-714e-a41b-a3ea9d6e3b11"
                     ]
                 },
                 "body": ""
@@ -415,8 +415,8 @@
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -450,16 +450,16 @@
                         "private, must-revalidate"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"b037485bef1c1186bdc6c430f97f20f8\""
+                        "\"bafb21d79c4f9495b5c0545e0d0f1702\""
                     ],
                     "last-modified": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -486,17 +486,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-3992-71e3-9304-52f01d2ed7e1"
+                        "01a187c2-a72d-7377-83ff-784f4f5e55a2"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye9ne3r9rt122rh30gv7\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":\"2026-10-29T12:25:21+00:00\"}}"
+                "body": "{\"data\":{\"id\":\"01m63w59p53mepbrpwvdsweyk6\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":\"2026-10-29T13:04:03+00:00\"}}"
             }
         },
         {
             "request": {
                 "method": "POST",
-                "path": "/v1/contacts/01m63sye9ne3r9rt122rh30gv7/restore",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63sye9ne3r9rt122rh30gv7/restore",
+                "path": "/v1/contacts/01m63w59p53mepbrpwvdsweyk6/restore",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63w59p53mepbrpwvdsweyk6/restore",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -530,13 +530,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:21 GMT"
+                        "Thu, 29 Oct 2026 13:04:03 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"179ed19576daf6b134fd0ab4fb3714f2\""
+                        "\"2cefe4fd7e506f615382e20c3a0a1766\""
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -563,10 +563,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-39a3-70ae-804e-b164428d5803"
+                        "01a187c2-a742-71e8-b887-51e4903d31b5"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sye9ne3r9rt122rh30gv7\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:21+00:00\",\"updated_at\":\"2026-10-29T12:25:21+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w59p53mepbrpwvdsweyk6\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:03+00:00\",\"updated_at\":\"2026-10-29T13:04:03+00:00\",\"deleted_at\":null}}"
             }
         }
     ]

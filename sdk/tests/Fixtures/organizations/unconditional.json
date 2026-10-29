@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"2092487d-67cc-4865-bd14-2917bd0e5d57\""
+                        "\"2a2e458a-402c-412b-8e8b-d365197906e8\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:09 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"4c8ba7fea082c74f96160c9d830af0dd\""
+                        "\"caa947b85d07e948bb4ec4902a7a291f\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63sykv8p3qedr5mzsky3m0h"
+                        "http://127.0.0.1:8000/v1/organizations/01m63w5famt5gcfd9hn49qdfng"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "542"
+                        "540"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,10 +80,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4f5e-7150-98b7-017c5b7c9061"
+                        "01a187c2-bd49-7336-b090-aca4c0395a19"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sykv8p3qedr5mzsky3m0h\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w5famt5gcfd9hn49qdfng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:09+00:00\",\"updated_at\":\"2026-10-29T13:04:09+00:00\",\"deleted_at\":null}}"
             }
         },
         {
@@ -124,7 +124,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:09 GMT"
                     ],
                     "content-type": [
                         "application/json"
@@ -136,7 +136,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "541"
+                        "539"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -157,17 +157,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4f79-730c-b3b8-6c937af37f3e"
+                        "01a187c2-bd65-7012-895f-8126be0c7d40"
                     ]
                 },
-                "body": "[{\"id\":\"01m63sykv8p3qedr5mzsky3m0h\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}]"
+                "body": "[{\"id\":\"01m63w5famt5gcfd9hn49qdfng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:09+00:00\",\"updated_at\":\"2026-10-29T13:04:09+00:00\",\"deleted_at\":null}]"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63sykv8p3qedr5mzsky3m0h",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykv8p3qedr5mzsky3m0h",
+                "path": "/v1/organizations/01m63w5famt5gcfd9hn49qdfng",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5famt5gcfd9hn49qdfng",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -204,7 +204,7 @@
                         "no-store, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:09 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -216,7 +216,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "540"
+                        "538"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -237,10 +237,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-4f8b-7068-9d83-13549454014d"
+                        "01a187c2-bd7b-73a3-a43d-84ece0aaf032"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\",\"instance\":\"urn:uuid:01a1879f-4f8b-7068-9d83-13549454014d\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\",\"instance\":\"urn:uuid:01a187c2-bd7b-73a3-a43d-84ece0aaf032\"}"
             }
         }
     ]

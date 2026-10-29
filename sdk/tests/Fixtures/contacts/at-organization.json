@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"a8c57c88-0db3-4bcf-b2a3-733b0e54bd4d\""
+                        "\"9e418562-f7cc-4fa5-9ad7-b61960de24c3\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,16 +44,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:20 GMT"
+                        "Thu, 29 Oct 2026 13:04:02 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"e5bba728c84c0683ec7560965901bead\""
+                        "\"2875916b1cf66adc2c7f45c34156c31a\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63sydpancafx841tn7vxx3x"
+                        "http://127.0.0.1:8000/v1/organizations/01m63w591z5g6f8yry8trer7nm"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -80,10 +80,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-36c0-7312-9993-3b8b1fd9bb1f"
+                        "01a187c2-a434-7391-b5a5-7d630be49cf4"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sydpancafx841tn7vxx3x\",\"name\":\"Contract Contacts Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:20+00:00\",\"updated_at\":\"2026-10-29T12:25:20+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w591z5g6f8yry8trer7nm\",\"name\":\"Contract Contacts Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:02+00:00\",\"updated_at\":\"2026-10-29T13:04:02+00:00\",\"deleted_at\":null}}"
             }
         },
         {
@@ -105,13 +105,13 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"4b22fa6f-813a-434d-b60e-4163b82f10e2\""
+                        "\"4438109b-12fd-42be-82a1-6a621bb05131\""
                     ],
                     "Authorization": [
                         "[redacted]"
                     ]
                 },
-                "body": "{\"organization_id\":\"01m63sydpancafx841tn7vxx3x\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\"}"
+                "body": "{\"organization_id\":\"01m63w591z5g6f8yry8trer7nm\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"phones\":[]}"
             },
             "response": {
                 "status": 201,
@@ -130,16 +130,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:20 GMT"
+                        "Thu, 29 Oct 2026 13:04:02 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"aff50f9c021e4753d62553d70ac406b6\""
+                        "\"63328a40974a450db049b5661fead329\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/contacts/01m63sydq7grqads10fga0xhf1"
+                        "http://127.0.0.1:8000/v1/contacts/01m63w592xqzak9z2gn94wdtvb"
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-36dc-73ec-914e-9758fde081d9"
+                        "01a187c2-a451-709a-b88a-c15bb58a2447"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63sydq7grqads10fga0xhf1\",\"organization_id\":\"01m63sydpancafx841tn7vxx3x\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:20+00:00\",\"updated_at\":\"2026-10-29T12:25:20+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63w592xqzak9z2gn94wdtvb\",\"organization_id\":\"01m63w591z5g6f8yry8trer7nm\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:02+00:00\",\"updated_at\":\"2026-10-29T13:04:02+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/contacts",
-                "uri": "http://127.0.0.1:8000/v1/contacts?organization_id=01m63sydpancafx841tn7vxx3x",
+                "path": "/v1/organizations/01m63w591z5g6f8yry8trer7nm/contacts",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w591z5g6f8yry8trer7nm/contacts",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -210,13 +210,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:20 GMT"
+                        "Thu, 29 Oct 2026 13:04:02 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "link": [
-                        "<http://127.0.0.1:8000/v1/contacts?organization_id=01m63sydpancafx841tn7vxx3x>; rel=\"first\""
+                        "<http://127.0.0.1:8000/v1/organizations/01m63w591z5g6f8yry8trer7nm/contacts>; rel=\"first\""
                     ],
                     "x-ratelimit-limit": [
                         "600"
@@ -243,10 +243,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-36f9-70ab-a98f-80647cb95079"
+                        "01a187c2-a470-730b-be88-01d568875dfa"
                     ]
                 },
-                "body": "[{\"id\":\"01m63sydq7grqads10fga0xhf1\",\"organization_id\":\"01m63sydpancafx841tn7vxx3x\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:20+00:00\",\"updated_at\":\"2026-10-29T12:25:20+00:00\",\"deleted_at\":null}]"
+                "body": "[{\"id\":\"01m63w592xqzak9z2gn94wdtvb\",\"organization_id\":\"01m63w591z5g6f8yry8trer7nm\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"phones\":[],\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:02+00:00\",\"updated_at\":\"2026-10-29T13:04:02+00:00\",\"deleted_at\":null}]"
             }
         }
     ]

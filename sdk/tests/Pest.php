@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Http\Discovery\Psr17FactoryDiscovery;
 use JustSteveKing\Pingback\Pingback;
 use JustSteveKing\Pingback\Webhooks\WebhookReceiver;
+use JustSteveKing\SdkToolbox\Deprecation\Deprecations;
 use JustSteveKing\SdkToolbox\Retries\RetryPolicy;
 use JustSteveKing\SdkToolbox\Testing\FakeTime;
 use JustSteveKing\SdkToolbox\Testing\Recorder;
@@ -49,7 +50,9 @@ function pingback(string $fixture, ?string $token = null, ?CacheInterface $cache
     // A replay answers at once, so it needn't wait the Retry-After the recording waited.
     $sleeper = live() ? new SystemSleeper : new FakeTime;
 
-    return new Pingback($token ?? demoToken(), baseUri(), $http, retry: RetryPolicy::none(), cache: $cache, events: $events, sleeper: $sleeper);
+    // Strict: the API deprecating anything the SDK calls fails the suite, live or replayed, so the
+    // SDK moves before the sunset rather than finding out after it (ADR-0008).
+    return new Pingback($token ?? demoToken(), baseUri(), $http, retry: RetryPolicy::none(), cache: $cache, events: $events, sleeper: $sleeper, deprecations: Deprecations::strict());
 }
 
 /**

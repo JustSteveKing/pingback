@@ -19,7 +19,7 @@
                         "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"11c83226-3bc9-4f2a-985e-be970f64d511\""
+                        "\"a0df2cc9-6fad-4d12-953e-02dd75a694ec\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,7 +44,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 12:25:27 GMT"
+                        "Thu, 29 Oct 2026 13:04:09 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -53,7 +53,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "531"
+                        "529"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -74,10 +74,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a1879f-5044-72bc-80e8-bb1e25b150b4"
+                        "01a187c2-be42-733c-8977-59da662dc017"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\",\"instance\":\"urn:uuid:01a1879f-5044-72bc-80e8-bb1e25b150b4\",\"errors\":{\"country\":[\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\"]}}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\",\"instance\":\"urn:uuid:01a187c2-be42-733c-8977-59da662dc017\",\"errors\":{\"country\":[\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\"]}}"
             }
         }
     ]

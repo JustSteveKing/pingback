@@ -24,7 +24,6 @@ final readonly class Contact
         'firstName' => 'first_name',
         'lastName' => 'last_name',
         'email' => 'email',
-        'phone' => 'phone',
         'address' => 'address',
         'city' => 'city',
         'region' => 'region',
@@ -38,7 +37,10 @@ final readonly class Contact
         public string $firstName,
         public string $lastName,
         public ?string $email,
+        /** @deprecated the first of phones, kept while the API sends it (Pingback's ADR-0007); read phones */
         public ?string $phone,
+        /** @var list<Phone> */
+        public array $phones,
         public ?string $address,
         public ?string $city,
         public ?string $region,
@@ -63,11 +65,19 @@ final readonly class Contact
     /**
      * A copy with some fields changed, to pass to update() beside the original. Name the fields,
      * and give null to clear one; organizationId: null takes the contact away from its
-     * organisation.
+     * organisation. Phone numbers change with withPhones().
      */
     public function with(?string ...$changes): self
     {
         $values = [];
+
+        if (array_key_exists('phone', $changes)) {
+            trigger_error('Contact::with(phone:) is deprecated: use withPhones().', E_USER_DEPRECATED);
+            $phone = $changes['phone'];
+            unset($changes['phone']);
+
+            return $this->with(...$changes)->withPhones(...($phone === null ? [] : [new Phone($phone)]));
+        }
 
         foreach ($changes as $field => $value) {
             if (! is_string($field) || ! array_key_exists($field, self::WRITABLE)) {
@@ -85,6 +95,15 @@ final readonly class Contact
     }
 
     /**
+     * A copy with these phone numbers in place of the old ones. A merge patch replaces a list
+     * whole (RFC 7396), so the update sends all of them.
+     */
+    public function withPhones(Phone ...$phones): self
+    {
+        return $this->copy([], array_values($phones));
+    }
+
+    /**
      * @internal the read that produced it supplies the ETag
      */
     public function withEtag(?EntityTag $etag): self
@@ -98,7 +117,7 @@ final readonly class Contact
      *
      * @internal
      *
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     public function fields(): array
     {
@@ -110,13 +129,14 @@ final readonly class Contact
             }
         }
 
-        return $fields;
+        return [...$fields, 'phones' => array_map(static fn (Phone $phone): array => $phone->toArray(), $this->phones)];
     }
 
     /**
      * @param  array<string, string|null>  $changes
+     * @param  list<Phone>|null  $phones
      */
-    private function copy(array $changes): self
+    private function copy(array $changes, ?array $phones = null): self
     {
         $value = static fn (string $property, ?string $current): ?string => array_key_exists($property, $changes) ? $changes[$property] : $current;
 
@@ -126,7 +146,8 @@ final readonly class Contact
             firstName: $value('firstName', $this->firstName) ?? $this->firstName,
             lastName: $value('lastName', $this->lastName) ?? $this->lastName,
             email: $value('email', $this->email),
-            phone: $value('phone', $this->phone),
+            phone: $phones === null ? $this->phone : ($phones[0] ?? null)?->number,
+            phones: $phones ?? $this->phones,
             address: $value('address', $this->address),
             city: $value('city', $this->city),
             region: $value('region', $this->region),

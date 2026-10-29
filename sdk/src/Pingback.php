@@ -12,6 +12,7 @@ use JustSteveKing\Pingback\Resources\Organizations;
 use JustSteveKing\SdkToolbox\Auth\Authenticator;
 use JustSteveKing\SdkToolbox\Auth\BearerToken;
 use JustSteveKing\SdkToolbox\Connector;
+use JustSteveKing\SdkToolbox\Deprecation\Deprecations;
 use JustSteveKing\SdkToolbox\Hydration\Hydrator;
 use JustSteveKing\SdkToolbox\Hydration\ValinorHydrator;
 use JustSteveKing\SdkToolbox\Retries\RetryPolicy;
@@ -34,6 +35,9 @@ use SensitiveParameter;
  *
  *     echo $pingback->account()->name;
  *
+ * Pass `deprecations: new Deprecations(...)` to hear when the API deprecates something the SDK
+ * calls, or `Deprecations::strict()` to fail on it, as the SDK's own contract suite does.
+ *
  * The token is a session token or an API key from the API. Pingback runs wherever you run it, so
  * there is no default base URI. Credentials only go over plain HTTP to a loopback address.
  */
@@ -52,6 +56,7 @@ final class Pingback extends Connector
         ClockInterface $clock = new SystemClock,
         Sleeper $sleeper = new SystemSleeper,
         ?Hydrator $hydrator = null,
+        ?Deprecations $deprecations = null,
     ) {
         parent::__construct(
             baseUri: $baseUri,
@@ -66,6 +71,7 @@ final class Pingback extends Connector
             cache: $cache,
             logger: $logger,
             events: $events,
+            deprecations: $deprecations,
         );
     }
 

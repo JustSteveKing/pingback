@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use JustSteveKing\Pingback\Data\Phone;
 use JustSteveKing\Pingback\Inputs\NewContact;
 use JustSteveKing\Pingback\Inputs\NewOrganization;
 use JustSteveKing\SdkToolbox\Errors\NotFoundException;
@@ -89,4 +90,14 @@ it('cannot see another account\'s contact', function (): void {
 
     expect(fn () => pingback('contacts/other-account-get', token: otherAccountToken())->contacts()->get($contact->id))
         ->toThrow(NotFoundException::class);
+});
+
+it('keeps a contact\'s phones as a list, with the first still shown as the deprecated phone', function (): void {
+    $contacts = pingback('contacts/phones')->contacts();
+    $contact = $contacts->create(new NewContact('Ada', 'Lovelace', phones: [new Phone('+44 20 7946 0000', 'work')]));
+
+    $updated = $contacts->update($contact, $contact->withPhones(new Phone('+44 7700 900000', 'mobile'), new Phone('+44 20 7946 0000', 'work')));
+
+    expect($updated->phones)->toEqual([new Phone('+44 7700 900000', 'mobile'), new Phone('+44 20 7946 0000', 'work')])
+        ->and($updated->phone)->toBe('+44 7700 900000');
 });
