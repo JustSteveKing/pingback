@@ -167,14 +167,14 @@
                     <a href="#exports">Exports</a>
                 </li>
                                     <ul id="tocify-subheader-exports" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="exports-GETv1-operations--operation-">
-                                <a href="#exports-GETv1-operations--operation-">Show Operation</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="exports-POSTv1-exports">
+                                                    <li class="tocify-item level-2" data-unique="exports-POSTv1-exports">
                                 <a href="#exports-POSTv1-exports">Create Export</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="exports-GETv1-exports--export-">
                                 <a href="#exports-GETv1-exports--export-">Show Export</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="exports-GETv1-operations--operation-">
+                                <a href="#exports-GETv1-operations--operation-">Show Operation</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -513,10 +513,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63w1b6n8ercgvhc3vk1a9r4&quot;,
+        &quot;id&quot;: &quot;01m63xxg5jvzscwssjy2ea9fpk&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;lafayette.considine@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:34:44+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -735,10 +735,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63w1b6whk0sqcjg3rkm3bp0&quot;,
+        &quot;id&quot;: &quot;01m63xxgaawnbhw7bv9qeb6m63&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;cormier.nick@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:34:45+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -925,10 +925,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63w1b7yygqpxj01fk5synde&quot;,
+        &quot;id&quot;: &quot;01m63xxgmht1hb7735t1ndsk7m&quot;,
         &quot;name&quot;: &quot;Morgan Hirthe&quot;,
         &quot;email&quot;: &quot;dare.emelie@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:34:45+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     }
@@ -5097,200 +5097,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     
 
-                                <h2 id="exports-GETv1-operations--operation-">Show Operation</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed.</p>
-
-<span id="example-requests-GETv1-operations--operation-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/v1/operations/01jbd2c3e4f5g6h7j8k9m0n1p2" \
-    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/v1/operations/01jbd2c3e4f5g6h7j8k9m0n1p2"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETv1-operations--operation-">
-            <blockquote>
-            <p>Example response (200, Still running: ask again after Retry-After.):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;id&quot;: &quot;01jbd2c3e4f5g6h7j8k9m0n1p2&quot;,
-    &quot;status&quot;: &quot;running&quot;,
-    &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
-    &quot;updated_at&quot;: &quot;2026-10-29T09:00:01+00:00&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (303, Finished: the result is in Location.):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;"></code>
- </pre>
-            <blockquote>
-            <p>Example response (401, Authentication failed.):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
-    &quot;title&quot;: &quot;Unauthorized&quot;,
-    &quot;status&quot;: 401,
-    &quot;detail&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (403, Token is missing the exports:read ability.):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
-    &quot;title&quot;: &quot;Forbidden&quot;,
-    &quot;status&quot;: 403,
-    &quot;detail&quot;: &quot;Forbidden.&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (404, No operation with this ID was started by the authenticated user.):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
-    &quot;title&quot;: &quot;Resource Not Found&quot;,
-    &quot;status&quot;: 404,
-    &quot;detail&quot;: &quot;Operation not found.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETv1-operations--operation-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETv1-operations--operation-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETv1-operations--operation-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETv1-operations--operation-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETv1-operations--operation-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETv1-operations--operation-" data-method="GET"
-      data-path="v1/operations/{operation}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETv1-operations--operation-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETv1-operations--operation-"
-                    onclick="tryItOut('GETv1-operations--operation-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETv1-operations--operation-"
-                    onclick="cancelTryOut('GETv1-operations--operation-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETv1-operations--operation-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>v1/operations/{operation}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETv1-operations--operation-"
-               value="Bearer {YOUR_BEARER_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETv1-operations--operation-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETv1-operations--operation-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>operation</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="operation"                data-endpoint="GETv1-operations--operation-"
-               value="01jbd2c3e4f5g6h7j8k9m0n1p2"
-               data-component="url">
-    <br>
-<p>The operation ID, from the 202's Location. Example: <code>01jbd2c3e4f5g6h7j8k9m0n1p2</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="exports-POSTv1-exports">Create Export</h2>
+                                <h2 id="exports-POSTv1-exports">Create Export</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -5677,6 +5484,199 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The export ID, a ULID. Example: <code>01jbd2c3e4f5g6h7j8k9m0n1p2</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="exports-GETv1-operations--operation-">Show Operation</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed.</p>
+
+<span id="example-requests-GETv1-operations--operation-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/v1/operations/01jbd2c3e4f5g6h7j8k9m0n1p2" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/operations/01jbd2c3e4f5g6h7j8k9m0n1p2"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-operations--operation-">
+            <blockquote>
+            <p>Example response (200, Still running: ask again after Retry-After.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: &quot;01jbd2c3e4f5g6h7j8k9m0n1p2&quot;,
+    &quot;status&quot;: &quot;running&quot;,
+    &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+    &quot;updated_at&quot;: &quot;2026-10-29T09:00:01+00:00&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (303, Finished: the result is in Location.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;"></code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the exports:read ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No operation with this ID was started by the authenticated user.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;Operation not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-operations--operation-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-operations--operation-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-operations--operation-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETv1-operations--operation-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-operations--operation-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETv1-operations--operation-" data-method="GET"
+      data-path="v1/operations/{operation}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-operations--operation-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-operations--operation-"
+                    onclick="tryItOut('GETv1-operations--operation-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-operations--operation-"
+                    onclick="cancelTryOut('GETv1-operations--operation-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-operations--operation-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/operations/{operation}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETv1-operations--operation-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETv1-operations--operation-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETv1-operations--operation-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>operation</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="operation"                data-endpoint="GETv1-operations--operation-"
+               value="01jbd2c3e4f5g6h7j8k9m0n1p2"
+               data-component="url">
+    <br>
+<p>The operation ID, from the 202's Location. Example: <code>01jbd2c3e4f5g6h7j8k9m0n1p2</code></p>
             </div>
                     </form>
 

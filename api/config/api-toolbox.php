@@ -49,12 +49,10 @@ return [
             'propagate_trace' => true,
         ]),
         Features::preferences(),
-        // The contact export answers 202 Accepted (ADR-0005). The monitor is documented by
-        // ShowOperationController, which registers the same URI over this one.
+        // The contact export answers 202 Accepted (ADR-0005). The monitor route is Pingback's own,
+        // routes/api/v1.php, so it is documented with the rest of the API.
         Features::asyncOperations([
-            // Where the status monitor lives, and the middleware it runs behind.
-            'path' => 'v1/operations',
-            'middleware' => ['api', 'auth:sanctum'],
+            'route' => false,
             // Seconds an operation's status is kept after its last change.
             'ttl' => 86400,
             // Retry-After, in seconds, while an operation is still running.

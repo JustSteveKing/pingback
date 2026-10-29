@@ -12,6 +12,8 @@ use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Database\Eloquent\Builder;
+use JustSteveKing\Toolbox\Deprecation\Attributes\Deprecation;
+use JustSteveKing\Toolbox\Deprecation\Attributes\Sunset;
 use JustSteveKing\Toolbox\Pagination\CursorPage;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -20,6 +22,10 @@ use Knuckles\Scribe\Attributes\QueryParam;
 use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\ResponseField;
 
+// The organisation filter is a resource of its own, its query part of its URI, and it alone is
+// deprecated: /contacts without it is not (ADR-0008).
+#[Deprecation(at: '2026-10-29T00:00:00Z', link: 'https://github.com/JustSteveKing/pingback/blob/main/architecture/adr/0008-the-organisation-filter-becomes-a-resource-and-is-deprecated.md', query: 'organization_id')]
+#[Sunset(at: '2027-01-31T23:59:59Z', query: 'organization_id')]
 #[Group(name: 'Contacts')]
 #[Endpoint(
     title: 'List Contacts',

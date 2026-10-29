@@ -201,8 +201,8 @@ Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (
         ->whereUlid('export')
         ->middleware('abilities:exports:read')
         ->name('v1.exports.show');
-    // The same URI and name as api-toolbox's monitor (config/api-toolbox.php), which this
-    // replaces: Operations::dispatch() builds every 202's Location from that name.
+    // api-toolbox's monitor, registered here rather than by the package ('route' => false), under
+    // the name Operations::dispatch() builds every 202's Location from.
     Route::get('/operations/{operation}', ShowOperationController::class)
         ->middleware('abilities:exports:read')
         ->name(Operations::ROUTE);

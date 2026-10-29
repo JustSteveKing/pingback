@@ -15,8 +15,8 @@ use Knuckles\Scribe\Attributes\Response;
 use Knuckles\Scribe\Attributes\UrlParam;
 
 /**
- * api-toolbox's status monitor, registered over its own route so that it is documented like the
- * rest of the API; the behaviour is all api-toolbox's.
+ * api-toolbox's status monitor, registered by Pingback ('route' => false) so that it is documented
+ * like the rest of the API; the behaviour is all api-toolbox's.
  */
 #[Group(name: 'Exports')]
 #[Endpoint(

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "2ad78e9f-c934-4fad-b60d-3a70c44afa39",
+        "_postman_id": "dee6d4a2-5d34-4960-acb9-6b373c96472f",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63w1b6n8ercgvhc3vk1a9r4\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63xxg5jvzscwssjy2ea9fpk\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T13:34:44+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63w1b6whk0sqcjg3rkm3bp0\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63xxgaawnbhw7bv9qeb6m63\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T13:34:45+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63w1b7yygqpxj01fk5synde\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63xxgmht1hb7735t1ndsk7m\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T13:34:45+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -1148,70 +1148,6 @@
             "description": "",
             "item": [
                 {
-                    "name": "Show Operation",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "v1\/operations\/:operation",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/v1\/operations\/:operation",
-                            "variable": [
-                                {
-                                    "id": "operation",
-                                    "key": "operation",
-                                    "value": "01jbd2c3e4f5g6h7j8k9m0n1p2",
-                                    "description": "The operation ID, from the 202's Location."
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed."
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\"id\":\"01jbd2c3e4f5g6h7j8k9m0n1p2\",\"status\":\"running\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:01+00:00\"}",
-                            "name": "Still running: ask again after Retry-After."
-                        },
-                        {
-                            "header": [],
-                            "code": 303,
-                            "body": null,
-                            "name": "Finished: the result is in Location."
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
-                            "name": "Authentication failed."
-                        },
-                        {
-                            "header": [],
-                            "code": 403,
-                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
-                            "name": "Token is missing the exports:read ability."
-                        },
-                        {
-                            "header": [],
-                            "code": 404,
-                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"Operation not found.\"}",
-                            "name": "No operation with this ID was started by the authenticated user."
-                        }
-                    ]
-                },
-                {
                     "name": "Create Export",
                     "request": {
                         "url": {
@@ -1330,6 +1266,70 @@
                             "code": 410,
                             "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/gone\",\"title\":\"Gone\",\"status\":410,\"detail\":\"This export has expired. Start another.\"}",
                             "name": "The export expired."
+                        }
+                    ]
+                },
+                {
+                    "name": "Show Operation",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/operations\/:operation",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/operations\/:operation",
+                            "variable": [
+                                {
+                                    "id": "operation",
+                                    "key": "operation",
+                                    "value": "01jbd2c3e4f5g6h7j8k9m0n1p2",
+                                    "description": "The operation ID, from the 202's Location."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"id\":\"01jbd2c3e4f5g6h7j8k9m0n1p2\",\"status\":\"running\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:01+00:00\"}",
+                            "name": "Still running: ask again after Retry-After."
+                        },
+                        {
+                            "header": [],
+                            "code": 303,
+                            "body": null,
+                            "name": "Finished: the result is in Location."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the exports:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"Operation not found.\"}",
+                            "name": "No operation with this ID was started by the authenticated user."
                         }
                     ]
                 }
