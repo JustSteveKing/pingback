@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,11 +18,15 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Ping CRM's demo account and user, so a fresh install has something to call and the
+        // SDK's contract suite has someone to sign in as. Model events are off while seeding, so
+        // the account is made here rather than by the registration listener.
+        $owner = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'password' => 'secret-pingback-demo',
         ]);
+
+        Account::factory()->for($owner, 'owner')->create(['name' => 'Acme Corporation']);
     }
 }
