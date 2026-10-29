@@ -83,7 +83,7 @@ final class AppServiceProvider extends ServiceProvider
         ]);
 
         RateLimiter::for('auth-protected', fn(Request $request): array => [
-            Limit::perMinute(60)->by(
+            Limit::perMinute(config()->integer('security.rate_limit'))->by(
                 $request->user() instanceof User ? $request->user()->id : (string) $request->ip(),
             ),
         ]);

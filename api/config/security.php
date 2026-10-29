@@ -12,6 +12,9 @@ return [
         'preload' => (bool) env('SECURITY_HSTS_PRELOAD', false),
     ],
 
+    // Requests a minute for each signed-in user, across every protected route.
+    'rate_limit' => (int) env('API_RATE_LIMIT', 60),
+
     'trusted_proxies' => env('TRUSTED_PROXIES', '*'),
 
     'trusted_hosts' => array_values(array_filter(array_map(

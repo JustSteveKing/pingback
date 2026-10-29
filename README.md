@@ -31,6 +31,9 @@ composer install
 PINGBACK_BASE_URI=http://127.0.0.1:8000/v1 composer test:contract
 ```
 
+The suite signs in as the demo user for every request, more than the API's default of 60 a minute
+for one user, so set `API_RATE_LIMIT=600` in `api/.env` before serving it, as CI does.
+
 With no API running, `composer test` replays the responses the contract suite recorded. To record them
 again, add `SDK_FIXTURES=record` to the contract run. CI does both on every push: the SDK's own checks
 with the fixtures, and the contract suite against a freshly booted API.

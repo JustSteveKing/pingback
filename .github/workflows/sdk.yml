@@ -58,6 +58,8 @@ jobs:
         working-directory: api
         run: |
           cp .env.example .env
+          # The whole contract suite signs in as one user, inside a minute.
+          sed -i 's/^API_RATE_LIMIT=.*/API_RATE_LIMIT=600/' .env
           composer install --no-interaction --no-progress --prefer-dist
           php artisan key:generate
           touch database/database.sqlite
