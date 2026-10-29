@@ -1,0 +1,6 @@
+/api/vendor/
+/api/node_modules/
+/api/.env
+/sdk/vendor/
+/sdk/composer.lock
+.phpunit.cache/
