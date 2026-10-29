@@ -3,17 +3,19 @@
 declare(strict_types=1);
 
 use Http\Discovery\Psr17FactoryDiscovery;
-use Http\Discovery\Psr18ClientDiscovery;
 use JustSteveKing\Pingback\Pingback;
 use JustSteveKing\Pingback\Webhooks\WebhookReceiver;
 use JustSteveKing\SdkToolbox\Retries\RetryPolicy;
 use JustSteveKing\SdkToolbox\Testing\FakeTime;
 use JustSteveKing\SdkToolbox\Testing\Recorder;
 use JustSteveKing\SdkToolbox\Testing\RecordMode;
+use JustSteveKing\SdkToolbox\Time\SystemSleeper;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\SimpleCache\CacheInterface;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\Psr18Client;
 
 /*
  * The contract suite runs the SDK against the real API when PINGBACK_BASE_URI is set (ADR-0006),
@@ -44,7 +46,10 @@ function pingback(string $fixture, ?string $token = null, ?CacheInterface $cache
         default => null,
     };
 
-    return new Pingback($token ?? demoToken(), baseUri(), $http, retry: RetryPolicy::none(), cache: $cache, events: $events);
+    // A replay answers at once, so it needn't wait the Retry-After the recording waited.
+    $sleeper = live() ? new SystemSleeper : new FakeTime;
+
+    return new Pingback($token ?? demoToken(), baseUri(), $http, retry: RetryPolicy::none(), cache: $cache, events: $events, sleeper: $sleeper);
 }
 
 /**
@@ -163,9 +168,10 @@ function makeDelivery(string $fixture, string $type, Closure $trigger): array
     $server = proc_open([PHP_BINARY, '-S', '127.0.0.1:8001', __DIR__.'/Support/receiver.php'], [['pipe', 'r'], ['file', '/dev/null', 'w'], ['file', '/dev/null', 'w']], $pipes, null, ['WEBHOOK_INBOX' => $inbox, 'PATH' => (string) getenv('PATH')]);
     usleep(300_000);
 
-    $subscription = postJson('/webhooks', ['url' => 'http://127.0.0.1:8001/hooks', 'events' => [$type]], demoToken());
+    $subscription = null;
 
     try {
+        $subscription = postJson('/webhooks', ['url' => 'http://127.0.0.1:8001/hooks', 'events' => [$type]], demoToken());
         $result = $trigger();
         $deadline = microtime(true) + 20;
 
@@ -181,7 +187,10 @@ function makeDelivery(string $fixture, string $type, Closure $trigger): array
         /** @var array{method: string, uri: string, headers: array<string, string>, body: string, received_at: string} $delivered */
         $delivered = json_decode((string) file_get_contents($files[0]), true, flags: JSON_THROW_ON_ERROR);
     } finally {
-        sendJson('DELETE', '/webhooks/'.$subscription['data']['id'], null, demoToken());
+        if ($subscription !== null) {
+            sendJson('DELETE', '/webhooks/'.$subscription['data']['id'], null, demoToken());
+        }
+
         proc_terminate($server);
         array_map(unlink(...), glob("{$inbox}/*") ?: []);
         rmdir($inbox);
@@ -258,7 +267,9 @@ function sendJson(string $method, string $path, ?array $body, string $token): ar
 
 function http(): ClientInterface
 {
-    return Psr18ClientDiscovery::find();
+    // Redirects are the SDK's to follow: a client that follows them itself would take the
+    // monitor's 303 out of await()'s hands, and the contract suite would not see it.
+    return new Psr18Client(HttpClient::create(['max_redirects' => 0]));
 }
 
 /**

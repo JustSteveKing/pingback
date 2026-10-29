@@ -16,10 +16,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"134fb2ae-3a08-4c7c-a9ff-6263c41db4a1\""
+                        "\"9fe1b2ff-cbb8-45b2-9852-39bdac65201a\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"75478c77f0246e9cf76ecd77ca470554\""
+                        "\"383b9f194b6075f34cfd12c007aea9c6\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z"
+                        "http://127.0.0.1:8000/v1/organizations/01m63sykrncece9mg8ym9gzqqd"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "46"
+                        "546"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,17 +80,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2ae6-716a-86e3-e3ece490cfe9"
+                        "01a1879f-4f0b-717a-a8bb-fa032c7ae225"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63q4aqgsg2j94h8bggr7a4z\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63sykrncece9mg8ym9gzqqd\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
+                "path": "/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -102,10 +102,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"75478c77f0246e9cf76ecd77ca470554\""
+                        "\"383b9f194b6075f34cfd12c007aea9c6\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -130,22 +130,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"d1555b9e0cd5e9b40d554601fd89cc22\""
+                        "\"e160ea4715259837b9a5747438bae987\""
                     ],
                     "accept-patch": [
                         "application/merge-patch+json"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "45"
+                        "545"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2b02-7237-a043-b8df3fd1ac0b"
+                        "01a1879f-4f25-72c7-a8e7-caacf791e092"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63q4aqgsg2j94h8bggr7a4z\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63sykrncece9mg8ym9gzqqd\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
+                "path": "/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -188,10 +188,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"75478c77f0246e9cf76ecd77ca470554\""
+                        "\"383b9f194b6075f34cfd12c007aea9c6\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -213,13 +213,13 @@
                         "PHP/8.5.12"
                     ],
                     "etag": [
-                        "\"d1555b9e0cd5e9b40d554601fd89cc22\""
+                        "\"e160ea4715259837b9a5747438bae987\""
                     ],
                     "cache-control": [
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -228,10 +228,10 @@
                         "application/merge-patch+json"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "44"
+                        "544"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -252,17 +252,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2b18-73be-aa2c-8029d577c040"
+                        "01a1879f-4f3b-712b-97ea-a77eef6c0477"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a18772-2b18-73be-aa2c-8029d577c040\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a1879f-4f3b-712b-97ea-a77eef6c0477\"}"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4aqgsg2j94h8bggr7a4z",
+                "path": "/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63sykrncece9mg8ym9gzqqd",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -271,7 +271,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -296,22 +296,22 @@
                         "private, must-revalidate"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"d1555b9e0cd5e9b40d554601fd89cc22\""
+                        "\"e160ea4715259837b9a5747438bae987\""
                     ],
                     "last-modified": [
-                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "43"
+                        "543"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -332,10 +332,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2b2d-7256-99bd-6fab87a175fd"
+                        "01a1879f-4f4c-71be-b65d-5c7be7f7d9e8"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63q4aqgsg2j94h8bggr7a4z\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"data\":{\"id\":\"01m63sykrncece9mg8ym9gzqqd\",\"name\":\"Contract Stale Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:25:27+00:00\",\"updated_at\":\"2026-10-29T12:25:27+00:00\",\"deleted_at\":null}}"
             }
         }
     ]

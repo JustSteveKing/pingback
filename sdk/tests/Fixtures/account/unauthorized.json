@@ -13,7 +13,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -41,7 +41,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:19:31 GMT"
+                        "Thu, 29 Oct 2026 12:25:20 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -65,10 +65,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18762-f3cd-723e-9b7c-5e3fceaa029c"
+                        "01a1879f-3683-72f1-bd6c-a4831b4ffc80"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\",\"instance\":\"urn:uuid:01a18762-f3cd-723e-9b7c-5e3fceaa029c\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\",\"instance\":\"urn:uuid:01a1879f-3683-72f1-bd6c-a4831b4ffc80\"}"
             }
         }
     ]

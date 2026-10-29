@@ -16,10 +16,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"fc111cce-eda7-4ee8-be3c-c7626473f96e\""
+                        "\"f3185fa5-30f8-4cd2-b975-dce5cbc49c25\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,7 +44,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:09 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -68,10 +68,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2d57-72d7-838e-464d64eaf4e7"
+                        "01a1879f-5157-701a-839c-41db416e6dbb"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\",\"instance\":\"urn:uuid:01a18772-2d57-72d7-838e-464d64eaf4e7\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\",\"instance\":\"urn:uuid:01a1879f-5157-701a-839c-41db416e6dbb\"}"
             }
         }
     ]

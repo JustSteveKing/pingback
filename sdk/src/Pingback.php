@@ -7,6 +7,7 @@ namespace JustSteveKing\Pingback;
 use JustSteveKing\Pingback\Data\Account;
 use JustSteveKing\Pingback\Requests\GetAccount;
 use JustSteveKing\Pingback\Resources\Contacts;
+use JustSteveKing\Pingback\Resources\Exports;
 use JustSteveKing\Pingback\Resources\Organizations;
 use JustSteveKing\SdkToolbox\Auth\Authenticator;
 use JustSteveKing\SdkToolbox\Auth\BearerToken;
@@ -79,6 +80,11 @@ final class Pingback extends Connector
     public function contacts(): Contacts
     {
         return new Contacts($this);
+    }
+
+    public function exports(): Exports
+    {
+        return new Exports($this);
     }
 
     public function organizations(): Organizations

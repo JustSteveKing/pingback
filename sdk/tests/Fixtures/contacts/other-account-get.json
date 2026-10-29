@@ -3,8 +3,8 @@
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/contacts/01m63qkkhwma2gm5z0j6jrdysc",
-                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkhwma2gm5z0j6jrdysc",
+                "path": "/v1/contacts/01m63syee243cjcxsnahssjtnb",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63syee243cjcxsnahssjtnb",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -13,7 +13,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -38,16 +38,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                        "Thu, 29 Oct 2026 12:25:21 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "59"
+                        "599"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -68,10 +68,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18779-cf00-73df-961e-088c04f15100"
+                        "01a1879f-3a92-704f-adb8-bfe31fd5e0a8"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\",\"instance\":\"urn:uuid:01a18779-cf00-73df-961e-088c04f15100\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\",\"instance\":\"urn:uuid:01a1879f-3a92-704f-adb8-bfe31fd5e0a8\"}"
             }
         }
     ]

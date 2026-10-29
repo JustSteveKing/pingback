@@ -16,10 +16,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"3aaca560-057c-4be8-b666-06c0eb8fe31b\""
+                        "\"11c83226-3bc9-4f2a-985e-be970f64d511\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,16 +44,16 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 11:36:09 GMT"
+                        "Thu, 29 Oct 2026 12:25:27 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
                     ],
                     "x-ratelimit-limit": [
-                        "60"
+                        "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "31"
+                        "531"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -74,10 +74,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a18772-2c34-7202-b8ba-7d75c3687273"
+                        "01a1879f-5044-72bc-80e8-bb1e25b150b4"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\",\"instance\":\"urn:uuid:01a18772-2c34-7202-b8ba-7d75c3687273\",\"errors\":{\"country\":[\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\"]}}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\",\"instance\":\"urn:uuid:01a1879f-5044-72bc-80e8-bb1e25b150b4\",\"errors\":{\"country\":[\"Countries are two-letter ISO 3166-1 codes in capitals, such as GB.\"]}}"
             }
         }
     ]
