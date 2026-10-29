@@ -1,0 +1,22 @@
+{
+    "subscription": "01m63s6yv9dr1cyhkte84e2e8s",
+    "secret": "whsec_9063674aa64354694907cde3f248ef77e4b1d337a9059cb1112eab4df7c74f85",
+    "delivery": {
+        "method": "POST",
+        "uri": "http://127.0.0.1:8001/hooks",
+        "headers": {
+            "Host": "127.0.0.1:8001",
+            "Idempotency-Key": "\"01m63s6ywart34388e743y6yjv\"",
+            "WebHook-Request-Origin": "localhost",
+            "User-Agent": "Laravel Webhooks",
+            "Accept": "application/json",
+            "Content-Type": "application/cloudevents+json; charset=utf-8",
+            "Content-Digest": "sha-256=:I+w98KhWCT7NO2ntlPt+bPaA68oQvXEFiLlncYUulVo=:",
+            "Signature-Input": "sig1=(\"@method\" \"@target-uri\" \"@authority\" \"@path\" \"content-type\" \"content-digest\");created=1793275952;keyid=\"01m63s6yv9dr1cyhkte84e2e8s\"",
+            "Signature": "sig1=:vm48xpQAxA5pneIxj3RWsuLb2zl15NC23nw+sQoELrk=:",
+            "Content-Length": "506"
+        },
+        "body": "{\"specversion\":\"1.0\",\"id\":\"01m63s6ywart34388e743y6yjv\",\"source\":\"http://localhost:8000/v1\",\"type\":\"organization.created\",\"subject\":\"01m63s6yw94rf9eze51mx50dbp\",\"time\":\"2026-10-29T12:12:32+00:00\",\"datacontenttype\":\"application/json\",\"data\":{\"id\":\"01m63s6yw94rf9eze51mx50dbp\",\"name\":\"Contract Webhook Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T12:12:32+00:00\",\"updated_at\":\"2026-10-29T12:12:32+00:00\",\"deleted_at\":null}}",
+        "received_at": "2026-10-29 12:12:32 UTC"
+    }
+}

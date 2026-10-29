@@ -11,4 +11,7 @@ paths = [
     '''(^|/)\.scribe/\.filehashes$''',
     # Laravel Boost's skills, written by boost:update, whose examples include placeholder keys.
     '''(^|/)\.(agents|claude)/skills/''',
+    # The SDK's recorded webhook delivery: a throwaway subscription on a local API, deleted when
+    # it was recorded, whose secret signs nothing else.
+    '''^sdk/tests/Fixtures/webhooks/''',
 ]

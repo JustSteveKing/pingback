@@ -7,7 +7,7 @@ arch('strict types everywhere')
     ->toUseStrictTypes();
 
 arch('data, inputs and requests are immutable')
-    ->expect(['JustSteveKing\Pingback\Data', 'JustSteveKing\Pingback\Inputs', 'JustSteveKing\Pingback\Requests', 'JustSteveKing\Pingback\Resources'])
+    ->expect(['JustSteveKing\Pingback\Data', 'JustSteveKing\Pingback\Inputs', 'JustSteveKing\Pingback\Requests', 'JustSteveKing\Pingback\Resources', 'JustSteveKing\Pingback\Webhooks'])
     ->classes()
     ->toBeReadonly();
 

@@ -65,6 +65,8 @@ jobs:
           touch database/database.sqlite
           php artisan migrate --seed --force
           php artisan serve --port=8000 > ../serve.log 2>&1 &
+          # Webhook deliveries and exports are queued.
+          php artisan queue:work --sleep=1 > ../worker.log 2>&1 &
           for attempt in $(seq 1 30); do
             curl --silent --fail http://127.0.0.1:8000/up > /dev/null && break
             sleep 1
@@ -81,4 +83,4 @@ jobs:
 
       - name: Show the API's log
         if: failure()
-        run: cat serve.log
+        run: cat serve.log worker.log

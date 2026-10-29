@@ -32,7 +32,15 @@ PINGBACK_BASE_URI=http://127.0.0.1:8000/v1 composer test:contract
 ```
 
 The suite signs in as the demo user for every request, more than the API's default of 60 a minute
-for one user, so set `API_RATE_LIMIT=600` in `api/.env` before serving it, as CI does.
+for one user, and it receives real webhook deliveries on `127.0.0.1:8001`, which needs a queue
+worker (`.env.example` already allows plain-HTTP, private webhook targets). CI serves the API like
+this:
+
+```bash
+cd api
+API_RATE_LIMIT=600 php artisan serve &
+API_RATE_LIMIT=600 php artisan queue:work &
+```
 
 With no API running, `composer test` replays the responses the contract suite recorded. To record them
 again, add `SDK_FIXTURES=record` to the contract run. CI does both on every push: the SDK's own checks
