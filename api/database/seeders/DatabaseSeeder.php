@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\Account;
+use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -31,6 +32,13 @@ final class DatabaseSeeder extends Seeder
         $account = Account::factory()->for($owner, 'owner')->create(['name' => 'Acme Corporation']);
 
         // Ping CRM seeds a hundred organisations, enough that a list has more than one page.
-        Organization::factory()->count(100)->for($account)->create();
+        $organizations = Organization::factory()->count(100)->for($account)->create();
+
+        // And a hundred contacts, each at one of those organisations, as Ping CRM seeds them.
+        Contact::factory()
+            ->count(100)
+            ->for($account)
+            ->sequence(static fn(): array => ['organization_id' => $organizations->random()->id])
+            ->create();
     }
 }

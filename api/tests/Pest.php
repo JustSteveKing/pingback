@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Account;
+use App\Models\Contact;
 use App\Models\Organization;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
@@ -80,4 +81,22 @@ function mergePatch(string $uri, array $patch, string $token, array $headers = [
 function etagOf(Organization $organization, string $token): string
 {
     return (string) test()->withToken($token)->getJson("/v1/organizations/{$organization->id}")->headers->get('ETag');
+}
+
+/**
+ * A bearer token for the account's owner, holding the contact abilities unless told otherwise.
+ *
+ * @param  list<string>  $abilities
+ */
+function contactToken(Account $account, array $abilities = ['contacts:read', 'contacts:write']): string
+{
+    return $account->owner->createToken('test', $abilities)->plainTextToken;
+}
+
+/**
+ * The contact's current ETag, read the way a client would.
+ */
+function contactEtag(Contact $contact, string $token): string
+{
+    return (string) test()->withToken($token)->getJson("/v1/contacts/{$contact->id}")->headers->get('ETag');
 }

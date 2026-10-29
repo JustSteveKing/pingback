@@ -137,6 +137,31 @@
                                                                     </ul>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-contacts" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="contacts">
+                    <a href="#contacts">Contacts</a>
+                </li>
+                                    <ul id="tocify-subheader-contacts" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="contacts-GETv1-contacts">
+                                <a href="#contacts-GETv1-contacts">List Contacts</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contacts-POSTv1-contacts">
+                                <a href="#contacts-POSTv1-contacts">Create Contact</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contacts-GETv1-contacts--contact-">
+                                <a href="#contacts-GETv1-contacts--contact-">Show Contact</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contacts-PATCHv1-contacts--contact-">
+                                <a href="#contacts-PATCHv1-contacts--contact-">Update Contact</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contacts-DELETEv1-contacts--contact-">
+                                <a href="#contacts-DELETEv1-contacts--contact-">Delete Contact</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contacts-POSTv1-contacts--contact--restore">
+                                <a href="#contacts-POSTv1-contacts--contact--restore">Restore Contact</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-organizations" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="organizations">
                     <a href="#organizations">Organizations</a>
@@ -469,10 +494,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63pxktagzdb6q9wsm2x0rc0&quot;,
+        &quot;id&quot;: &quot;01m63qgvfka6qe5y0fmkedc9wv&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;lafayette.considine@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T11:32:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T11:42:59+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -691,10 +716,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63pxktjjwqtyhx5sh9g7hm3&quot;,
+        &quot;id&quot;: &quot;01m63qgvfv6zpf0b6th0r7cg93&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;cormier.nick@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T11:32:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T11:42:59+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -881,10 +906,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63pxkvkzwv5h496zn2zef9k&quot;,
+        &quot;id&quot;: &quot;01m63qgvgtb91tpcecz3p3pj2p&quot;,
         &quot;name&quot;: &quot;Morgan Hirthe&quot;,
         &quot;email&quot;: &quot;dare.emelie@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T11:32:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T11:42:59+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     }
@@ -2796,7 +2821,2074 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                <h1 id="organizations">Organizations</h1>
+                <h1 id="contacts">Contacts</h1>
+
+    
+
+                                <h2 id="contacts-GETv1-contacts">List Contacts</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>List the account's contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header's rel=&quot;next&quot; for the next page, which keeps the same search and filter.</p>
+
+<span id="example-requests-GETv1-contacts">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/v1/contacts?search=ada&amp;trashed=with&amp;organization_id=01jbd0x4qsm2cf4c8m3x6y1v7z&amp;cursor=architecto" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts"
+);
+
+const params = {
+    "search": "ada",
+    "trashed": "with",
+    "organization_id": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+    "cursor": "architecto",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-contacts">
+            <blockquote>
+            <p>Example response (200, One page of contacts.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:read ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, The trashed filter is not &quot;with&quot; or &quot;only&quot;, the organisation is not a ULID, or the search is longer than 100 characters.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/validation-failed&quot;,
+    &quot;title&quot;: &quot;Validation Failed&quot;,
+    &quot;status&quot;: 422,
+    &quot;detail&quot;: &quot;The selected trashed is invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;trashed&quot;: [
+            &quot;The selected trashed is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-contacts" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-contacts"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-contacts"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETv1-contacts" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-contacts">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETv1-contacts" data-method="GET"
+      data-path="v1/contacts"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-contacts', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-contacts"
+                    onclick="tryItOut('GETv1-contacts');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-contacts"
+                    onclick="cancelTryOut('GETv1-contacts');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-contacts"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/contacts</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETv1-contacts"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETv1-contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETv1-contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETv1-contacts"
+               value="ada"
+               data-component="query">
+    <br>
+<p>Only contacts whose first name, last name, email or organisation name contains this text, ignoring case. Must not be greater than 100 characters. Example: <code>ada</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>trashed</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="trashed"                data-endpoint="GETv1-contacts"
+               value="with"
+               data-component="query">
+    <br>
+<p>Deleted contacts are left out unless this is &quot;with&quot; (include them) or &quot;only&quot; (nothing else). Example: <code>with</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>with</code></li> <li><code>only</code></li></ul>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="organization_id"                data-endpoint="GETv1-contacts"
+               value="01jbd0x4qsm2cf4c8m3x6y1v7z"
+               data-component="query">
+    <br>
+<p>Only the contacts at this organisation. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cursor</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cursor"                data-endpoint="GETv1-contacts"
+               value="architecto"
+               data-component="query">
+    <br>
+<p>Opaque cursor from a Link header. Omit it for the first page. Example: <code>architecto</code></p>
+            </div>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <p>The request body is an array (<code>object[]</code>`). Each item has the following properties:</p>
+
+                                            <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A phone number, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                                    <h2 id="contacts-POSTv1-contacts">Create Contact</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Add a contact to the account, at one of its organisations or none. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the contact with its ETag, and its URL in Location.</p>
+
+<span id="example-requests-POSTv1-contacts">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/v1/contacts" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Idempotency-Key: \&amp;quot;contact-retry-1\&amp;quot;" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"organization_id\": \"01jbd0x4qsm2cf4c8m3x6y1v7z\",
+    \"first_name\": \"Ada\",
+    \"last_name\": \"Lovelace\",
+    \"email\": \"ada@rippin.example\",
+    \"phone\": \"+1 555 0101\",
+    \"address\": \"742 Evergreen Terrace\",
+    \"city\": \"Springfield\",
+    \"region\": \"Oregon\",
+    \"country\": \"US\",
+    \"postal_code\": \"97403\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Idempotency-Key": "&amp;quot;contact-retry-1&amp;quot;",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "organization_id": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+    "first_name": "Ada",
+    "last_name": "Lovelace",
+    "email": "ada@rippin.example",
+    "phone": "+1 555 0101",
+    "address": "742 Evergreen Terrace",
+    "city": "Springfield",
+    "region": "Oregon",
+    "country": "US",
+    "postal_code": "97403"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-contacts">
+            <blockquote>
+            <p>Example response (201, Contact created.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:write ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, A field is missing, too long or malformed, or the organisation is not one of the account&#039;s.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/validation-failed&quot;,
+    &quot;title&quot;: &quot;Validation Failed&quot;,
+    &quot;status&quot;: 422,
+    &quot;detail&quot;: &quot;The first name field is required.&quot;,
+    &quot;errors&quot;: {
+        &quot;first_name&quot;: [
+            &quot;The first name field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTv1-contacts" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-contacts"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-contacts"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTv1-contacts" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-contacts">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTv1-contacts" data-method="POST"
+      data-path="v1/contacts"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-contacts', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-contacts"
+                    onclick="tryItOut('POSTv1-contacts');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-contacts"
+                    onclick="cancelTryOut('POSTv1-contacts');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-contacts"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/contacts</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTv1-contacts"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Idempotency-Key</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Idempotency-Key"                data-endpoint="POSTv1-contacts"
+               value=""contact-retry-1""
+               data-component="header">
+    <br>
+<p>Example: <code>"contact-retry-1"</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTv1-contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTv1-contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="organization_id"                data-endpoint="POSTv1-contacts"
+               value="01jbd0x4qsm2cf4c8m3x6y1v7z"
+               data-component="body">
+    <br>
+<p>One of the account's organisations that is not deleted, or null for none. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="first_name"                data-endpoint="POSTv1-contacts"
+               value="Ada"
+               data-component="body">
+    <br>
+<p>Up to 25 characters. Example: <code>Ada</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="last_name"                data-endpoint="POSTv1-contacts"
+               value="Lovelace"
+               data-component="body">
+    <br>
+<p>Up to 25 characters. Example: <code>Lovelace</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTv1-contacts"
+               value="ada@rippin.example"
+               data-component="body">
+    <br>
+<p>An email address, up to 50 characters, or null. Example: <code>ada@rippin.example</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTv1-contacts"
+               value="+1 555 0101"
+               data-component="body">
+    <br>
+<p>Up to 50 characters, or null. Example: <code>+1 555 0101</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="POSTv1-contacts"
+               value="742 Evergreen Terrace"
+               data-component="body">
+    <br>
+<p>Up to 150 characters, or null. Example: <code>742 Evergreen Terrace</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="POSTv1-contacts"
+               value="Springfield"
+               data-component="body">
+    <br>
+<p>Up to 50 characters, or null. Example: <code>Springfield</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="region"                data-endpoint="POSTv1-contacts"
+               value="Oregon"
+               data-component="body">
+    <br>
+<p>A state, province or county, up to 50 characters, or null. Example: <code>Oregon</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="POSTv1-contacts"
+               value="US"
+               data-component="body">
+    <br>
+<p>A two-letter ISO 3166-1 code in capitals, or null. Example: <code>US</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="postal_code"                data-endpoint="POSTv1-contacts"
+               value="97403"
+               data-component="body">
+    <br>
+<p>Up to 25 characters, or null. Example: <code>97403</code></p>
+        </div>
+        </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A phone number, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                    </details>
+        </div>
+                        <h2 id="contacts-GETv1-contacts--contact-">Show Contact</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Fetch one contact by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the contact, or 304 with no body when If-None-Match still matches.</p>
+
+<span id="example-requests-GETv1-contacts--contact-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "If-None-Match: \&amp;quot;a1b2c3d4e5f6\&amp;quot;" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "If-None-Match": "&amp;quot;a1b2c3d4e5f6&amp;quot;",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-contacts--contact-">
+            <blockquote>
+            <p>Example response (200, The contact, with its ETag.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:read ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No contact with this ID belongs to the authenticated account.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;The resource was not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-contacts--contact-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-contacts--contact-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-contacts--contact-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETv1-contacts--contact-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-contacts--contact-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETv1-contacts--contact-" data-method="GET"
+      data-path="v1/contacts/{contact}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-contacts--contact-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-contacts--contact-"
+                    onclick="tryItOut('GETv1-contacts--contact-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-contacts--contact-"
+                    onclick="cancelTryOut('GETv1-contacts--contact-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-contacts--contact-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/contacts/{contact}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETv1-contacts--contact-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>If-None-Match</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="If-None-Match"                data-endpoint="GETv1-contacts--contact-"
+               value=""a1b2c3d4e5f6""
+               data-component="header">
+    <br>
+<p>Example: <code>"a1b2c3d4e5f6"</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contact</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="contact"                data-endpoint="GETv1-contacts--contact-"
+               value="01jbd1k9r2w3x4y5z6a7b8c9d0"
+               data-component="url">
+    <br>
+<p>The contact ID, a ULID. Example: <code>01jbd1k9r2w3x4y5z6a7b8c9d0</code></p>
+            </div>
+                    </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A phone number, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                    </details>
+        </div>
+                        <h2 id="contacts-PATCHv1-contacts--contact-">Update Contact</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Change a contact with a JSON Merge Patch (application/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the contact after the change, with its new ETag.</p>
+
+<span id="example-requests-PATCHv1-contacts--contact-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "If-Match: \&amp;quot;a1b2c3d4e5f6\&amp;quot;" \
+    --header "Accept: application/json" \
+    --data "{
+    \"organization_id\": \"01jbd0x4qsm2cf4c8m3x6y1v7z\",
+    \"first_name\": \"Ada\",
+    \"last_name\": \"Lovelace\",
+    \"email\": \"ada@rippin.example\",
+    \"phone\": \"+1 555 0101\",
+    \"address\": \"742 Evergreen Terrace\",
+    \"city\": \"Springfield\",
+    \"region\": \"Oregon\",
+    \"country\": \"US\",
+    \"postal_code\": \"97403\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "If-Match": "&amp;quot;a1b2c3d4e5f6&amp;quot;",
+    "Accept": "application/json",
+};
+
+let body = {
+    "organization_id": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+    "first_name": "Ada",
+    "last_name": "Lovelace",
+    "email": "ada@rippin.example",
+    "phone": "+1 555 0101",
+    "address": "742 Evergreen Terrace",
+    "city": "Springfield",
+    "region": "Oregon",
+    "country": "US",
+    "postal_code": "97403"
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHv1-contacts--contact-">
+            <blockquote>
+            <p>Example response (200, The contact after the change.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:write ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No contact with this ID belongs to the authenticated account.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;The resource was not found.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (412, If-Match does not match the current ETag: someone else changed it first.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/precondition-failed&quot;,
+    &quot;title&quot;: &quot;Precondition Failed&quot;,
+    &quot;status&quot;: 412,
+    &quot;detail&quot;: &quot;The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (415, The body is not application/merge-patch+json.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unsupported-media-type&quot;,
+    &quot;title&quot;: &quot;Unsupported Media Type&quot;,
+    &quot;status&quot;: 415,
+    &quot;detail&quot;: &quot;The Content-Type &#039;application/json&#039; is not supported. Supported content types: application/merge-patch+json.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, A field is too long or malformed, a name was cleared, or the organisation is not one of the account&#039;s.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/validation-failed&quot;,
+    &quot;title&quot;: &quot;Validation Failed&quot;,
+    &quot;status&quot;: 422,
+    &quot;detail&quot;: &quot;The organisation is not one of this account&#039;s, or it is deleted.&quot;,
+    &quot;errors&quot;: {
+        &quot;organization_id&quot;: [
+            &quot;The organisation is not one of this account&#039;s, or it is deleted.&quot;
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (428, The request has no If-Match.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/precondition-required&quot;,
+    &quot;title&quot;: &quot;Precondition Required&quot;,
+    &quot;status&quot;: 428,
+    &quot;detail&quot;: &quot;This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHv1-contacts--contact-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHv1-contacts--contact-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHv1-contacts--contact-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHv1-contacts--contact-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHv1-contacts--contact-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHv1-contacts--contact-" data-method="PATCH"
+      data-path="v1/contacts/{contact}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHv1-contacts--contact-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHv1-contacts--contact-"
+                    onclick="tryItOut('PATCHv1-contacts--contact-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHv1-contacts--contact-"
+                    onclick="cancelTryOut('PATCHv1-contacts--contact-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHv1-contacts--contact-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>v1/contacts/{contact}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PATCHv1-contacts--contact-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>If-Match</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="If-Match"                data-endpoint="PATCHv1-contacts--contact-"
+               value=""a1b2c3d4e5f6""
+               data-component="header">
+    <br>
+<p>Example: <code>"a1b2c3d4e5f6"</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contact</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="contact"                data-endpoint="PATCHv1-contacts--contact-"
+               value="01jbd1k9r2w3x4y5z6a7b8c9d0"
+               data-component="url">
+    <br>
+<p>The contact ID, a ULID. Example: <code>01jbd1k9r2w3x4y5z6a7b8c9d0</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="organization_id"                data-endpoint="PATCHv1-contacts--contact-"
+               value="01jbd0x4qsm2cf4c8m3x6y1v7z"
+               data-component="body">
+    <br>
+<p>One of the account's organisations that is not deleted, or null for none. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>first_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="first_name"                data-endpoint="PATCHv1-contacts--contact-"
+               value="Ada"
+               data-component="body">
+    <br>
+<p>Up to 25 characters. Example: <code>Ada</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>last_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="last_name"                data-endpoint="PATCHv1-contacts--contact-"
+               value="Lovelace"
+               data-component="body">
+    <br>
+<p>Up to 25 characters. Example: <code>Lovelace</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PATCHv1-contacts--contact-"
+               value="ada@rippin.example"
+               data-component="body">
+    <br>
+<p>An email address, up to 50 characters, or null. Example: <code>ada@rippin.example</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PATCHv1-contacts--contact-"
+               value="+1 555 0101"
+               data-component="body">
+    <br>
+<p>Up to 50 characters, or null. Example: <code>+1 555 0101</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="PATCHv1-contacts--contact-"
+               value="742 Evergreen Terrace"
+               data-component="body">
+    <br>
+<p>Up to 150 characters, or null. Example: <code>742 Evergreen Terrace</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="PATCHv1-contacts--contact-"
+               value="Springfield"
+               data-component="body">
+    <br>
+<p>Up to 50 characters, or null. Example: <code>Springfield</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="region"                data-endpoint="PATCHv1-contacts--contact-"
+               value="Oregon"
+               data-component="body">
+    <br>
+<p>A state, province or county, up to 50 characters, or null. Example: <code>Oregon</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="PATCHv1-contacts--contact-"
+               value="US"
+               data-component="body">
+    <br>
+<p>A two-letter ISO 3166-1 code in capitals, or null. Example: <code>US</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="postal_code"                data-endpoint="PATCHv1-contacts--contact-"
+               value="97403"
+               data-component="body">
+    <br>
+<p>Up to 25 characters, or null. Example: <code>97403</code></p>
+        </div>
+        </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A phone number, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                    </details>
+        </div>
+                        <h2 id="contacts-DELETEv1-contacts--contact-">Delete Contact</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Delete a contact. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing.</p>
+
+<span id="example-requests-DELETEv1-contacts--contact-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "If-Match: \&amp;quot;a1b2c3d4e5f6\&amp;quot;" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "If-Match": "&amp;quot;a1b2c3d4e5f6&amp;quot;",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEv1-contacts--contact-">
+            <blockquote>
+            <p>Example response (204, Contact deleted.):</p>
+        </blockquote>
+                <pre>
+<code>Empty response</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:write ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No contact with this ID belongs to the authenticated account.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;The resource was not found.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (412, If-Match does not match the current ETag: someone else changed it first.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/precondition-failed&quot;,
+    &quot;title&quot;: &quot;Precondition Failed&quot;,
+    &quot;status&quot;: 412,
+    &quot;detail&quot;: &quot;The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (428, The request has no If-Match.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/precondition-required&quot;,
+    &quot;title&quot;: &quot;Precondition Required&quot;,
+    &quot;status&quot;: 428,
+    &quot;detail&quot;: &quot;This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEv1-contacts--contact-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEv1-contacts--contact-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEv1-contacts--contact-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEv1-contacts--contact-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEv1-contacts--contact-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEv1-contacts--contact-" data-method="DELETE"
+      data-path="v1/contacts/{contact}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEv1-contacts--contact-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEv1-contacts--contact-"
+                    onclick="tryItOut('DELETEv1-contacts--contact-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEv1-contacts--contact-"
+                    onclick="cancelTryOut('DELETEv1-contacts--contact-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEv1-contacts--contact-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>v1/contacts/{contact}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEv1-contacts--contact-"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>If-Match</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="If-Match"                data-endpoint="DELETEv1-contacts--contact-"
+               value=""a1b2c3d4e5f6""
+               data-component="header">
+    <br>
+<p>Example: <code>"a1b2c3d4e5f6"</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEv1-contacts--contact-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contact</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="contact"                data-endpoint="DELETEv1-contacts--contact-"
+               value="01jbd1k9r2w3x4y5z6a7b8c9d0"
+               data-component="url">
+    <br>
+<p>The contact ID, a ULID. Example: <code>01jbd1k9r2w3x4y5z6a7b8c9d0</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="contacts-POSTv1-contacts--contact--restore">Restore Contact</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Bring back a deleted contact, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the contact with its new ETag.</p>
+
+<span id="example-requests-POSTv1-contacts--contact--restore">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0/restore" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0/restore"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-contacts--contact--restore">
+            <blockquote>
+            <p>Example response (200, The contact, restored.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:write ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No contact with this ID belongs to the authenticated account.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;The resource was not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTv1-contacts--contact--restore" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-contacts--contact--restore"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-contacts--contact--restore"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTv1-contacts--contact--restore" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-contacts--contact--restore">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTv1-contacts--contact--restore" data-method="POST"
+      data-path="v1/contacts/{contact}/restore"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-contacts--contact--restore', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-contacts--contact--restore"
+                    onclick="tryItOut('POSTv1-contacts--contact--restore');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-contacts--contact--restore"
+                    onclick="cancelTryOut('POSTv1-contacts--contact--restore');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-contacts--contact--restore"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/contacts/{contact}/restore</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTv1-contacts--contact--restore"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTv1-contacts--contact--restore"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTv1-contacts--contact--restore"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>contact</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="contact"                data-endpoint="POSTv1-contacts--contact--restore"
+               value="01jbd1k9r2w3x4y5z6a7b8c9d0"
+               data-component="url">
+    <br>
+<p>The contact ID, a ULID. Example: <code>01jbd1k9r2w3x4y5z6a7b8c9d0</code></p>
+            </div>
+                    </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A phone number, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                    </details>
+        </div>
+                    <h1 id="organizations">Organizations</h1>
 
     
 

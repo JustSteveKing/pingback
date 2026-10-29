@@ -25,6 +25,9 @@ return [
         'too_many_requests' => 'Too many requests. Please try again later.',
         'https_required' => 'HTTPS is required for this endpoint.',
     ],
+    'contacts' => [
+        'organization_unknown' => 'The organisation is not one of this account\'s, or it is deleted.',
+    ],
     'organizations' => [
         'country_format' => 'Countries are two-letter ISO 3166-1 codes in capitals, such as GB.',
     ],

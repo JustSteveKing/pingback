@@ -1,0 +1,1230 @@
+name: Contacts
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: v1/contacts
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Contacts'
+      description: 'List the account''s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header''s rel="next" for the next page, which keeps the same search and filter.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: 'Only contacts whose first name, last name, email or organisation name contains this text, ignoring case. Must not be greater than 100 characters.'
+        required: false
+        example: ada
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      trashed:
+        custom: []
+        name: trashed
+        description: 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).'
+        required: false
+        example: with
+        type: string
+        enumValues:
+          - with
+          - only
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      organization_id:
+        custom: []
+        name: organization_id
+        description: 'Only the contacts at this organisation.'
+        required: false
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      cursor:
+        custom: []
+        name: cursor
+        description: 'Opaque cursor from a Link header. Omit it for the first page.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: ada
+      trashed: with
+      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+      cursor: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '[{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
+        headers: []
+        description: 'One page of contacts.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:read ability.'
+      -
+        custom: []
+        status: 422
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The selected trashed is invalid.","errors":{"trashed":["The selected trashed is invalid."]}}'
+        headers: []
+        description: 'The trashed filter is not "with" or "only", the organisation is not a ULID, or the search is longer than 100 characters.'
+    responseFields:
+      '[].organization_id':
+        custom: []
+        name: '[].organization_id'
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].email':
+        custom: []
+        name: '[].email'
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].phone':
+        custom: []
+        name: '[].phone'
+        description: 'A phone number, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].address':
+        custom: []
+        name: '[].address'
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].city':
+        custom: []
+        name: '[].city'
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].region':
+        custom: []
+        name: '[].region'
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].country':
+        custom: []
+        name: '[].country'
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].postal_code':
+        custom: []
+        name: '[].postal_code'
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].deleted_at':
+        custom: []
+        name: '[].deleted_at'
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: v1/contacts
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create Contact'
+      description: 'Add a contact to the account, at one of its organisations or none. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the contact with its ETag, and its URL in Location.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Idempotency-Key: '"contact-retry-1"'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      organization_id:
+        custom: []
+        name: organization_id
+        description: "One of the account's organisations that is not deleted, or null for none."
+        required: false
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      first_name:
+        custom: []
+        name: first_name
+        description: 'Up to 25 characters.'
+        required: true
+        example: Ada
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      last_name:
+        custom: []
+        name: last_name
+        description: 'Up to 25 characters.'
+        required: true
+        example: Lovelace
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'An email address, up to 50 characters, or null.'
+        required: false
+        example: ada@rippin.example
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Up to 50 characters, or null.'
+        required: false
+        example: '+1 555 0101'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'Up to 150 characters, or null.'
+        required: false
+        example: '742 Evergreen Terrace'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'Up to 50 characters, or null.'
+        required: false
+        example: Springfield
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      region:
+        custom: []
+        name: region
+        description: 'A state, province or county, up to 50 characters, or null.'
+        required: false
+        example: Oregon
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'A two-letter ISO 3166-1 code in capitals, or null.'
+        required: false
+        example: US
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      postal_code:
+        custom: []
+        name: postal_code
+        description: 'Up to 25 characters, or null.'
+        required: false
+        example: '97403'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+      first_name: Ada
+      last_name: Lovelace
+      email: ada@rippin.example
+      phone: '+1 555 0101'
+      address: '742 Evergreen Terrace'
+      city: Springfield
+      region: Oregon
+      country: US
+      postal_code: '97403'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        headers: []
+        description: 'Contact created.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:write ability.'
+      -
+        custom: []
+        status: 422
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The first name field is required.","errors":{"first_name":["The first name field is required."]}}'
+        headers: []
+        description: "A field is missing, too long or malformed, or the organisation is not one of the account's."
+    responseFields:
+      data.organization_id:
+        custom: []
+        name: data.organization_id
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.email:
+        custom: []
+        name: data.email
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.phone:
+        custom: []
+        name: data.phone
+        description: 'A phone number, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.address:
+        custom: []
+        name: data.address
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.city:
+        custom: []
+        name: data.city
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.region:
+        custom: []
+        name: data.region
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.country:
+        custom: []
+        name: data.country
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.postal_code:
+        custom: []
+        name: data.postal_code
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.deleted_at:
+        custom: []
+        name: data.deleted_at
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'v1/contacts/{contact}'
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show Contact'
+      description: "Fetch one contact by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the contact, or 304 with no body when If-None-Match still matches."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      If-None-Match: '"a1b2c3d4e5f6"'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      contact:
+        custom: []
+        name: contact
+        description: 'The contact ID, a ULID.'
+        required: true
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        headers: []
+        description: 'The contact, with its ETag.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:read ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No contact with this ID belongs to the authenticated account.'
+    responseFields:
+      data.organization_id:
+        custom: []
+        name: data.organization_id
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.email:
+        custom: []
+        name: data.email
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.phone:
+        custom: []
+        name: data.phone
+        description: 'A phone number, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.address:
+        custom: []
+        name: data.address
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.city:
+        custom: []
+        name: data.city
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.region:
+        custom: []
+        name: data.region
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.country:
+        custom: []
+        name: data.country
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.postal_code:
+        custom: []
+        name: data.postal_code
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.deleted_at:
+        custom: []
+        name: data.deleted_at
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'v1/contacts/{contact}'
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update Contact'
+      description: 'Change a contact with a JSON Merge Patch (application/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the contact after the change, with its new ETag.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      If-Match: '"a1b2c3d4e5f6"'
+      Accept: application/json
+    urlParameters:
+      contact:
+        custom: []
+        name: contact
+        description: 'The contact ID, a ULID.'
+        required: true
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      organization_id:
+        custom: []
+        name: organization_id
+        description: "One of the account's organisations that is not deleted, or null for none."
+        required: false
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      first_name:
+        custom: []
+        name: first_name
+        description: 'Up to 25 characters.'
+        required: false
+        example: Ada
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      last_name:
+        custom: []
+        name: last_name
+        description: 'Up to 25 characters.'
+        required: false
+        example: Lovelace
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'An email address, up to 50 characters, or null.'
+        required: false
+        example: ada@rippin.example
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Up to 50 characters, or null.'
+        required: false
+        example: '+1 555 0101'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'Up to 150 characters, or null.'
+        required: false
+        example: '742 Evergreen Terrace'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'Up to 50 characters, or null.'
+        required: false
+        example: Springfield
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      region:
+        custom: []
+        name: region
+        description: 'A state, province or county, up to 50 characters, or null.'
+        required: false
+        example: Oregon
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'A two-letter ISO 3166-1 code in capitals, or null.'
+        required: false
+        example: US
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      postal_code:
+        custom: []
+        name: postal_code
+        description: 'Up to 25 characters, or null.'
+        required: false
+        example: '97403'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+      first_name: Ada
+      last_name: Lovelace
+      email: ada@rippin.example
+      phone: '+1 555 0101'
+      address: '742 Evergreen Terrace'
+      city: Springfield
+      region: Oregon
+      country: US
+      postal_code: '97403'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        headers: []
+        description: 'The contact after the change.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:write ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No contact with this ID belongs to the authenticated account.'
+      -
+        custom: []
+        status: 412
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/precondition-failed","title":"Precondition Failed","status":412,"detail":"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag."}'
+        headers: []
+        description: 'If-Match does not match the current ETag: someone else changed it first.'
+      -
+        custom: []
+        status: 415
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unsupported-media-type","title":"Unsupported Media Type","status":415,"detail":"The Content-Type ''application\/json'' is not supported. Supported content types: application\/merge-patch+json."}'
+        headers: []
+        description: 'The body is not application/merge-patch+json.'
+      -
+        custom: []
+        status: 422
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The organisation is not one of this account''s, or it is deleted.","errors":{"organization_id":["The organisation is not one of this account''s, or it is deleted."]}}'
+        headers: []
+        description: "A field is too long or malformed, a name was cleared, or the organisation is not one of the account's."
+      -
+        custom: []
+        status: 428
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/precondition-required","title":"Precondition Required","status":428,"detail":"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match."}'
+        headers: []
+        description: 'The request has no If-Match.'
+    responseFields:
+      data.organization_id:
+        custom: []
+        name: data.organization_id
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.email:
+        custom: []
+        name: data.email
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.phone:
+        custom: []
+        name: data.phone
+        description: 'A phone number, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.address:
+        custom: []
+        name: data.address
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.city:
+        custom: []
+        name: data.city
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.region:
+        custom: []
+        name: data.region
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.country:
+        custom: []
+        name: data.country
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.postal_code:
+        custom: []
+        name: data.postal_code
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.deleted_at:
+        custom: []
+        name: data.deleted_at
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'v1/contacts/{contact}'
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete Contact'
+      description: 'Delete a contact. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      If-Match: '"a1b2c3d4e5f6"'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      contact:
+        custom: []
+        name: contact
+        description: 'The contact ID, a ULID.'
+        required: true
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 204
+        content: null
+        headers: []
+        description: 'Contact deleted.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:write ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No contact with this ID belongs to the authenticated account.'
+      -
+        custom: []
+        status: 412
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/precondition-failed","title":"Precondition Failed","status":412,"detail":"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag."}'
+        headers: []
+        description: 'If-Match does not match the current ETag: someone else changed it first.'
+      -
+        custom: []
+        status: 428
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/precondition-required","title":"Precondition Required","status":428,"detail":"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match."}'
+        headers: []
+        description: 'The request has no If-Match.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'v1/contacts/{contact}/restore'
+    metadata:
+      custom: []
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Restore Contact'
+      description: 'Bring back a deleted contact, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the contact with its new ETag.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      contact:
+        custom: []
+        name: contact
+        description: 'The contact ID, a ULID.'
+        required: true
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        headers: []
+        description: 'The contact, restored.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:write ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No contact with this ID belongs to the authenticated account.'
+    responseFields:
+      data.organization_id:
+        custom: []
+        name: data.organization_id
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.email:
+        custom: []
+        name: data.email
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.phone:
+        custom: []
+        name: data.phone
+        description: 'A phone number, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.address:
+        custom: []
+        name: data.address
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.city:
+        custom: []
+        name: data.city
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.region:
+        custom: []
+        name: data.region
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.country:
+        custom: []
+        name: data.country
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.postal_code:
+        custom: []
+        name: data.postal_code
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      data.deleted_at:
+        custom: []
+        name: data.deleted_at
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

@@ -18,6 +18,9 @@ ignore:
       - GET /v1/organizations
       - POST /v1/organizations
       - PATCH /v1/organizations/*
+      - GET /v1/contacts
+      - POST /v1/contacts
+      - PATCH /v1/contacts/*
     reason: >
       Validation problems add an errors member keyed by field, which apiguide.dev's
       validation-failed type defines. Every problem shares type, title, status and detail.

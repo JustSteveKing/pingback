@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use JustSteveKing\Toolbox\ConditionalRequests\Contracts\HasValidators;
@@ -36,9 +37,7 @@ final class Organization extends Model implements HasValidators
 {
     /** @use HasFactory<OrganizationFactory> */
     use HasFactory;
-    use HasRevision {
-        entityTagVersion as revisionTagVersion;
-    }
+    use HasRevision;
     use HasUlids;
     use SoftDeletes;
 
@@ -70,15 +69,11 @@ final class Organization extends Model implements HasValidators
     }
 
     /**
-     * A soft delete writes deleted_at with a query of its own, which fires no "updating" event and
-     * so leaves the revision alone. The representation still changes, so the ETag must too. A
-     * restore is an ordinary save and moves the revision on, so no tag repeats.
+     * @return HasMany<Contact, $this>
      */
-    protected function entityTagVersion(): ?string
+    public function contacts(): HasMany
     {
-        $version = $this->revisionTagVersion();
-
-        return null !== $version && $this->trashed() ? $version . '-deleted' : $version;
+        return $this->hasMany(Contact::class);
     }
 
     /**

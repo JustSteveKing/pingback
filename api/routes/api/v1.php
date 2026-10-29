@@ -16,6 +16,12 @@ use App\Http\Controllers\Api\V1\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\V1\Auth\SendEmailVerificationNotificationController;
 use App\Http\Controllers\Api\V1\Auth\ShowResetPasswordTokenController;
 use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\V1\Contacts\CreateContactController;
+use App\Http\Controllers\Api\V1\Contacts\DeleteContactController;
+use App\Http\Controllers\Api\V1\Contacts\ListContactsController;
+use App\Http\Controllers\Api\V1\Contacts\RestoreContactController;
+use App\Http\Controllers\Api\V1\Contacts\ShowContactController;
+use App\Http\Controllers\Api\V1\Contacts\UpdateContactController;
 use App\Http\Controllers\Api\V1\Organizations\CreateOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\DeleteOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\ListOrganizationsController;
@@ -155,4 +161,27 @@ Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (
         ->whereUlid('organization')
         ->middleware('abilities:organizations:write')
         ->name('v1.organizations.restore');
+
+    Route::get('/contacts', ListContactsController::class)
+        ->middleware('abilities:contacts:read')
+        ->name('v1.contacts.index');
+    Route::post('/contacts', CreateContactController::class)
+        ->middleware(['abilities:contacts:write', 'idempotent'])
+        ->name('v1.contacts.store');
+    Route::get('/contacts/{contact}', ShowContactController::class)
+        ->whereUlid('contact')
+        ->middleware(['abilities:contacts:read', 'conditional'])
+        ->name('v1.contacts.show');
+    Route::patch('/contacts/{contact}', UpdateContactController::class)
+        ->whereUlid('contact')
+        ->middleware(['abilities:contacts:write', 'consumes:application/merge-patch+json', 'merge-patch', 'conditional', 'preconditions.required'])
+        ->name('v1.contacts.update');
+    Route::delete('/contacts/{contact}', DeleteContactController::class)
+        ->whereUlid('contact')
+        ->middleware(['abilities:contacts:write', 'conditional', 'preconditions.required'])
+        ->name('v1.contacts.destroy');
+    Route::post('/contacts/{contact}/restore', RestoreContactController::class)
+        ->whereUlid('contact')
+        ->middleware('abilities:contacts:write')
+        ->name('v1.contacts.restore');
 });

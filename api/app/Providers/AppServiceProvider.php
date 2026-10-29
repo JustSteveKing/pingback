@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
 use App\Support\ProductionSecurityChecks;
@@ -91,7 +92,7 @@ final class AppServiceProvider extends ServiceProvider
     /**
      * Records are bound to the route, because api-toolbox finds a resource's ETag in the bound
      * parameters. Each binding resolves within the authenticated user's account, so another
-     * account's organisation is a 404, exactly like one that does not exist (ADR-0003). Deleted
+     * account's organisation or contact is a 404, exactly like one that does not exist (ADR-0003). Deleted
      * records still resolve: they can be read, changed and restored, as in Ping CRM.
      */
     private function bindRouteParameters(): void
@@ -104,6 +105,16 @@ final class AppServiceProvider extends ServiceProvider
             }
 
             return $account->organizations()->withTrashed()->whereKey($id)->firstOrFail();
+        });
+
+        Route::bind('contact', static function (string $id): Contact {
+            $account = request()->user()?->account;
+
+            if (null === $account) {
+                throw new ModelNotFoundException()->setModel(Contact::class);
+            }
+
+            return $account->contacts()->withTrashed()->whereKey($id)->firstOrFail();
         });
     }
 }

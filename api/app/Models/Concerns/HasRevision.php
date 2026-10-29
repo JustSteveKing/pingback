@@ -29,10 +29,22 @@ trait HasRevision
         });
     }
 
+    /**
+     * A soft delete writes deleted_at with a query of its own, which fires no "updating" event and
+     * so leaves the revision alone. The representation still changes, so the ETag must too. A
+     * restore is an ordinary save and moves the revision on, so no tag repeats.
+     */
     protected function entityTagVersion(): ?string
     {
         $revision = $this->getAttribute('revision');
 
-        return is_int($revision) ? (string) $revision : null;
+        if ( ! is_int($revision)) {
+            return null;
+        }
+
+        // Set only on a soft-deleting model that has been deleted.
+        $trashed = null !== $this->getAttribute('deleted_at');
+
+        return $trashed ? $revision . '-deleted' : (string) $revision;
     }
 }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Account;
+use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\WebhookDelivery;
@@ -493,6 +494,41 @@ it('keeps organisation responses aligned with their documented schemas, nulls in
         ['PATCH', '/v1/organizations/{organization}', 428, fn(): TestResponse => mergePatch('/v1/organizations/' . $full->id, ['city' => null], $token)],
         ['POST', '/v1/organizations/{organization}/restore', 200, fn(): TestResponse => $this->withToken($token)->postJson('/v1/organizations/' . $deleted->id . '/restore')],
         ['DELETE', '/v1/organizations/{organization}', 404, fn(): TestResponse => $this->withToken($token)->deleteJson('/v1/organizations/01jbd0x4qsm2cf4c8m3x6y1v7z', [], ['If-Match' => '"x"'])],
+    ];
+
+    foreach ($checks as [$method, $documented, $status, $send]) {
+        $response = $send()->assertStatus($status);
+        $schema = documentedResponseSchema($spec, $documented, $method, $status);
+
+        expect($schema)->not->toBeNull(sprintf('%s %s documents no %d.', $method, $documented, $status));
+        assertMatchesOpenApiSchema($spec, (array) $schema, $response->json(), '$');
+    }
+});
+
+it('keeps contact responses aligned with their documented schemas, nulls included', function (): void {
+    $spec = generateOpenApiSpec(forceGenerate: true);
+    $account = Account::factory()->create();
+    $organization = Organization::factory()->for($account)->create();
+
+    $bare = Contact::factory()->for($account)->create(array_fill_keys(['organization_id', 'email', 'phone', 'address', 'city', 'region', 'country', 'postal_code'], null));
+    $full = Contact::factory()->for($account)->create(['organization_id' => $organization->id]);
+    $deleted = Contact::factory()->for($account)->create();
+    $deleted->delete();
+
+    $token = $account->owner->createToken('contract', ['contacts:read', 'contacts:write'])->plainTextToken;
+    $etag = fn(Contact $contact): string => (string) $this->withToken($token)->getJson('/v1/contacts/' . $contact->id)->headers->get('ETag');
+
+    $checks = [
+        ['GET', '/v1/contacts', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts?trashed=with')],
+        ['GET', '/v1/contacts/{contact}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts/' . $bare->id)],
+        ['GET', '/v1/contacts/{contact}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts/' . $deleted->id)],
+        ['POST', '/v1/contacts', 201, fn(): TestResponse => $this->withToken($token)->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace'])],
+        ['POST', '/v1/contacts', 422, fn(): TestResponse => $this->withToken($token)->postJson('/v1/contacts', [])],
+        ['PATCH', '/v1/contacts/{contact}', 200, fn(): TestResponse => mergePatch('/v1/contacts/' . $full->id, ['city' => null], $token, ['If-Match' => $etag($full)])],
+        ['PATCH', '/v1/contacts/{contact}', 412, fn(): TestResponse => mergePatch('/v1/contacts/' . $full->id, ['city' => null], $token, ['If-Match' => '"stale"'])],
+        ['PATCH', '/v1/contacts/{contact}', 428, fn(): TestResponse => mergePatch('/v1/contacts/' . $full->id, ['city' => null], $token)],
+        ['POST', '/v1/contacts/{contact}/restore', 200, fn(): TestResponse => $this->withToken($token)->postJson('/v1/contacts/' . $deleted->id . '/restore')],
+        ['DELETE', '/v1/contacts/{contact}', 404, fn(): TestResponse => $this->withToken($token)->deleteJson('/v1/contacts/01jbd1k9r2w3x4y5z6a7b8c9d0', [], ['If-Match' => '"x"'])],
     ];
 
     foreach ($checks as [$method, $documented, $status, $send]) {

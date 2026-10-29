@@ -14,6 +14,9 @@ tags:
     name: Authentication
     description: ''
   -
+    name: Contacts
+    description: ''
+  -
     name: Organizations
     description: ''
   -
@@ -122,10 +125,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63pxktagzdb6q9wsm2x0rc0
+                    id: 01m63qgvfka6qe5y0fmkedc9wv
                     name: 'Justina Gaylord'
                     email: lafayette.considine@example.com
-                    email_verified_at: '2026-10-29T11:32:28+00:00'
+                    email_verified_at: '2026-10-29T11:42:59+00:00'
                     created_at: null
                     updated_at: null
                   meta:
@@ -138,7 +141,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63pxktagzdb6q9wsm2x0rc0
+                        example: 01m63qgvfka6qe5y0fmkedc9wv
                       name:
                         type: string
                         example: 'Justina Gaylord'
@@ -147,7 +150,7 @@ paths:
                         example: lafayette.considine@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:32:28+00:00'
+                        example: '2026-10-29T11:42:59+00:00'
                       created_at:
                         type: string
                         example: null
@@ -250,10 +253,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63pxktjjwqtyhx5sh9g7hm3
+                    id: 01m63qgvfv6zpf0b6th0r7cg93
                     name: 'Justina Gaylord'
                     email: cormier.nick@example.com
-                    email_verified_at: '2026-10-29T11:32:28+00:00'
+                    email_verified_at: '2026-10-29T11:42:59+00:00'
                     created_at: null
                     updated_at: null
                   meta:
@@ -266,7 +269,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63pxktjjwqtyhx5sh9g7hm3
+                        example: 01m63qgvfv6zpf0b6th0r7cg93
                       name:
                         type: string
                         example: 'Justina Gaylord'
@@ -275,7 +278,7 @@ paths:
                         example: cormier.nick@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:32:28+00:00'
+                        example: '2026-10-29T11:42:59+00:00'
                       created_at:
                         type: string
                         example: null
@@ -713,10 +716,10 @@ paths:
                 type: object
                 example:
                   data:
-                    id: 01m63pxkvkzwv5h496zn2zef9k
+                    id: 01m63qgvgtb91tpcecz3p3pj2p
                     name: 'Morgan Hirthe'
                     email: dare.emelie@example.com
-                    email_verified_at: '2026-10-29T11:32:28+00:00'
+                    email_verified_at: '2026-10-29T11:42:59+00:00'
                     created_at: null
                     updated_at: null
                 properties:
@@ -725,7 +728,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 01m63pxkvkzwv5h496zn2zef9k
+                        example: 01m63qgvgtb91tpcecz3p3pj2p
                       name:
                         type: string
                         example: 'Morgan Hirthe'
@@ -734,7 +737,7 @@ paths:
                         example: dare.emelie@example.com
                       email_verified_at:
                         type: string
-                        example: '2026-10-29T11:32:28+00:00'
+                        example: '2026-10-29T11:42:59+00:00'
                       created_at:
                         type: string
                         example: null
@@ -1316,6 +1319,1317 @@ paths:
                     example: Unauthenticated.
       tags:
         - Authentication
+  /v1/contacts:
+    get:
+      summary: 'List Contacts'
+      operationId: listContacts
+      description: 'List the account''s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header''s rel="next" for the next page, which keeps the same search and filter.'
+      parameters:
+        -
+          in: query
+          name: search
+          description: 'Only contacts whose first name, last name, email or organisation name contains this text, ignoring case. Must not be greater than 100 characters.'
+          example: ada
+          required: false
+          schema:
+            type: string
+            description: 'Only contacts whose first name, last name, email or organisation name contains this text, ignoring case. Must not be greater than 100 characters.'
+            example: ada
+        -
+          in: query
+          name: trashed
+          description: 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).'
+          example: with
+          required: false
+          schema:
+            type: string
+            description: 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).'
+            example: with
+            enum:
+              - with
+              - only
+        -
+          in: query
+          name: organization_id
+          description: 'Only the contacts at this organisation.'
+          example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+          required: false
+          schema:
+            type: string
+            description: 'Only the contacts at this organisation.'
+            example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+        -
+          in: query
+          name: cursor
+          description: 'Opaque cursor from a Link header. Omit it for the first page.'
+          example: architecto
+          required: false
+          schema:
+            type: string
+            description: 'Opaque cursor from a Link header. Omit it for the first page.'
+            example: architecto
+      responses:
+        200:
+          description: 'One page of contacts.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id:
+                      type: string
+                      example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                      nullable: true
+                    first_name:
+                      type: string
+                      example: Ada
+                    last_name:
+                      type: string
+                      example: Lovelace
+                    email:
+                      type: string
+                      example: ada@rippin.example
+                      nullable: true
+                    phone:
+                      type: string
+                      example: '+1 555 0101'
+                      nullable: true
+                    address:
+                      type: string
+                      example: '742 Evergreen Terrace'
+                      nullable: true
+                    city:
+                      type: string
+                      example: Springfield
+                      nullable: true
+                    region:
+                      type: string
+                      example: Oregon
+                      nullable: true
+                    country:
+                      type: string
+                      example: US
+                      nullable: true
+                    postal_code:
+                      type: string
+                      example: '97403'
+                      nullable: true
+                    created_at:
+                      type: string
+                      example: '2026-10-29T09:00:00+00:00'
+                    updated_at:
+                      type: string
+                      example: '2026-10-29T09:00:00+00:00'
+                    deleted_at:
+                      type: string
+                      example: null
+                      nullable: true
+                example:
+                  -
+                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    first_name: Ada
+                    last_name: Lovelace
+                    email: ada@rippin.example
+                    phone: '+1 555 0101'
+                    address: '742 Evergreen Terrace'
+                    city: Springfield
+                    region: Oregon
+                    country: US
+                    postal_code: '97403'
+                    created_at: '2026-10-29T09:00:00+00:00'
+                    updated_at: '2026-10-29T09:00:00+00:00'
+                    deleted_at: null
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:read ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        422:
+          description: 'The trashed filter is not "with" or "only", the organisation is not a ULID, or the search is longer than 100 characters.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/validation-failed'
+                  title: 'Validation Failed'
+                  status: 422
+                  detail: 'The selected trashed is invalid.'
+                  errors:
+                    trashed:
+                      - 'The selected trashed is invalid.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/validation-failed'
+                  title:
+                    type: string
+                    example: 'Validation Failed'
+                  status:
+                    type: integer
+                    example: 422
+                  detail:
+                    type: string
+                    example: 'The selected trashed is invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      trashed:
+                        type: array
+                        example:
+                          - 'The selected trashed is invalid.'
+                        items:
+                          type: string
+      tags:
+        - Contacts
+    post:
+      summary: 'Create Contact'
+      operationId: createContact
+      description: 'Add a contact to the account, at one of its organisations or none. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the contact with its ETag, and its URL in Location.'
+      parameters:
+        -
+          in: header
+          name: Idempotency-Key
+          description: 'A key unique to this request, such as a UUID. Send the same key when retrying: a retry with the same key and body gets the original response instead of running again, for a day. The same key with a different body is a 422.'
+          example: '"contact-retry-1"'
+          schema:
+            type: string
+      responses:
+        201:
+          description: 'Contact created.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    first_name: Ada
+                    last_name: Lovelace
+                    email: ada@rippin.example
+                    phone: '+1 555 0101'
+                    address: '742 Evergreen Terrace'
+                    city: Springfield
+                    region: Oregon
+                    country: US
+                    postal_code: '97403'
+                    created_at: '2026-10-29T09:00:00+00:00'
+                    updated_at: '2026-10-29T09:00:00+00:00'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                      organization_id:
+                        type: string
+                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                        nullable: true
+                      first_name:
+                        type: string
+                        example: Ada
+                      last_name:
+                        type: string
+                        example: Lovelace
+                      email:
+                        type: string
+                        example: ada@rippin.example
+                        description: "The contact's email address, or null."
+                        nullable: true
+                      phone:
+                        type: string
+                        example: '+1 555 0101'
+                        description: 'A phone number, or null.'
+                        nullable: true
+                      address:
+                        type: string
+                        example: '742 Evergreen Terrace'
+                        description: 'The street address, or null.'
+                        nullable: true
+                      city:
+                        type: string
+                        example: Springfield
+                        description: 'The city, or null.'
+                        nullable: true
+                      region:
+                        type: string
+                        example: Oregon
+                        description: 'The state, province or county, or null.'
+                        nullable: true
+                      country:
+                        type: string
+                        example: US
+                        description: 'A two-letter ISO 3166-1 code, or null.'
+                        nullable: true
+                      postal_code:
+                        type: string
+                        example: '97403'
+                        description: 'The postal code, or null.'
+                        nullable: true
+                      created_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      updated_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      deleted_at:
+                        type: string
+                        example: null
+                        description: 'When it was deleted, or null if it is not.'
+                        nullable: true
+                    required:
+                      - organization_id
+                      - email
+                      - phone
+                      - address
+                      - city
+                      - region
+                      - country
+                      - postal_code
+                      - deleted_at
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:write ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        422:
+          description: "A field is missing, too long or malformed, or the organisation is not one of the account's."
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/validation-failed'
+                  title: 'Validation Failed'
+                  status: 422
+                  detail: 'The first name field is required.'
+                  errors:
+                    first_name:
+                      - 'The first name field is required.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/validation-failed'
+                  title:
+                    type: string
+                    example: 'Validation Failed'
+                  status:
+                    type: integer
+                    example: 422
+                  detail:
+                    type: string
+                    example: 'The first name field is required.'
+                  errors:
+                    type: object
+                    properties:
+                      first_name:
+                        type: array
+                        example:
+                          - 'The first name field is required.'
+                        items:
+                          type: string
+      tags:
+        - Contacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organization_id:
+                  type: string
+                  description: "One of the account's organisations that is not deleted, or null for none."
+                  example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                first_name:
+                  type: string
+                  description: 'Up to 25 characters.'
+                  example: Ada
+                last_name:
+                  type: string
+                  description: 'Up to 25 characters.'
+                  example: Lovelace
+                email:
+                  type: string
+                  description: 'An email address, up to 50 characters, or null.'
+                  example: ada@rippin.example
+                phone:
+                  type: string
+                  description: 'Up to 50 characters, or null.'
+                  example: '+1 555 0101'
+                address:
+                  type: string
+                  description: 'Up to 150 characters, or null.'
+                  example: '742 Evergreen Terrace'
+                city:
+                  type: string
+                  description: 'Up to 50 characters, or null.'
+                  example: Springfield
+                region:
+                  type: string
+                  description: 'A state, province or county, up to 50 characters, or null.'
+                  example: Oregon
+                country:
+                  type: string
+                  description: 'A two-letter ISO 3166-1 code in capitals, or null.'
+                  example: US
+                postal_code:
+                  type: string
+                  description: 'Up to 25 characters, or null.'
+                  example: '97403'
+              required:
+                - first_name
+                - last_name
+  '/v1/contacts/{contact}':
+    get:
+      summary: 'Show Contact'
+      operationId: showContact
+      description: "Fetch one contact by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the contact, or 304 with no body when If-None-Match still matches."
+      parameters:
+        -
+          in: header
+          name: If-None-Match
+          description: 'An ETag from an earlier response. While it still matches, the answer is 304 Not Modified with no body, so you can re-fetch cheaply.'
+          example: '"a1b2c3d4e5f6"'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'The contact, with its ETag.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    first_name: Ada
+                    last_name: Lovelace
+                    email: ada@rippin.example
+                    phone: '+1 555 0101'
+                    address: '742 Evergreen Terrace'
+                    city: Springfield
+                    region: Oregon
+                    country: US
+                    postal_code: '97403'
+                    created_at: '2026-10-29T09:00:00+00:00'
+                    updated_at: '2026-10-29T09:00:00+00:00'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                      organization_id:
+                        type: string
+                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                        nullable: true
+                      first_name:
+                        type: string
+                        example: Ada
+                      last_name:
+                        type: string
+                        example: Lovelace
+                      email:
+                        type: string
+                        example: ada@rippin.example
+                        description: "The contact's email address, or null."
+                        nullable: true
+                      phone:
+                        type: string
+                        example: '+1 555 0101'
+                        description: 'A phone number, or null.'
+                        nullable: true
+                      address:
+                        type: string
+                        example: '742 Evergreen Terrace'
+                        description: 'The street address, or null.'
+                        nullable: true
+                      city:
+                        type: string
+                        example: Springfield
+                        description: 'The city, or null.'
+                        nullable: true
+                      region:
+                        type: string
+                        example: Oregon
+                        description: 'The state, province or county, or null.'
+                        nullable: true
+                      country:
+                        type: string
+                        example: US
+                        description: 'A two-letter ISO 3166-1 code, or null.'
+                        nullable: true
+                      postal_code:
+                        type: string
+                        example: '97403'
+                        description: 'The postal code, or null.'
+                        nullable: true
+                      created_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      updated_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      deleted_at:
+                        type: string
+                        example: null
+                        description: 'When it was deleted, or null if it is not.'
+                        nullable: true
+                    required:
+                      - organization_id
+                      - email
+                      - phone
+                      - address
+                      - city
+                      - region
+                      - country
+                      - postal_code
+                      - deleted_at
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:read ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        404:
+          description: 'No contact with this ID belongs to the authenticated account.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/resource-not-found'
+                  title: 'Resource Not Found'
+                  status: 404
+                  detail: 'The resource was not found.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/resource-not-found'
+                  title:
+                    type: string
+                    example: 'Resource Not Found'
+                  status:
+                    type: integer
+                    example: 404
+                  detail:
+                    type: string
+                    example: 'The resource was not found.'
+      tags:
+        - Contacts
+    patch:
+      summary: 'Update Contact'
+      operationId: updateContact
+      description: 'Change a contact with a JSON Merge Patch (application/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the contact after the change, with its new ETag.'
+      parameters:
+        -
+          in: header
+          name: If-Match
+          description: "The ETag from your last GET of this resource. The change is refused with 412 if the resource has changed since, so it cannot overwrite someone else's change. Leaving it out is a 428 where the endpoint requires it."
+          example: '"a1b2c3d4e5f6"'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'The contact after the change.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    first_name: Ada
+                    last_name: Lovelace
+                    email: ada@rippin.example
+                    phone: '+1 555 0101'
+                    address: '742 Evergreen Terrace'
+                    city: Springfield
+                    region: Oregon
+                    country: US
+                    postal_code: '97403'
+                    created_at: '2026-10-29T09:00:00+00:00'
+                    updated_at: '2026-10-29T09:00:00+00:00'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                      organization_id:
+                        type: string
+                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                        nullable: true
+                      first_name:
+                        type: string
+                        example: Ada
+                      last_name:
+                        type: string
+                        example: Lovelace
+                      email:
+                        type: string
+                        example: ada@rippin.example
+                        description: "The contact's email address, or null."
+                        nullable: true
+                      phone:
+                        type: string
+                        example: '+1 555 0101'
+                        description: 'A phone number, or null.'
+                        nullable: true
+                      address:
+                        type: string
+                        example: '742 Evergreen Terrace'
+                        description: 'The street address, or null.'
+                        nullable: true
+                      city:
+                        type: string
+                        example: Springfield
+                        description: 'The city, or null.'
+                        nullable: true
+                      region:
+                        type: string
+                        example: Oregon
+                        description: 'The state, province or county, or null.'
+                        nullable: true
+                      country:
+                        type: string
+                        example: US
+                        description: 'A two-letter ISO 3166-1 code, or null.'
+                        nullable: true
+                      postal_code:
+                        type: string
+                        example: '97403'
+                        description: 'The postal code, or null.'
+                        nullable: true
+                      created_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      updated_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      deleted_at:
+                        type: string
+                        example: null
+                        description: 'When it was deleted, or null if it is not.'
+                        nullable: true
+                    required:
+                      - organization_id
+                      - email
+                      - phone
+                      - address
+                      - city
+                      - region
+                      - country
+                      - postal_code
+                      - deleted_at
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:write ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        404:
+          description: 'No contact with this ID belongs to the authenticated account.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/resource-not-found'
+                  title: 'Resource Not Found'
+                  status: 404
+                  detail: 'The resource was not found.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/resource-not-found'
+                  title:
+                    type: string
+                    example: 'Resource Not Found'
+                  status:
+                    type: integer
+                    example: 404
+                  detail:
+                    type: string
+                    example: 'The resource was not found.'
+        412:
+          description: 'If-Match does not match the current ETag: someone else changed it first.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/precondition-failed'
+                  title: 'Precondition Failed'
+                  status: 412
+                  detail: 'The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/precondition-failed'
+                  title:
+                    type: string
+                    example: 'Precondition Failed'
+                  status:
+                    type: integer
+                    example: 412
+                  detail:
+                    type: string
+                    example: 'The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.'
+        415:
+          description: 'The body is not application/merge-patch+json.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unsupported-media-type'
+                  title: 'Unsupported Media Type'
+                  status: 415
+                  detail: "The Content-Type 'application/json' is not supported. Supported content types: application/merge-patch+json."
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unsupported-media-type'
+                  title:
+                    type: string
+                    example: 'Unsupported Media Type'
+                  status:
+                    type: integer
+                    example: 415
+                  detail:
+                    type: string
+                    example: "The Content-Type 'application/json' is not supported. Supported content types: application/merge-patch+json."
+        422:
+          description: "A field is too long or malformed, a name was cleared, or the organisation is not one of the account's."
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/validation-failed'
+                  title: 'Validation Failed'
+                  status: 422
+                  detail: "The organisation is not one of this account's, or it is deleted."
+                  errors:
+                    organization_id:
+                      - "The organisation is not one of this account's, or it is deleted."
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/validation-failed'
+                  title:
+                    type: string
+                    example: 'Validation Failed'
+                  status:
+                    type: integer
+                    example: 422
+                  detail:
+                    type: string
+                    example: "The organisation is not one of this account's, or it is deleted."
+                  errors:
+                    type: object
+                    properties:
+                      organization_id:
+                        type: array
+                        example:
+                          - "The organisation is not one of this account's, or it is deleted."
+                        items:
+                          type: string
+        428:
+          description: 'The request has no If-Match.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/precondition-required'
+                  title: 'Precondition Required'
+                  status: 428
+                  detail: 'This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/precondition-required'
+                  title:
+                    type: string
+                    example: 'Precondition Required'
+                  status:
+                    type: integer
+                    example: 428
+                  detail:
+                    type: string
+                    example: 'This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.'
+      tags:
+        - Contacts
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organization_id:
+                  type: string
+                  description: "One of the account's organisations that is not deleted, or null for none."
+                  example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                first_name:
+                  type: string
+                  description: 'Up to 25 characters.'
+                  example: Ada
+                last_name:
+                  type: string
+                  description: 'Up to 25 characters.'
+                  example: Lovelace
+                email:
+                  type: string
+                  description: 'An email address, up to 50 characters, or null.'
+                  example: ada@rippin.example
+                phone:
+                  type: string
+                  description: 'Up to 50 characters, or null.'
+                  example: '+1 555 0101'
+                address:
+                  type: string
+                  description: 'Up to 150 characters, or null.'
+                  example: '742 Evergreen Terrace'
+                city:
+                  type: string
+                  description: 'Up to 50 characters, or null.'
+                  example: Springfield
+                region:
+                  type: string
+                  description: 'A state, province or county, up to 50 characters, or null.'
+                  example: Oregon
+                country:
+                  type: string
+                  description: 'A two-letter ISO 3166-1 code in capitals, or null.'
+                  example: US
+                postal_code:
+                  type: string
+                  description: 'Up to 25 characters, or null.'
+                  example: '97403'
+    delete:
+      summary: 'Delete Contact'
+      operationId: deleteContact
+      description: 'Delete a contact. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing.'
+      parameters:
+        -
+          in: header
+          name: If-Match
+          description: "The ETag from your last GET of this resource. The change is refused with 412 if the resource has changed since, so it cannot overwrite someone else's change. Leaving it out is a 428 where the endpoint requires it."
+          example: '"a1b2c3d4e5f6"'
+          schema:
+            type: string
+      responses:
+        204:
+          description: 'Contact deleted.'
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:write ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        404:
+          description: 'No contact with this ID belongs to the authenticated account.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/resource-not-found'
+                  title: 'Resource Not Found'
+                  status: 404
+                  detail: 'The resource was not found.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/resource-not-found'
+                  title:
+                    type: string
+                    example: 'Resource Not Found'
+                  status:
+                    type: integer
+                    example: 404
+                  detail:
+                    type: string
+                    example: 'The resource was not found.'
+        412:
+          description: 'If-Match does not match the current ETag: someone else changed it first.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/precondition-failed'
+                  title: 'Precondition Failed'
+                  status: 412
+                  detail: 'The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/precondition-failed'
+                  title:
+                    type: string
+                    example: 'Precondition Failed'
+                  status:
+                    type: integer
+                    example: 412
+                  detail:
+                    type: string
+                    example: 'The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.'
+        428:
+          description: 'The request has no If-Match.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/precondition-required'
+                  title: 'Precondition Required'
+                  status: 428
+                  detail: 'This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/precondition-required'
+                  title:
+                    type: string
+                    example: 'Precondition Required'
+                  status:
+                    type: integer
+                    example: 428
+                  detail:
+                    type: string
+                    example: 'This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.'
+      tags:
+        - Contacts
+    parameters:
+      -
+        in: path
+        name: contact
+        description: 'The contact ID, a ULID.'
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        required: true
+        schema:
+          type: string
+  '/v1/contacts/{contact}/restore':
+    post:
+      summary: 'Restore Contact'
+      operationId: restoreContact
+      description: 'Bring back a deleted contact, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the contact with its new ETag.'
+      parameters: []
+      responses:
+        200:
+          description: 'The contact, restored.'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    first_name: Ada
+                    last_name: Lovelace
+                    email: ada@rippin.example
+                    phone: '+1 555 0101'
+                    address: '742 Evergreen Terrace'
+                    city: Springfield
+                    region: Oregon
+                    country: US
+                    postal_code: '97403'
+                    created_at: '2026-10-29T09:00:00+00:00'
+                    updated_at: '2026-10-29T09:00:00+00:00'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                      organization_id:
+                        type: string
+                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                        nullable: true
+                      first_name:
+                        type: string
+                        example: Ada
+                      last_name:
+                        type: string
+                        example: Lovelace
+                      email:
+                        type: string
+                        example: ada@rippin.example
+                        description: "The contact's email address, or null."
+                        nullable: true
+                      phone:
+                        type: string
+                        example: '+1 555 0101'
+                        description: 'A phone number, or null.'
+                        nullable: true
+                      address:
+                        type: string
+                        example: '742 Evergreen Terrace'
+                        description: 'The street address, or null.'
+                        nullable: true
+                      city:
+                        type: string
+                        example: Springfield
+                        description: 'The city, or null.'
+                        nullable: true
+                      region:
+                        type: string
+                        example: Oregon
+                        description: 'The state, province or county, or null.'
+                        nullable: true
+                      country:
+                        type: string
+                        example: US
+                        description: 'A two-letter ISO 3166-1 code, or null.'
+                        nullable: true
+                      postal_code:
+                        type: string
+                        example: '97403'
+                        description: 'The postal code, or null.'
+                        nullable: true
+                      created_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      updated_at:
+                        type: string
+                        example: '2026-10-29T09:00:00+00:00'
+                      deleted_at:
+                        type: string
+                        example: null
+                        description: 'When it was deleted, or null if it is not.'
+                        nullable: true
+                    required:
+                      - organization_id
+                      - email
+                      - phone
+                      - address
+                      - city
+                      - region
+                      - country
+                      - postal_code
+                      - deleted_at
+        401:
+          description: 'Authentication failed.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/unauthorized'
+                  title: Unauthorized
+                  status: 401
+                  detail: Unauthenticated.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/unauthorized'
+                  title:
+                    type: string
+                    example: Unauthorized
+                  status:
+                    type: integer
+                    example: 401
+                  detail:
+                    type: string
+                    example: Unauthenticated.
+        403:
+          description: 'Token is missing the contacts:write ability.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/forbidden'
+                  title: Forbidden
+                  status: 403
+                  detail: Forbidden.
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/forbidden'
+                  title:
+                    type: string
+                    example: Forbidden
+                  status:
+                    type: integer
+                    example: 403
+                  detail:
+                    type: string
+                    example: Forbidden.
+        404:
+          description: 'No contact with this ID belongs to the authenticated account.'
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                example:
+                  type: 'https://apiguide.dev/errors/resource-not-found'
+                  title: 'Resource Not Found'
+                  status: 404
+                  detail: 'The resource was not found.'
+                properties:
+                  type:
+                    type: string
+                    example: 'https://apiguide.dev/errors/resource-not-found'
+                  title:
+                    type: string
+                    example: 'Resource Not Found'
+                  status:
+                    type: integer
+                    example: 404
+                  detail:
+                    type: string
+                    example: 'The resource was not found.'
+      tags:
+        - Contacts
+    parameters:
+      -
+        in: path
+        name: contact
+        description: 'The contact ID, a ULID.'
+        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        required: true
+        schema:
+          type: string
   /v1/organizations:
     get:
       summary: 'List Organizations'
