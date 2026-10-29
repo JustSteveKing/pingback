@@ -8,7 +8,7 @@ useDefault = true
 description = "Generated files that are not secrets"
 paths = [
     # Scribe's hashes of the files it has documented.
-    '''^\.scribe/\.filehashes$''',
+    '''(^|/)\.scribe/\.filehashes$''',
     # Laravel Boost's skills, written by boost:update, whose examples include placeholder keys.
-    '''^\.(agents|claude)/skills/''',
+    '''(^|/)\.(agents|claude)/skills/''',
 ]
