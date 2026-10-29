@@ -1,0 +1,78 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/organizations",
+                "uri": "http://127.0.0.1:8000/v1/organizations",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"fc111cce-eda7-4ee8-be3c-c7626473f96e\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"name\":\"Contract Forbidden Ltd\"}"
+            },
+            "response": {
+                "status": 403,
+                "reason": "Forbidden",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:09 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2d57-72d7-838e-464d64eaf4e7"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\",\"instance\":\"urn:uuid:01a18772-2d57-72d7-838e-464d64eaf4e7\"}"
+            }
+        }
+    ]
+}

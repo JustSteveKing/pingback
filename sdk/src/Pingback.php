@@ -6,6 +6,7 @@ namespace JustSteveKing\Pingback;
 
 use JustSteveKing\Pingback\Data\Account;
 use JustSteveKing\Pingback\Requests\GetAccount;
+use JustSteveKing\Pingback\Resources\Organizations;
 use JustSteveKing\SdkToolbox\Auth\Authenticator;
 use JustSteveKing\SdkToolbox\Auth\BearerToken;
 use JustSteveKing\SdkToolbox\Connector;
@@ -72,6 +73,11 @@ final class Pingback extends Connector
     public function account(): Account
     {
         return $this->send(new GetAccount);
+    }
+
+    public function organizations(): Organizations
+    {
+        return new Organizations($this);
     }
 
     private static function isLoopback(string $baseUri): bool

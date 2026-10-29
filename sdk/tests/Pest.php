@@ -78,6 +78,23 @@ function apiKey(array $abilities): string
 }
 
 /**
+ * A session token for a newly registered user, so in an account of its own.
+ */
+function otherAccountToken(): string
+{
+    if (! live()) {
+        return 'replayed-other-token';
+    }
+
+    return post('/auth/register', [
+        'name' => 'Another Account',
+        'email' => 'contract-'.bin2hex(random_bytes(8)).'@example.com',
+        'password' => 'secret-another-account',
+        'device_name' => 'pingback-sdk-contract',
+    ]);
+}
+
+/**
  * @param  array<string, mixed>  $body
  */
 function post(string $path, array $body, ?string $token = null): string

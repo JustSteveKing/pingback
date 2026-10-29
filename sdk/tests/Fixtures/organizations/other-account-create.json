@@ -1,0 +1,90 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/organizations",
+                "uri": "http://127.0.0.1:8000/v1/organizations",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"f9dccfc8-2174-47d8-a088-93944be714b4\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"name\":\"Contract Private Ltd\"}"
+            },
+            "response": {
+                "status": 201,
+                "reason": "Created",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:09 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"aef20a3d36b6ec4c2a042afab553e997\""
+                    ],
+                    "location": [
+                        "http://127.0.0.1:8000/v1/organizations/01m63q4b2t08mpdsqf17jz1xr7"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "30"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2c50-7197-95e7-8b716e3a9b72"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63q4b2t08mpdsqf17jz1xr7\",\"name\":\"Contract Private Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:09+00:00\",\"updated_at\":\"2026-10-29T11:36:09+00:00\",\"deleted_at\":null}}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,336 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/organizations",
+                "uri": "http://127.0.0.1:8000/v1/organizations",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"ea38f2a9-7663-46ba-9fda-fdbb9d909d15\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"name\":\"Contract Stale Delete Ltd\"}"
+            },
+            "response": {
+                "status": 201,
+                "reason": "Created",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"9004e1150e660a5427d90c27f1313144\""
+                    ],
+                    "location": [
+                        "http://127.0.0.1:8000/v1/organizations/01m63q4az7wenc29301yn88yg5"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "35"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2bdd-70f3-bda2-27fbc8a0baa8"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63q4az7wenc29301yn88yg5\",\"name\":\"Contract Stale Delete Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "PATCH",
+                "path": "/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/merge-patch+json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"9004e1150e660a5427d90c27f1313144\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"city\":\"Leeds\"}"
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"52dd06d1194f73518ee4d1365a786b3f\""
+                    ],
+                    "accept-patch": [
+                        "application/merge-patch+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "34"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2bf9-7179-9cc2-74e3aee07af9"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63q4az7wenc29301yn88yg5\",\"name\":\"Contract Stale Delete Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "DELETE",
+                "path": "/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"9004e1150e660a5427d90c27f1313144\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 412,
+                "reason": "Precondition Failed",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "etag": [
+                        "\"52dd06d1194f73518ee4d1365a786b3f\""
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "33"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2c0e-713a-8221-1a6bf4a6a083"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a18772-2c0e-713a-8221-1a6bf4a6a083\"}"
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "path": "/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4az7wenc29301yn88yg5",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "private, must-revalidate"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:09 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"52dd06d1194f73518ee4d1365a786b3f\""
+                    ],
+                    "last-modified": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "32"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2c21-72fc-bb77-101c54e43ef0"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63q4az7wenc29301yn88yg5\",\"name\":\"Contract Stale Delete Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+            }
+        }
+    ]
+}

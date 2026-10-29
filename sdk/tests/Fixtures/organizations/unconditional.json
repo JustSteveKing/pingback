@@ -1,0 +1,247 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/organizations",
+                "uri": "http://127.0.0.1:8000/v1/organizations",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"af826823-d5df-486d-9dfb-28c718481374\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"name\":\"Contract Unconditional Ltd\"}"
+            },
+            "response": {
+                "status": 201,
+                "reason": "Created",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"8cb74764d4b0df5194de98b7e9b7d1af\""
+                    ],
+                    "location": [
+                        "http://127.0.0.1:8000/v1/organizations/01m63q4atb20pmj9tkxp6ghnng"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "42"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2b40-73ec-8d34-a8576220362b"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63q4atb20pmj9tkxp6ghnng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "path": "/v1/organizations",
+                "uri": "http://127.0.0.1:8000/v1/organizations?search=contract%20unconditional",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "link": [
+                        "<http://127.0.0.1:8000/v1/organizations?search=contract%20unconditional>; rel=\"first\""
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "41"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2b5c-705e-ad4f-8ffb53507c23"
+                    ]
+                },
+                "body": "[{\"id\":\"01m63q4atb20pmj9tkxp6ghnng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:36:08+00:00\",\"updated_at\":\"2026-10-29T11:36:08+00:00\",\"deleted_at\":null}]"
+            }
+        },
+        {
+            "request": {
+                "method": "PATCH",
+                "path": "/v1/organizations/01m63q4atb20pmj9tkxp6ghnng",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m63q4atb20pmj9tkxp6ghnng",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/merge-patch+json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"city\":\"Leeds\"}"
+            },
+            "response": {
+                "status": 428,
+                "reason": "Precondition Required",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-store, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:36:08 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "accept-patch": [
+                        "application/merge-patch+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "40"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18772-2b72-728a-92ca-8504e8375a63"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\",\"instance\":\"urn:uuid:01a18772-2b72-728a-92ca-8504e8375a63\"}"
+            }
+        }
+    ]
+}
