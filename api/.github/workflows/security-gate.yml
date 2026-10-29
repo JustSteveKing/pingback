@@ -1,0 +1,78 @@
+name: security-gate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  composer-audit:
+    name: composer-audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist --no-scripts
+
+      - name: Run Composer audit
+        run: composer audit --format=json > composer-audit.json || true
+
+      - name: Fail on high/critical advisories
+        run: |
+          HIGH_OR_CRITICAL_COUNT=$(jq '[.advisories[]?[]? | select(((.severity // "unknown") | ascii_downcase) == "high" or ((.severity // "unknown") | ascii_downcase) == "critical")] | length' composer-audit.json)
+          echo "High/Critical advisories: ${HIGH_OR_CRITICAL_COUNT}"
+          if [ "${HIGH_OR_CRITICAL_COUNT}" -gt 0 ]; then
+            jq '.advisories' composer-audit.json
+            exit 1
+          fi
+
+  secrets-scan:
+    name: secrets-scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # The commits this push or pull request adds, or all of history when there is no earlier
+      # commit to start from: a new repository's first push, a new branch, a force push, or a
+      # manual run. gitleaks-action fails on a first push, where its range starts at the root
+      # commit's parent, which does not exist.
+      - name: Scan for secrets
+        env:
+          GITLEAKS_VERSION: 8.24.3
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          curl -fsSLO "${base}/${archive}"
+          curl -fsSL "${base}/gitleaks_${GITLEAKS_VERSION}_checksums.txt" | grep " ${archive}\$" | sha256sum -c -
+          tar xzf "${archive}" gitleaks
+
+          range="${HEAD}"
+          if [ "${EVENT}" = "pull_request" ]; then
+            range="${BASE}..${HEAD}"
+          elif [ "${EVENT}" = "push" ] && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            range="${BEFORE}..${HEAD}"
+          fi
+
+          echo "Scanning ${range}"
+          ./gitleaks git --redact --verbose --log-opts="--no-merges ${range}" .
