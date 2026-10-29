@@ -38,7 +38,7 @@ final class DeprecatedFieldsOpenApiGenerator extends OpenApiGenerator
      */
     public function pathItem(array $pathItem, array $groupedEndpoints, OutputEndpointData $endpoint): array
     {
-        $pathItem = self::markParameters($pathItem, self::PARAMETERS[$endpoint->httpMethods[0] . ' ' . $endpoint->uri] ?? []);
+        $pathItem = $this->markParameters($pathItem, self::PARAMETERS[$endpoint->httpMethods[0] . ' ' . $endpoint->uri] ?? []);
         $fields = [];
 
         foreach (self::FIELDS as $prefix => $names) {
@@ -54,27 +54,6 @@ final class DeprecatedFieldsOpenApiGenerator extends OpenApiGenerator
         foreach (['requestBody', 'responses'] as $part) {
             if (is_array($pathItem[$part] ?? null)) {
                 $pathItem[$part] = self::mark($pathItem[$part], $fields);
-            }
-        }
-
-        return $pathItem;
-    }
-
-    /**
-     * @param  array<string, mixed>  $pathItem
-     * @param  list<string>  $names
-     * @return array<string, mixed>
-     */
-    private static function markParameters(array $pathItem, array $names): array
-    {
-        if ([] === $names || ! is_array($pathItem['parameters'] ?? null)) {
-            return $pathItem;
-        }
-
-        foreach ($pathItem['parameters'] as $index => $parameter) {
-            if (is_array($parameter) && in_array($parameter['name'] ?? null, $names, true)) {
-                $parameter['deprecated'] = true;
-                $pathItem['parameters'][$index] = $parameter;
             }
         }
 
@@ -103,5 +82,26 @@ final class DeprecatedFieldsOpenApiGenerator extends OpenApiGenerator
         }
 
         return $node;
+    }
+
+    /**
+     * @param  array<string, mixed>  $pathItem
+     * @param  list<string>  $names
+     * @return array<string, mixed>
+     */
+    private function markParameters(array $pathItem, array $names): array
+    {
+        if ([] === $names || ! is_array($pathItem['parameters'] ?? null)) {
+            return $pathItem;
+        }
+
+        foreach ($pathItem['parameters'] as $index => $parameter) {
+            if (is_array($parameter) && in_array($parameter['name'] ?? null, $names, true)) {
+                $parameter['deprecated'] = true;
+                $pathItem['parameters'][$index] = $parameter;
+            }
+        }
+
+        return $pathItem;
     }
 }
