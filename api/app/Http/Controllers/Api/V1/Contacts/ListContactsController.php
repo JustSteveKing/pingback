@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\V1\Contacts;
 use App\Http\Payloads\V1\ListContactsPayload;
 use App\Http\Requests\Contacts\ListContactsRequest;
 use App\Http\Resources\ContactResource;
+use App\Models\Account;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -22,7 +23,7 @@ use Knuckles\Scribe\Attributes\ResponseField;
 #[Group(name: 'Contacts')]
 #[Endpoint(
     title: 'List Contacts',
-    description: 'List the account\'s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header\'s rel="next" for the next page, which keeps the same search and filter.',
+    description: 'List the account\'s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts; for the people at one organisation, use List Organization Contacts, since filtering this list by organization_id is deprecated. Returns an array of contacts; follow the Link header\'s rel="next" for the next page, which keeps the same search and filter.',
 )]
 #[Authenticated]
 #[ResponseField('[].organization_id', 'string', 'The organisation the contact is at, or null. It may since have been deleted.', nullable: true)]
@@ -83,13 +84,24 @@ final class ListContactsController
     {
         $payload = ListContactsPayload::fromRequest($request);
 
+        return self::page($user->account()->firstOrFail(), $payload->search, $payload->trashed, $payload->organizationId);
+    }
+
+    /**
+     * One page of an account's contacts, shared with the organisation's own list (ADR-0008).
+     *
+     * @param  'with'|'only'|null  $trashed
+     * @return CursorPage<int, Contact>
+     */
+    public static function page(Account $account, ?string $search, ?string $trashed, ?string $organizationId): CursorPage
+    {
         $contacts = Contact::query()
-            ->whereBelongsTo($user->account()->firstOrFail())
-            ->when('with' === $payload->trashed, static fn(Builder $query): Builder => $query->withTrashed())
-            ->when('only' === $payload->trashed, static fn(Builder $query): Builder => $query->onlyTrashed())
-            ->when(null !== $payload->organizationId, static fn(Builder $query): Builder => $query->where('organization_id', $payload->organizationId))
-            ->when(null !== $payload->search, static function (Builder $query) use ($payload): void {
-                $pattern = '%' . self::escape(mb_strtolower((string) $payload->search)) . '%';
+            ->whereBelongsTo($account)
+            ->when('with' === $trashed, static fn(Builder $query): Builder => $query->withTrashed())
+            ->when('only' === $trashed, static fn(Builder $query): Builder => $query->onlyTrashed())
+            ->when(null !== $organizationId, static fn(Builder $query): Builder => $query->where('organization_id', $organizationId))
+            ->when(null !== $search, static function (Builder $query) use ($search): void {
+                $pattern = '%' . self::escape(mb_strtolower((string) $search)) . '%';
                 $like = "lower(%s) like ? escape '" . self::ESCAPE . "'";
 
                 $query->where(static function (Builder $query) use ($pattern, $like): void {

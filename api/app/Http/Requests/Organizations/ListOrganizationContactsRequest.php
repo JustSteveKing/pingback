@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests\Organizations;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+final class ListOrganizationContactsRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Body or query input only: path parameters are validated by the route's constraints.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        return [
+            'search' => ['sometimes', 'string', 'max:100'],
+            'trashed' => ['sometimes', 'string', 'in:with,only'],
+        ];
+    }
+
+    /**
+     * Read by Scribe, so this GET's rules are documented as query parameters, not a body.
+     *
+     * @return array<string, array{description: string, example: mixed}>
+     */
+    public function queryParameters(): array
+    {
+        return [
+            'search' => ['description' => 'Only contacts whose first name, last name or email contains this text, ignoring case.', 'example' => 'ada'],
+            'trashed' => ['description' => 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).', 'example' => 'with'],
+        ];
+    }
+}

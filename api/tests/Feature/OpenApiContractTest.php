@@ -520,6 +520,7 @@ it('keeps contact responses aligned with their documented schemas, nulls include
 
     $checks = [
         ['GET', '/v1/contacts', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts?trashed=with')],
+        ['GET', '/v1/organizations/{organization}/contacts', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/organizations/' . $organization->id . '/contacts?trashed=with')],
         ['GET', '/v1/contacts/{contact}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts/' . $bare->id)],
         ['GET', '/v1/contacts/{contact}', 200, fn(): TestResponse => $this->withToken($token)->getJson('/v1/contacts/' . $deleted->id)],
         ['POST', '/v1/contacts', 201, fn(): TestResponse => $this->withToken($token)->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace'])],
@@ -551,6 +552,14 @@ it('marks a contact\'s phone deprecated in the contract, and nothing else (ADR-0
         ->and($contact['properties']['data']['properties']['phones'] ?? null)->not->toHaveKey('deprecated')
         ->and($body['phone']['deprecated'] ?? null)->toBeTrue()
         ->and($organization['properties']['data']['properties']['phone'] ?? null)->not->toHaveKey('deprecated');
+});
+
+it('marks the deprecated organisation filter deprecated in the contract too (ADR-0008)', function (): void {
+    $spec = generateOpenApiSpec(forceGenerate: true);
+    $parameters = collect($spec['paths']['/v1/contacts']['get']['parameters'] ?? [])->keyBy('name');
+
+    expect($parameters['organization_id']['deprecated'] ?? null)->toBeTrue()
+        ->and($parameters['search'])->not->toHaveKey('deprecated');
 });
 
 it('describes every request header it documents', function (): void {

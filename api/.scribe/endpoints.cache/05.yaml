@@ -15,7 +15,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'List Contacts'
-      description: 'List the account''s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header''s rel="next" for the next page, which keeps the same search and filter.'
+      description: 'List the account''s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts; for the people at one organisation, use List Organization Contacts, since filtering this list by organization_id is deprecated. Returns an array of contacts; follow the Link header''s rel="next" for the next page, which keeps the same search and filter.'
       authenticated: true
       deprecated: false
     headers:
@@ -52,7 +52,7 @@ endpoints:
       organization_id:
         custom: []
         name: organization_id
-        description: 'Only the contacts at this organisation.'
+        description: 'Deprecated, with a sunset of 2027-01-31: use List Organization Contacts. Only the contacts at this organisation.'
         required: false
         example: 01jbd0x4qsm2cf4c8m3x6y1v7z
         type: string

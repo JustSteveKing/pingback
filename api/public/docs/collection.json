@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "9659639d-91e8-4a47-a906-e04c04b92363",
+        "_postman_id": "2ad78e9f-c934-4fad-b60d-3a70c44afa39",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63vv2yx1hdm5q84n06q4m96\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63w1b6n8ercgvhc3vk1a9r4\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63vv2z5t8901mdb5z3gexn1\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63w1b6whk0sqcjg3rkm3bp0\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63vv303psewa7vw4dhpk26f\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:58:28+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63w1b7yygqpxj01fk5synde\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T13:01:53+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -748,7 +748,7 @@
                                 {
                                     "key": "organization_id",
                                     "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
-                                    "description": "Only the contacts at this organisation.",
+                                    "description": "Deprecated, with a sunset of 2027-01-31: use List Organization Contacts. Only the contacts at this organisation.",
                                     "disabled": false
                                 },
                                 {
@@ -772,7 +772,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "List the account's contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header's rel=\"next\" for the next page, which keeps the same search and filter."
+                        "description": "List the account's contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts; for the people at one organisation, use List Organization Contacts, since filtering this list by organization_id is deprecated. Returns an array of contacts; follow the Link header's rel=\"next\" for the next page, which keeps the same search and filter."
                     },
                     "response": [
                         {
@@ -1745,6 +1745,89 @@
                             "code": 404,
                             "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
                             "name": "No organisation with this ID belongs to the authenticated account."
+                        }
+                    ]
+                },
+                {
+                    "name": "List Organization Contacts",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/organizations\/:organization\/contacts",
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "ada",
+                                    "description": "Only contacts whose first name, last name or email contains this text, ignoring case. Must not be greater than 100 characters.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "trashed",
+                                    "value": "with",
+                                    "description": "Deleted contacts are left out unless this is \"with\" (include them) or \"only\" (nothing else).",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "cursor",
+                                    "value": "architecto",
+                                    "description": "Opaque cursor from a Link header. Omit it for the first page.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/v1\/organizations\/:organization\/contacts?search=ada&trashed=with&cursor=architecto",
+                            "variable": [
+                                {
+                                    "id": "organization",
+                                    "key": "organization",
+                                    "value": "01jbd0x4qsm2cf4c8m3x6y1v7z",
+                                    "description": "The organisation ID, a ULID. A deleted organisation still lists its contacts."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "List the contacts at one organisation, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it in place of List Contacts with organization_id, which is deprecated. Returns an array of contacts; follow the Link header's rel=\"next\" for the next page."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}]",
+                            "name": "One page of contacts."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the contacts:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No organisation with this ID belongs to the authenticated account."
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"The selected trashed is invalid.\",\"errors\":{\"trashed\":[\"The selected trashed is invalid.\"]}}",
+                            "name": "The trashed filter is not \"with\" or \"only\", or the search is longer than 100 characters."
                         }
                     ]
                 }

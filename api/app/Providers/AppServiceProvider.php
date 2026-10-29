@@ -9,6 +9,7 @@ use App\Models\Export;
 use App\Models\Organization;
 use App\Models\User;
 use App\Support\ProductionSecurityChecks;
+use App\Support\QueryParameterDeprecations;
 use App\Webhooks\DnsHostResolver;
 use App\Webhooks\HostResolver;
 use App\Webhooks\SubscriptionSigningKeys;
@@ -21,6 +22,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use JustSteveKing\Toolbox\Deprecation\Contracts\DeprecationSource;
 use JustSteveKing\Toolbox\Idempotency\Http\Middleware\EnsureIdempotency;
 use JustSteveKing\Toolbox\MessageSignatures\Contracts\KeyResolver;
 use Knuckles\Scribe\Scribe;
@@ -39,6 +41,9 @@ final class AppServiceProvider extends ServiceProvider
         // Each webhook subscription signs with its own secret; other key IDs fall through to
         // config/api-toolbox.php.
         $this->app->extend(KeyResolver::class, static fn(KeyResolver $configured): KeyResolver => new SubscriptionSigningKeys($configured));
+
+        // Some resources are a route with a query parameter, deprecated on their own (ADR-0008).
+        $this->app->extend(DeprecationSource::class, static fn(DeprecationSource $routes): DeprecationSource => new QueryParameterDeprecations($routes));
     }
 
     /**

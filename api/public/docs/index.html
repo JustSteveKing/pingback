@@ -201,6 +201,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="organizations-POSTv1-organizations--organization--restore">
                                 <a href="#organizations-POSTv1-organizations--organization--restore">Restore Organization</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="organizations-GETv1-organizations--organization--contacts">
+                                <a href="#organizations-GETv1-organizations--organization--contacts">List Organization Contacts</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-webhooks" class="tocify-header">
@@ -510,10 +513,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63vv2yx1hdm5q84n06q4m96&quot;,
+        &quot;id&quot;: &quot;01m63w1b6n8ercgvhc3vk1a9r4&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;lafayette.considine@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T12:58:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -732,10 +735,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63vv2z5t8901mdb5z3gexn1&quot;,
+        &quot;id&quot;: &quot;01m63w1b6whk0sqcjg3rkm3bp0&quot;,
         &quot;name&quot;: &quot;Justina Gaylord&quot;,
         &quot;email&quot;: &quot;cormier.nick@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T12:58:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     },
@@ -922,10 +925,10 @@ fetch(url, {
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: {
-        &quot;id&quot;: &quot;01m63vv303psewa7vw4dhpk26f&quot;,
+        &quot;id&quot;: &quot;01m63w1b7yygqpxj01fk5synde&quot;,
         &quot;name&quot;: &quot;Morgan Hirthe&quot;,
         &quot;email&quot;: &quot;dare.emelie@example.com&quot;,
-        &quot;email_verified_at&quot;: &quot;2026-10-29T12:58:28+00:00&quot;,
+        &quot;email_verified_at&quot;: &quot;2026-10-29T13:01:53+00:00&quot;,
         &quot;created_at&quot;: null,
         &quot;updated_at&quot;: null
     }
@@ -2847,7 +2850,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small class="badge badge-darkred">requires authentication</small>
 </p>
 
-<p>List the account's contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header's rel=&quot;next&quot; for the next page, which keeps the same search and filter.</p>
+<p>List the account's contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts; for the people at one organisation, use List Organization Contacts, since filtering this list by organization_id is deprecated. Returns an array of contacts; follow the Link header's rel=&quot;next&quot; for the next page, which keeps the same search and filter.</p>
 
 <span id="example-requests-GETv1-contacts">
 <blockquote>Example request:</blockquote>
@@ -3085,7 +3088,7 @@ Must be one of:
                value="01jbd0x4qsm2cf4c8m3x6y1v7z"
                data-component="query">
     <br>
-<p>Only the contacts at this organisation. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
+<p>Deprecated, with a sunset of 2027-01-31: use List Organization Contacts. Only the contacts at this organisation. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>cursor</code></b>&nbsp;&nbsp;
@@ -7625,7 +7628,363 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     </div>
                                     </details>
         </div>
-                    <h1 id="webhooks">Webhooks</h1>
+                        <h2 id="organizations-GETv1-organizations--organization--contacts">List Organization Contacts</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>List the contacts at one organisation, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it in place of List Contacts with organization_id, which is deprecated. Returns an array of contacts; follow the Link header's rel=&quot;next&quot; for the next page.</p>
+
+<span id="example-requests-GETv1-organizations--organization--contacts">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/v1/organizations/01jbd0x4qsm2cf4c8m3x6y1v7z/contacts?search=ada&amp;trashed=with&amp;cursor=architecto" \
+    --header "Authorization: Bearer {YOUR_BEARER_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/v1/organizations/01jbd0x4qsm2cf4c8m3x6y1v7z/contacts"
+);
+
+const params = {
+    "search": "ada",
+    "trashed": "with",
+    "cursor": "architecto",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_BEARER_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-organizations--organization--contacts">
+            <blockquote>
+            <p>Example response (200, One page of contacts.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">[
+    {
+        &quot;id&quot;: &quot;01jbd1k9r2w3x4y5z6a7b8c9d0&quot;,
+        &quot;organization_id&quot;: &quot;01jbd0x4qsm2cf4c8m3x6y1v7z&quot;,
+        &quot;first_name&quot;: &quot;Ada&quot;,
+        &quot;last_name&quot;: &quot;Lovelace&quot;,
+        &quot;email&quot;: &quot;ada@rippin.example&quot;,
+        &quot;phone&quot;: &quot;+1 555 0101&quot;,
+        &quot;phones&quot;: [
+            {
+                &quot;number&quot;: &quot;+1 555 0101&quot;,
+                &quot;label&quot;: &quot;work&quot;
+            },
+            {
+                &quot;number&quot;: &quot;+1 555 0102&quot;,
+                &quot;label&quot;: &quot;mobile&quot;
+            }
+        ],
+        &quot;address&quot;: &quot;742 Evergreen Terrace&quot;,
+        &quot;city&quot;: &quot;Springfield&quot;,
+        &quot;region&quot;: &quot;Oregon&quot;,
+        &quot;country&quot;: &quot;US&quot;,
+        &quot;postal_code&quot;: &quot;97403&quot;,
+        &quot;created_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;updated_at&quot;: &quot;2026-10-29T09:00:00+00:00&quot;,
+        &quot;deleted_at&quot;: null
+    }
+]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Authentication failed.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/unauthorized&quot;,
+    &quot;title&quot;: &quot;Unauthorized&quot;,
+    &quot;status&quot;: 401,
+    &quot;detail&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Token is missing the contacts:read ability.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/forbidden&quot;,
+    &quot;title&quot;: &quot;Forbidden&quot;,
+    &quot;status&quot;: 403,
+    &quot;detail&quot;: &quot;Forbidden.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, No organisation with this ID belongs to the authenticated account.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/resource-not-found&quot;,
+    &quot;title&quot;: &quot;Resource Not Found&quot;,
+    &quot;status&quot;: 404,
+    &quot;detail&quot;: &quot;The resource was not found.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, The trashed filter is not &quot;with&quot; or &quot;only&quot;, or the search is longer than 100 characters.):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;type&quot;: &quot;https://apiguide.dev/errors/validation-failed&quot;,
+    &quot;title&quot;: &quot;Validation Failed&quot;,
+    &quot;status&quot;: 422,
+    &quot;detail&quot;: &quot;The selected trashed is invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;trashed&quot;: [
+            &quot;The selected trashed is invalid.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETv1-organizations--organization--contacts" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-organizations--organization--contacts"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-organizations--organization--contacts"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETv1-organizations--organization--contacts" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-organizations--organization--contacts">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETv1-organizations--organization--contacts" data-method="GET"
+      data-path="v1/organizations/{organization}/contacts"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-organizations--organization--contacts', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-organizations--organization--contacts"
+                    onclick="tryItOut('GETv1-organizations--organization--contacts');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-organizations--organization--contacts"
+                    onclick="cancelTryOut('GETv1-organizations--organization--contacts');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-organizations--organization--contacts"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/organizations/{organization}/contacts</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETv1-organizations--organization--contacts"
+               value="Bearer {YOUR_BEARER_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_BEARER_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>organization</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="organization"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="01jbd0x4qsm2cf4c8m3x6y1v7z"
+               data-component="url">
+    <br>
+<p>The organisation ID, a ULID. A deleted organisation still lists its contacts. Example: <code>01jbd0x4qsm2cf4c8m3x6y1v7z</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="ada"
+               data-component="query">
+    <br>
+<p>Only contacts whose first name, last name or email contains this text, ignoring case. Must not be greater than 100 characters. Example: <code>ada</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>trashed</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="trashed"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="with"
+               data-component="query">
+    <br>
+<p>Deleted contacts are left out unless this is &quot;with&quot; (include them) or &quot;only&quot; (nothing else). Example: <code>with</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>with</code></li> <li><code>only</code></li></ul>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cursor</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="cursor"                data-endpoint="GETv1-organizations--organization--contacts"
+               value="architecto"
+               data-component="query">
+    <br>
+<p>Opaque cursor from a Link header. Omit it for the first page. Example: <code>architecto</code></p>
+            </div>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <p>The request body is an array (<code>object[]</code>`). Each item has the following properties:</p>
+
+                                            <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>organization_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The organisation the contact is at, or null. It may since have been deleted.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's email address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Deprecated: the first of phones, or null. Read phones instead.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>phones</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The contact's phone numbers, each with an optional label.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The street address, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The city, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>region</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The state, province or county, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>A two-letter ISO 3166-1 code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>postal_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>The postal code, or null.</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>deleted_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>When it was deleted, or null if it is not.</p>
+                    </div>
+                                                <h1 id="webhooks">Webhooks</h1>
 
     
 

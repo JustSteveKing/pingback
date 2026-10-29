@@ -1113,3 +1113,228 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'v1/organizations/{organization}/contacts'
+    metadata:
+      custom: []
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Organization Contacts'
+      description: 'List the contacts at one organisation, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it in place of List Contacts with organization_id, which is deprecated. Returns an array of contacts; follow the Link header''s rel="next" for the next page.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      organization:
+        custom: []
+        name: organization
+        description: 'The organisation ID, a ULID. A deleted organisation still lists its contacts.'
+        required: true
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      organization: 01jbd0x4qsm2cf4c8m3x6y1v7z
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: 'Only contacts whose first name, last name or email contains this text, ignoring case. Must not be greater than 100 characters.'
+        required: false
+        example: ada
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      trashed:
+        custom: []
+        name: trashed
+        description: 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).'
+        required: false
+        example: with
+        type: string
+        enumValues:
+          - with
+          - only
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      cursor:
+        custom: []
+        name: cursor
+        description: 'Opaque cursor from a Link header. Omit it for the first page.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: ada
+      trashed: with
+      cursor: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '[{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","phones":[{"number":"+1 555 0101","label":"work"},{"number":"+1 555 0102","label":"mobile"}],"address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
+        headers: []
+        description: 'One page of contacts.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the contacts:read ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No organisation with this ID belongs to the authenticated account.'
+      -
+        custom: []
+        status: 422
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The selected trashed is invalid.","errors":{"trashed":["The selected trashed is invalid."]}}'
+        headers: []
+        description: 'The trashed filter is not "with" or "only", or the search is longer than 100 characters.'
+    responseFields:
+      '[].organization_id':
+        custom: []
+        name: '[].organization_id'
+        description: 'The organisation the contact is at, or null. It may since have been deleted.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].email':
+        custom: []
+        name: '[].email'
+        description: "The contact's email address, or null."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].phone':
+        custom: []
+        name: '[].phone'
+        description: 'Deprecated: the first of phones, or null. Read phones instead.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].phones':
+        custom: []
+        name: '[].phones'
+        description: "The contact's phone numbers, each with an optional label."
+        required: true
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      '[].address':
+        custom: []
+        name: '[].address'
+        description: 'The street address, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].city':
+        custom: []
+        name: '[].city'
+        description: 'The city, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].region':
+        custom: []
+        name: '[].region'
+        description: 'The state, province or county, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].country':
+        custom: []
+        name: '[].country'
+        description: 'A two-letter ISO 3166-1 code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].postal_code':
+        custom: []
+        name: '[].postal_code'
+        description: 'The postal code, or null.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      '[].deleted_at':
+        custom: []
+        name: '[].deleted_at'
+        description: 'When it was deleted, or null if it is not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\V1\Exports\ShowExportController;
 use App\Http\Controllers\Api\V1\Operations\ShowOperationController;
 use App\Http\Controllers\Api\V1\Organizations\CreateOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\DeleteOrganizationController;
+use App\Http\Controllers\Api\V1\Organizations\ListOrganizationContactsController;
 use App\Http\Controllers\Api\V1\Organizations\ListOrganizationsController;
 use App\Http\Controllers\Api\V1\Organizations\RestoreOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\ShowOrganizationController;
@@ -165,6 +166,10 @@ Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (
         ->whereUlid('organization')
         ->middleware('abilities:organizations:write')
         ->name('v1.organizations.restore');
+    Route::get('/organizations/{organization}/contacts', ListOrganizationContactsController::class)
+        ->whereUlid('organization')
+        ->middleware('abilities:contacts:read')
+        ->name('v1.organizations.contacts.index');
 
     Route::get('/contacts', ListContactsController::class)
         ->middleware('abilities:contacts:read')

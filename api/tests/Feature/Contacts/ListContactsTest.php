@@ -6,6 +6,7 @@ use App\Models\Account;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
+use App\Support\QueryParameterDeprecations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -98,4 +99,35 @@ it('requires the contacts:read ability', function (): void {
     $this->withToken($token)
         ->getJson('/v1/contacts')
         ->assertProblem(403);
+});
+
+it('deprecates filtering by organisation, with a sunset and a link to why (ADR-0008)', function (): void {
+    $account = Account::factory()->create();
+    $organization = Organization::factory()->for($account)->create();
+    $notice = QueryParameterDeprecations::NOTICES['v1.contacts.index']['organization_id'];
+
+    $this->withToken(contactToken($account))
+        ->getJson("/v1/contacts?organization_id={$organization->id}")
+        ->assertOk()
+        ->assertDeprecated($notice['deprecated'], $notice['link'])
+        ->assertSunset($notice['sunset']);
+});
+
+it('leaves the contact list itself undeprecated', function (): void {
+    $this->withToken(contactToken(Account::factory()->create()))
+        ->getJson('/v1/contacts?search=ada')
+        ->assertOk()
+        ->assertNotDeprecated();
+});
+
+it('retires the organisation filter with 410 after its sunset, and only that', function (): void {
+    $account = Account::factory()->create();
+    $organization = Organization::factory()->for($account)->create();
+    $token = contactToken($account);
+
+    $this->travelTo(new DateTimeImmutable('2027-02-01T00:00:00Z'));
+
+    $this->withToken($token)->getJson("/v1/contacts?organization_id={$organization->id}")->assertProblem(410);
+    $this->withToken($token)->getJson('/v1/contacts')->assertOk();
+    $this->withToken($token)->getJson("/v1/organizations/{$organization->id}/contacts")->assertOk();
 });

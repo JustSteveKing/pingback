@@ -37,7 +37,7 @@ final class ListContactsRequest extends FormRequest
         return [
             'search' => ['description' => 'Only contacts whose first name, last name, email or organisation name contains this text, ignoring case.', 'example' => 'ada'],
             'trashed' => ['description' => 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).', 'example' => 'with'],
-            'organization_id' => ['description' => 'Only the contacts at this organisation.', 'example' => '01jbd0x4qsm2cf4c8m3x6y1v7z'],
+            'organization_id' => ['description' => 'Deprecated, with a sunset of 2027-01-31: use List Organization Contacts. Only the contacts at this organisation.', 'example' => '01jbd0x4qsm2cf4c8m3x6y1v7z'],
         ];
     }
 }

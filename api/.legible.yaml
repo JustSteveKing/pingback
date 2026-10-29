@@ -19,6 +19,7 @@ ignore:
       - POST /v1/organizations
       - PATCH /v1/organizations/*
       - GET /v1/contacts
+      - GET /v1/organizations/*/contacts
       - POST /v1/contacts
       - PATCH /v1/contacts/*
     reason: >
