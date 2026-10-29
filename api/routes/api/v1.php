@@ -22,6 +22,9 @@ use App\Http\Controllers\Api\V1\Contacts\ListContactsController;
 use App\Http\Controllers\Api\V1\Contacts\RestoreContactController;
 use App\Http\Controllers\Api\V1\Contacts\ShowContactController;
 use App\Http\Controllers\Api\V1\Contacts\UpdateContactController;
+use App\Http\Controllers\Api\V1\Exports\CreateExportController;
+use App\Http\Controllers\Api\V1\Exports\ShowExportController;
+use App\Http\Controllers\Api\V1\Operations\ShowOperationController;
 use App\Http\Controllers\Api\V1\Organizations\CreateOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\DeleteOrganizationController;
 use App\Http\Controllers\Api\V1\Organizations\ListOrganizationsController;
@@ -41,6 +44,7 @@ use App\Http\Controllers\Api\V1\Webhooks\ShowWebhookController;
 use App\Http\Controllers\Api\V1\Webhooks\UpdateWebhookController;
 use App\Http\Controllers\Api\V1\Webhooks\ValidateWebhookController;
 use Illuminate\Support\Facades\Route;
+use JustSteveKing\Toolbox\AsyncOperations\Operations;
 
 Route::post('/auth/register', RegisterController::class)
     ->middleware(['idempotent', 'throttle:auth-register'])
@@ -184,4 +188,17 @@ Route::middleware(['auth:sanctum', 'throttle:auth-protected'])->group(function (
         ->whereUlid('contact')
         ->middleware('abilities:contacts:write')
         ->name('v1.contacts.restore');
+
+    Route::post('/exports', CreateExportController::class)
+        ->middleware(['abilities:exports:create', 'idempotent', 'prefer'])
+        ->name('v1.exports.store');
+    Route::get('/exports/{export}', ShowExportController::class)
+        ->whereUlid('export')
+        ->middleware('abilities:exports:read')
+        ->name('v1.exports.show');
+    // The same URI and name as api-toolbox's monitor (config/api-toolbox.php), which this
+    // replaces: Operations::dispatch() builds every 202's Location from that name.
+    Route::get('/operations/{operation}', ShowOperationController::class)
+        ->middleware('abilities:exports:read')
+        ->name(Operations::ROUTE);
 });

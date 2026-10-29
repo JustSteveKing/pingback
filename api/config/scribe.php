@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Support\HeaderDescriptionsOpenApiGenerator;
+use App\Support\MediaTypesOpenApiGenerator;
 use App\Support\NoContentOpenApiGenerator;
 use App\Support\ProblemDetailsOpenApiGenerator;
 use App\Support\ResponseFieldsOpenApiGenerator;
@@ -184,6 +185,7 @@ return [
         'generators' => [
             ProblemDetailsOpenApiGenerator::class,
             NoContentOpenApiGenerator::class,
+            MediaTypesOpenApiGenerator::class,
             ResponseFieldsOpenApiGenerator::class,
             HeaderDescriptionsOpenApiGenerator::class,
         ],

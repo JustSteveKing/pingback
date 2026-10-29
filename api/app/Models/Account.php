@@ -55,4 +55,12 @@ final class Account extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+    /**
+     * @return HasMany<Export, $this>
+     */
+    public function exports(): HasMany
+    {
+        return $this->hasMany(Export::class);
+    }
 }

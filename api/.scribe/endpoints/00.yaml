@@ -1,790 +1,19 @@
-name: Authentication
+name: Exports
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
-      - POST
-    uri: v1/auth/register
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: Register
-      description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user with the token, its type and expiry in meta, and sends a verification email.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Idempotency-Key: '"register-retry-1"'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: 'Display name for the account.'
-        required: true
-        example: 'Jane Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Unique email address for login.'
-        required: true
-        example: jane@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: 'Account password.'
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      device_name:
-        custom: []
-        name: device_name
-        description: 'Client device label for token tracking.'
-        required: false
-        example: ios-app
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      name: 'Jane Doe'
-      email: jane@example.com
-      password: password123
-      device_name: ios-app
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 201
-        content: '{"data":{"id":"01m63rn5s52wwngdzj8h67kt9a","name":"Justina Gaylord","email":"lafayette.considine@example.com","email_verified_at":"2026-10-29T12:02:49+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
-        headers: []
-        description: 'Registration succeeded.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The email has already been taken.","errors":{"email":["The email has already been taken."]}}'
-        headers: []
-        description: 'Validation failed.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: v1/auth/login
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: Login
-      description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user with the token, its type and expiry in meta; wrong credentials are a 422 on the email field.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        custom: []
-        name: email
-        description: 'User email address.'
-        required: true
-        example: jane@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: 'User password.'
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      device_name:
-        custom: []
-        name: device_name
-        description: 'Client device label for token tracking.'
-        required: true
-        example: ios-app
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      email: jane@example.com
-      password: password123
-      device_name: ios-app
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":{"id":"01m63rn5sdnjftpj5zm62fwqzj","name":"Justina Gaylord","email":"cormier.nick@example.com","email_verified_at":"2026-10-29T12:02:49+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
-        headers: []
-        description: 'Login succeeded.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The provided credentials are incorrect.","errors":{"email":["The provided credentials are incorrect."]}}'
-        headers: []
-        description: 'Credentials were invalid.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: v1/auth/password/forgot
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Password Reset'
-      subgroupDescription: ''
-      title: 'Request Password Reset'
-      description: 'Email a password reset link to an address, if an account uses it. Use it from a forgot-password form. The response is the same whether or not the account exists, so it cannot be used to discover accounts; send an Idempotency-Key so a retry does not send a second email.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Idempotency-Key: '"forgot-retry-1"'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        custom: []
-        name: email
-        description: 'Account email address.'
-        required: true
-        example: jane@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      email: jane@example.com
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message":"If the account exists, a password reset link has been sent."}'
-        headers: []
-        description: 'Password reset request accepted.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The email field must be a valid email address.","errors":{"email":["The email field must be a valid email address."]}}'
-        headers: []
-        description: 'The email was missing or not an email address.'
-      -
-        custom: []
-        status: 429
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/rate-limit-exceeded","title":"Rate Limit Exceeded","status":429,"detail":"Too many requests. Please try again later."}'
-        headers: []
-        description: 'Too many reset requests for this address; retry after the Retry-After header.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: v1/auth/password/reset
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Password Reset'
-      subgroupDescription: ''
-      title: 'Reset Password'
-      description: 'Set a new password using the token from a password reset email. Use it to finish the forgot-password flow. Returns a confirmation message; an invalid or expired token is a 422 on the email field.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      token:
-        custom: []
-        name: token
-        description: 'Password reset token.'
-        required: true
-        example: reset-token-value
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Account email associated with token.'
-        required: true
-        example: jane@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: 'New account password.'
-        required: true
-        example: new-password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      password_confirmation:
-        custom: []
-        name: password_confirmation
-        description: 'Must match password.'
-        required: true
-        example: new-password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      token: reset-token-value
-      email: jane@example.com
-      password: new-password123
-      password_confirmation: new-password123
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message":"Your password has been reset."}'
-        headers: []
-        description: 'Password reset succeeded.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"This password reset token is invalid.","errors":{"email":["This password reset token is invalid."]}}'
-        headers: []
-        description: 'Reset token or payload was invalid.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - GET
-    uri: 'v1/auth/password/reset/{token}'
+    uri: 'v1/operations/{operation}'
     metadata:
       custom: []
-      groupName: Authentication
+      groupName: Exports
       groupDescription: ''
-      subgroup: 'Password Reset'
+      subgroup: ''
       subgroupDescription: ''
-      title: 'Read Reset Token Payload'
-      description: 'Return the token and email from a password reset link, for a client that opens the link and shows its own reset form. It does not check the token; Reset Password does. Returns the token and the email, if the link carried one.'
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      token:
-        custom: []
-        name: token
-        description: 'Password reset token from reset link.'
-        required: true
-        example: reset-token-value
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      token: reset-token-value
-    queryParameters:
-      email:
-        custom: []
-        name: email
-        description: 'Account email from the reset link.'
-        required: false
-        example: jane@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      email: jane@example.com
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"token":"reset-token-value","email":"jane@example.com"}'
-        headers: []
-        description: 'Reset payload data.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The email field must be a valid email address.","errors":{"email":["The email field must be a valid email address."]}}'
-        headers: []
-        description: 'The email query parameter was not an email address.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'v1/auth/email/verify/{id}/{hash}'
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Email Verification'
-      subgroupDescription: ''
-      title: 'Verify Email'
-      description: "Mark the user's email as verified using the signed link from the verification email. Clients do not build this URL; they follow the one in the email, which expires. Returns a confirmation message; a link that is invalid, expired or altered is a 403."
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'User ULID from the signed verification link.'
-        required: true
-        example: 01HZX3W3T4J8Q57XNZD5BPHJ92
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      hash:
-        custom: []
-        name: hash
-        description: 'SHA-1 hash of the email from the signed verification link.'
-        required: true
-        example: 8c4f4370e5db9b5be6d0f4c95495f49f998fa32a
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 01HZX3W3T4J8Q57XNZD5BPHJ92
-      hash: 8c4f4370e5db9b5be6d0f4c95495f49f998fa32a
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"message":"Email verified successfully."}'
-        headers: []
-        description: 'Email was verified.'
-      -
-        custom: []
-        status: 403
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Invalid verification link."}'
-        headers: []
-        description: 'Signed URL was invalid, expired, or mismatched.'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: v1/auth/me
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: 'Get Current User'
-      description: "Return the user the bearer token belongs to. Use it to check a token still works and to read the account's profile and verification state. The response carries an ETag: send it back in If-None-Match and an unchanged user returns 304 with no body."
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      If-None-Match: '"a1b2c3d4e5f6"'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":{"id":"01m63rn5temmjcwapz7cdsft8n","name":"Morgan Hirthe","email":"dare.emelie@example.com","email_verified_at":"2026-10-29T12:02:49+00:00","created_at":null,"updated_at":null}}'
-        headers: []
-        description: 'Authenticated user profile.'
-      -
-        custom: []
-        status: 401
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
-        headers: []
-        description: 'Authentication failed.'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: v1/auth/logout
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: Logout
-      description: "Revoke the bearer token that made this request, and only that one. Use it when a client signs out; the user's other tokens keep working. Returns 204 with no body."
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 204
-        content: null
-        headers: []
-        description: 'Token revoked.'
-      -
-        custom: []
-        status: 401
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
-        headers: []
-        description: 'Authentication failed.'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: v1/auth/tokens
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: 'List Tokens'
-      description: 'List the authenticated user''s personal access tokens, newest first, 25 to a page. Use it to show signed-in devices or to find a token ID to revoke. Returns an array of tokens, with is_current marking the one making the request; follow the Link header''s rel="next" for the next page.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      cursor:
-        custom: []
-        name: cursor
-        description: 'Opaque cursor from a Link header. Omit it for the first page.'
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      cursor: architecto
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '[{"id":"1","name":"ios-app","abilities":["auth:me","auth:logout"],"last_used_at":null,"expires_at":"2026-02-24T12:00:00+00:00","created_at":"2026-02-23T12:00:00+00:00","updated_at":"2026-02-23T12:00:00+00:00","is_current":true}]'
-        headers: []
-        description: 'One page of tokens, newest first. Navigation is in RFC 8288 Link headers: rel="next" and rel="prev" when there is a page that way, and rel="first".'
-      -
-        custom: []
-        status: 401
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
-        headers: []
-        description: 'Authentication failed.'
-      -
-        custom: []
-        status: 403
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
-        headers: []
-        description: 'Token is missing required ability.'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: v1/auth/tokens
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: 'Create API Key'
-      description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in meta.token, which is shown once and cannot be read again.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Idempotency-Key: '"token-retry-1"'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: 'A label for the key, shown when listing tokens.'
-        required: true
-        example: deploy-bot
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      abilities:
-        custom: []
-        name: abilities
-        description: 'Abilities to grant, each one held by the token making this request.'
-        required: true
-        example:
-          - 'auth:me'
-          - 'auth:tokens:read'
-        type: 'string[]'
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      expires_at:
-        custom: []
-        name: expires_at
-        description: 'ISO 8601 expiry, in the future and no later than the configured maximum (365 days by default). Leave it out for the default (90 days).'
-        required: false
-        example: '2027-01-01T00:00:00+00:00'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      name: deploy-bot
-      abilities:
-        - 'auth:me'
-        - 'auth:tokens:read'
-      expires_at: '2027-01-01T00:00:00+00:00'
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 201
-        content: '{"data":{"id":"7","name":"deploy-bot","abilities":["auth:me","auth:tokens:read"],"last_used_at":null,"expires_at":"2027-01-01T00:00:00+00:00","created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","is_current":false},"meta":{"token":"7|example-token","token_type":"Bearer"}}'
-        headers: []
-        description: 'API key created. meta.token is the only time its value is returned.'
-      -
-        custom: []
-        status: 401
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
-        headers: []
-        description: 'Authentication failed.'
-      -
-        custom: []
-        status: 403
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
-        headers: []
-        description: 'Token is missing the auth:tokens:create ability.'
-      -
-        custom: []
-        status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"You can only grant abilities your current token holds.","errors":{"abilities.0":["You can only grant abilities your current token holds."]}}'
-        headers: []
-        description: 'A requested ability is not held by this token, or the expiry is invalid.'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: v1/auth/tokens
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: 'Revoke All Tokens'
-      description: 'Revoke every personal access token the authenticated user holds, including the one making this request. Use it to sign out everywhere after a suspected compromise. Returns 204 with no body; every later request with these tokens is a 401.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 204
-        content: null
-        headers: []
-        description: 'All tokens revoked.'
-      -
-        custom: []
-        status: 401
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
-        headers: []
-        description: 'Authentication failed.'
-      -
-        custom: []
-        status: 403
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
-        headers: []
-        description: 'Token is missing required ability.'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'v1/auth/tokens/{token_id}'
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: 'Token Authentication'
-      subgroupDescription: ''
-      title: 'Revoke Token'
-      description: "Revoke one of the authenticated user's personal access tokens by its ID, such as a lost device's. Use List Tokens to find the ID. Returns 204 with no body; a token the user does not own, or that no longer exists, is a 404."
+      title: 'Show Operation'
+      description: 'The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed.'
       authenticated: true
       deprecated: false
     headers:
@@ -792,19 +21,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      token_id:
+      operation:
         custom: []
-        name: token_id
-        description: 'Personal access token id.'
+        name: operation
+        description: "The operation ID, from the 202's Location."
         required: true
-        example: 42
-        type: integer
+        example: 01jbd2c3e4f5g6h7j8k9m0n1p2
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      token_id: 42
+      operation: 01jbd2c3e4f5g6h7j8k9m0n1p2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -813,10 +42,16 @@ endpoints:
     responses:
       -
         custom: []
-        status: 204
+        status: 200
+        content: '{"id":"01jbd2c3e4f5g6h7j8k9m0n1p2","status":"running","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:01+00:00"}'
+        headers: []
+        description: 'Still running: ask again after Retry-After.'
+      -
+        custom: []
+        status: 303
         content: null
         headers: []
-        description: 'Token revoked.'
+        description: 'Finished: the result is in Location.'
       -
         custom: []
         status: 401
@@ -828,13 +63,13 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing required ability.'
+        description: 'Token is missing the exports:read ability.'
       -
         custom: []
         status: 404
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"Token not found."}'
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"Operation not found."}'
         headers: []
-        description: 'Token does not belong to current user or no longer exists.'
+        description: 'No operation with this ID was started by the authenticated user.'
     responseFields: []
     auth:
       - headers
@@ -847,19 +82,21 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: v1/auth/email/verification-notification
+    uri: v1/exports
     metadata:
       custom: []
-      groupName: Authentication
+      groupName: Exports
       groupDescription: ''
-      subgroup: 'Email Verification'
+      subgroup: ''
       subgroupDescription: ''
-      title: 'Send Verification Email'
-      description: 'Send the authenticated user a new email verification link. Use it when the first link expired or never arrived; it is limited to six requests a minute. Returns a message saying the link was sent, or that the email is already verified.'
+      title: 'Create Export'
+      description: "Export the account's contacts, deleted ones left out, to CSV. Send Prefer: respond-async to get 202 Accepted at once, with the status monitor in Location and Retry-After; without it the request waits up to 5 seconds and answers 303 See Other to the file, or 202 if it is still running. Send an Idempotency-Key, so a retried start runs one export, not two."
       authenticated: true
       deprecated: false
     headers:
       Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Prefer: respond-async
+      Idempotency-Key: '"export-retry-1"'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -872,22 +109,106 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"message":"Verification link sent."}'
+        status: 202
+        content: '{"id":"01jbd2c3e4f5g6h7j8k9m0n1p2","status":"pending","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00"}'
         headers: []
-        description: 'Verification email queued/sent.'
+        description: 'The export is running: poll the monitor in Location.'
       -
         custom: []
-        status: 200
-        content: '{"message":"Email is already verified."}'
+        status: 303
+        content: null
         headers: []
-        description: 'User already verified.'
+        description: 'The export finished while the request waited: the file is in Location.'
       -
         custom: []
         status: 401
         content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
         headers: []
         description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the exports:create ability.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'v1/exports/{export}'
+    metadata:
+      custom: []
+      groupName: Exports
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show Export'
+      description: 'Download a finished contact export as CSV, with a header row. Follow the 303 from the status monitor, or the url in the export.completed webhook, to get here. Returns the file until it expires, a day after it finished, and 410 Gone after that.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      export:
+        custom: []
+        name: export
+        description: 'The export ID, a ULID.'
+        required: true
+        example: 01jbd2c3e4f5g6h7j8k9m0n1p2
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      export: 01jbd2c3e4f5g6h7j8k9m0n1p2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |
+          id,first_name,last_name,email,phone,organization,address,city,region,country,postal_code
+        headers: []
+        description: 'The CSV file.'
+      -
+        custom: []
+        status: 401
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/unauthorized","title":"Unauthorized","status":401,"detail":"Unauthenticated."}'
+        headers: []
+        description: 'Authentication failed.'
+      -
+        custom: []
+        status: 403
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
+        headers: []
+        description: 'Token is missing the exports:read ability.'
+      -
+        custom: []
+        status: 404
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
+        headers: []
+        description: 'No finished export with this ID belongs to the authenticated account.'
+      -
+        custom: []
+        status: 410
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/gone","title":"Gone","status":410,"detail":"This export has expired. Start another."}'
+        headers: []
+        description: 'The export expired.'
     responseFields: []
     auth:
       - headers

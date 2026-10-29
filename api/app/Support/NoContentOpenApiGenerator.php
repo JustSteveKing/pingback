@@ -14,7 +14,7 @@ use Knuckles\Scribe\Writing\OpenApiSpecGenerators\OpenApiGenerator;
  */
 final class NoContentOpenApiGenerator extends OpenApiGenerator
 {
-    private const array STATUSES = [204, 304];
+    private const array STATUSES = [204, 303, 304];
 
     /**
      * @param  array<string, mixed>  $pathItem

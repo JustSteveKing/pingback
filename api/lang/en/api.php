@@ -28,6 +28,9 @@ return [
     'contacts' => [
         'organization_unknown' => 'The organisation is not one of this account\'s, or it is deleted.',
     ],
+    'exports' => [
+        'expired' => 'This export has expired. Start another.',
+    ],
     'organizations' => [
         'country_format' => 'Countries are two-letter ISO 3166-1 codes in capitals, such as GB.',
     ],

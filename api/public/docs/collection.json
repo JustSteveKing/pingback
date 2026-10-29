@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "c6d31c7f-d233-41e9-8fbb-e381197bf75f",
+        "_postman_id": "43796364-b3c4-49fb-b318-fbccc6101bbe",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63rn5s52wwngdzj8h67kt9a\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63ryew8qt644nhx4b6mjbt4\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63rn5sdnjftpj5zm62fwqzj\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63ryewg4nrg9gde4hebtwfc\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63rn5temmjcwapz7cdsft8n\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63ryexg1k99jnt139bhhwgf\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:07:53+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -1138,6 +1138,198 @@
                             "code": 404,
                             "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
                             "name": "No contact with this ID belongs to the authenticated account."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Exports",
+            "description": "",
+            "item": [
+                {
+                    "name": "Show Operation",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/operations\/:operation",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/operations\/:operation",
+                            "variable": [
+                                {
+                                    "id": "operation",
+                                    "key": "operation",
+                                    "value": "01jbd2c3e4f5g6h7j8k9m0n1p2",
+                                    "description": "The operation ID, from the 202's Location."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "The status monitor a 202 Accepted points at in Location. Poll it no sooner than its Retry-After says. Returns 200 with the status while pending or running, 303 See Other to the result when it succeeded, and 200 with a problem in error when it failed."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"id\":\"01jbd2c3e4f5g6h7j8k9m0n1p2\",\"status\":\"running\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:01+00:00\"}",
+                            "name": "Still running: ask again after Retry-After."
+                        },
+                        {
+                            "header": [],
+                            "code": 303,
+                            "body": null,
+                            "name": "Finished: the result is in Location."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the exports:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"Operation not found.\"}",
+                            "name": "No operation with this ID was started by the authenticated user."
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Export",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/exports",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/exports"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Prefer",
+                                "value": "respond-async"
+                            },
+                            {
+                                "key": "Idempotency-Key",
+                                "value": "\"export-retry-1\""
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Export the account's contacts, deleted ones left out, to CSV. Send Prefer: respond-async to get 202 Accepted at once, with the status monitor in Location and Retry-After; without it the request waits up to 5 seconds and answers 303 See Other to the file, or 202 if it is still running. Send an Idempotency-Key, so a retried start runs one export, not two."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 202,
+                            "body": "{\"id\":\"01jbd2c3e4f5g6h7j8k9m0n1p2\",\"status\":\"pending\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\"}",
+                            "name": "The export is running: poll the monitor in Location."
+                        },
+                        {
+                            "header": [],
+                            "code": 303,
+                            "body": null,
+                            "name": "The export finished while the request waited: the file is in Location."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the exports:create ability."
+                        }
+                    ]
+                },
+                {
+                    "name": "Show Export",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/exports\/:export",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/exports\/:export",
+                            "variable": [
+                                {
+                                    "id": "export",
+                                    "key": "export",
+                                    "value": "01jbd2c3e4f5g6h7j8k9m0n1p2",
+                                    "description": "The export ID, a ULID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Download a finished contact export as CSV, with a header row. Follow the 303 from the status monitor, or the url in the export.completed webhook, to get here. Returns the file until it expires, a day after it finished, and 410 Gone after that."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "id,first_name,last_name,email,phone,organization,address,city,region,country,postal_code\n",
+                            "name": "The CSV file."
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/unauthorized\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Unauthenticated.\"}",
+                            "name": "Authentication failed."
+                        },
+                        {
+                            "header": [],
+                            "code": 403,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/forbidden\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Forbidden.\"}",
+                            "name": "Token is missing the exports:read ability."
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/resource-not-found\",\"title\":\"Resource Not Found\",\"status\":404,\"detail\":\"The resource was not found.\"}",
+                            "name": "No finished export with this ID belongs to the authenticated account."
+                        },
+                        {
+                            "header": [],
+                            "code": 410,
+                            "body": "{\"type\":\"https:\\\/\\\/apiguide.dev\\\/errors\\\/gone\",\"title\":\"Gone\",\"status\":410,\"detail\":\"This export has expired. Start another.\"}",
+                            "name": "The export expired."
                         }
                     ]
                 }

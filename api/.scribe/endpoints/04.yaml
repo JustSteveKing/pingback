@@ -1,19 +1,19 @@
-name: Contacts
+name: Organizations
 description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: v1/contacts
+    uri: v1/organizations
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List Contacts'
-      description: 'List the account''s contacts, ordered by last name then first name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search contacts, or to find the people at one organisation. Returns an array of contacts; follow the Link header''s rel="next" for the next page, which keeps the same search and filter.'
+      title: 'List Organizations'
+      description: "List the account's organisations, ordered by name, 25 to a page, leaving deleted ones out unless asked. Use it to browse or search organisations, or to find one's ID. Returns an array of organisations; follow the Link header's rel=\"next\" for the next page, which keeps the same search and filter."
       authenticated: true
       deprecated: false
     headers:
@@ -26,9 +26,9 @@ endpoints:
       search:
         custom: []
         name: search
-        description: 'Only contacts whose first name, last name, email or organisation name contains this text, ignoring case. Must not be greater than 100 characters.'
+        description: 'Only organisations whose name or email contains this text, ignoring case. Must not be greater than 100 characters.'
         required: false
-        example: ada
+        example: acme
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -37,24 +37,13 @@ endpoints:
       trashed:
         custom: []
         name: trashed
-        description: 'Deleted contacts are left out unless this is "with" (include them) or "only" (nothing else).'
+        description: 'Deleted organisations are left out unless this is "with" (include them) or "only" (nothing else).'
         required: false
         example: with
         type: string
         enumValues:
           - with
           - only
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      organization_id:
-        custom: []
-        name: organization_id
-        description: 'Only the contacts at this organisation.'
-        required: false
-        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-        type: string
-        enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
@@ -70,9 +59,8 @@ endpoints:
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      search: ada
+      search: acme
       trashed: with
-      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
       cursor: architecto
     bodyParameters: []
     cleanBodyParameters: []
@@ -81,9 +69,9 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '[{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
+        content: '[{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}]'
         headers: []
-        description: 'One page of contacts.'
+        description: 'One page of organisations.'
       -
         custom: []
         status: 401
@@ -95,29 +83,18 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:read ability.'
+        description: 'Token is missing the organizations:read ability.'
       -
         custom: []
         status: 422
         content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The selected trashed is invalid.","errors":{"trashed":["The selected trashed is invalid."]}}'
         headers: []
-        description: 'The trashed filter is not "with" or "only", the organisation is not a ULID, or the search is longer than 100 characters.'
+        description: 'The trashed filter is not "with" or "only", or the search is longer than 100 characters.'
     responseFields:
-      '[].organization_id':
-        custom: []
-        name: '[].organization_id'
-        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-        required: true
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
       '[].email':
         custom: []
         name: '[].email'
-        description: "The contact's email address, or null."
+        description: "The organisation's email address, or null."
         required: true
         example: null
         type: string
@@ -213,20 +190,20 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: v1/contacts
+    uri: v1/organizations
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create Contact'
-      description: 'Add a contact to the account, at one of its organisations or none. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the contact with its ETag, and its URL in Location.'
+      title: 'Create Organization'
+      description: 'Add an organisation to the account. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the organisation with its ETag, and its URL in Location.'
       authenticated: true
       deprecated: false
     headers:
       Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
-      Idempotency-Key: '"contact-retry-1"'
+      Idempotency-Key: '"organization-retry-1"'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -234,34 +211,12 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      organization_id:
+      name:
         custom: []
-        name: organization_id
-        description: "One of the account's organisations that is not deleted, or null for none."
-        required: false
-        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      first_name:
-        custom: []
-        name: first_name
-        description: 'Up to 25 characters.'
+        name: name
+        description: 'Up to 100 characters.'
         required: true
-        example: Ada
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      last_name:
-        custom: []
-        name: last_name
-        description: 'Up to 25 characters.'
-        required: true
-        example: Lovelace
+        example: 'Rippin, Kovacek and Bins'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -272,7 +227,7 @@ endpoints:
         name: email
         description: 'An email address, up to 50 characters, or null.'
         required: false
-        example: ada@rippin.example
+        example: info@rippin.example
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -283,7 +238,7 @@ endpoints:
         name: phone
         description: 'Up to 50 characters, or null.'
         required: false
-        example: '+1 555 0101'
+        example: '+1 555 0100'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -345,11 +300,9 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-      first_name: Ada
-      last_name: Lovelace
-      email: ada@rippin.example
-      phone: '+1 555 0101'
+      name: 'Rippin, Kovacek and Bins'
+      email: info@rippin.example
+      phone: '+1 555 0100'
       address: '742 Evergreen Terrace'
       city: Springfield
       region: Oregon
@@ -360,9 +313,9 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
-        description: 'Contact created.'
+        description: 'Organisation created.'
       -
         custom: []
         status: 401
@@ -374,29 +327,18 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:write ability.'
+        description: 'Token is missing the organizations:write ability.'
       -
         custom: []
         status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The first name field is required.","errors":{"first_name":["The first name field is required."]}}'
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The name field is required.","errors":{"name":["The name field is required."]}}'
         headers: []
-        description: "A field is missing, too long or malformed, or the organisation is not one of the account's."
+        description: 'A field is missing, too long or malformed.'
     responseFields:
-      data.organization_id:
-        custom: []
-        name: data.organization_id
-        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-        required: true
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
       data.email:
         custom: []
         name: data.email
-        description: "The contact's email address, or null."
+        description: "The organisation's email address, or null."
         required: true
         example: null
         type: string
@@ -492,15 +434,15 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'v1/contacts/{contact}'
+    uri: 'v1/organizations/{organization}'
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Show Contact'
-      description: "Fetch one contact by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the contact, or 304 with no body when If-None-Match still matches."
+      title: 'Show Organization'
+      description: "Fetch one organisation by its ID, deleted or not. Use it before changing or deleting one: the response's ETag goes in If-Match. Returns the organisation, or 304 with no body when If-None-Match still matches."
       authenticated: true
       deprecated: false
     headers:
@@ -509,19 +451,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      contact:
+      organization:
         custom: []
-        name: contact
-        description: 'The contact ID, a ULID.'
+        name: organization
+        description: 'The organisation ID, a ULID.'
         required: true
-        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+      organization: 01jbd0x4qsm2cf4c8m3x6y1v7z
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -531,9 +473,9 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
-        description: 'The contact, with its ETag.'
+        description: 'The organisation, with its ETag.'
       -
         custom: []
         status: 401
@@ -545,29 +487,18 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:read ability.'
+        description: 'Token is missing the organizations:read ability.'
       -
         custom: []
         status: 404
         content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
         headers: []
-        description: 'No contact with this ID belongs to the authenticated account.'
+        description: 'No organisation with this ID belongs to the authenticated account.'
     responseFields:
-      data.organization_id:
-        custom: []
-        name: data.organization_id
-        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-        required: true
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
       data.email:
         custom: []
         name: data.email
-        description: "The contact's email address, or null."
+        description: "The organisation's email address, or null."
         required: true
         example: null
         type: string
@@ -663,15 +594,15 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'v1/contacts/{contact}'
+    uri: 'v1/organizations/{organization}'
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update Contact'
-      description: 'Change a contact with a JSON Merge Patch (application/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the contact after the change, with its new ETag.'
+      title: 'Update Organization'
+      description: 'Change an organisation with a JSON Merge Patch (application/merge-patch+json): send only the fields that change, and null to clear one. If-Match is required, with the ETag from the last read, so a change someone else made first is never overwritten. Returns the organisation after the change, with its new ETag.'
       authenticated: true
       deprecated: false
     headers:
@@ -680,50 +611,28 @@ endpoints:
       If-Match: '"a1b2c3d4e5f6"'
       Accept: application/json
     urlParameters:
-      contact:
+      organization:
         custom: []
-        name: contact
-        description: 'The contact ID, a ULID.'
+        name: organization
+        description: 'The organisation ID, a ULID.'
         required: true
-        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      organization_id:
-        custom: []
-        name: organization_id
-        description: "One of the account's organisations that is not deleted, or null for none."
-        required: false
         example: 01jbd0x4qsm2cf4c8m3x6y1v7z
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      first_name:
+    cleanUrlParameters:
+      organization: 01jbd0x4qsm2cf4c8m3x6y1v7z
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
         custom: []
-        name: first_name
-        description: 'Up to 25 characters.'
+        name: name
+        description: 'Up to 100 characters.'
         required: false
-        example: Ada
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      last_name:
-        custom: []
-        name: last_name
-        description: 'Up to 25 characters.'
-        required: false
-        example: Lovelace
+        example: 'Rippin, Kovacek and Bins'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -734,7 +643,7 @@ endpoints:
         name: email
         description: 'An email address, up to 50 characters, or null.'
         required: false
-        example: ada@rippin.example
+        example: info@rippin.example
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -745,7 +654,7 @@ endpoints:
         name: phone
         description: 'Up to 50 characters, or null.'
         required: false
-        example: '+1 555 0101'
+        example: '+1 555 0100'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -807,11 +716,9 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-      first_name: Ada
-      last_name: Lovelace
-      email: ada@rippin.example
-      phone: '+1 555 0101'
+      name: 'Rippin, Kovacek and Bins'
+      email: info@rippin.example
+      phone: '+1 555 0100'
       address: '742 Evergreen Terrace'
       city: Springfield
       region: Oregon
@@ -822,9 +729,9 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
-        description: 'The contact after the change.'
+        description: 'The organisation after the change.'
       -
         custom: []
         status: 401
@@ -836,13 +743,13 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:write ability.'
+        description: 'Token is missing the organizations:write ability.'
       -
         custom: []
         status: 404
         content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
         headers: []
-        description: 'No contact with this ID belongs to the authenticated account.'
+        description: 'No organisation with this ID belongs to the authenticated account.'
       -
         custom: []
         status: 412
@@ -858,9 +765,9 @@ endpoints:
       -
         custom: []
         status: 422
-        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The organisation is not one of this account''s, or it is deleted.","errors":{"organization_id":["The organisation is not one of this account''s, or it is deleted."]}}'
+        content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The name field is required.","errors":{"name":["The name field is required."]}}'
         headers: []
-        description: "A field is too long or malformed, a name was cleared, or the organisation is not one of the account's."
+        description: 'A field is too long or malformed, or the name was cleared.'
       -
         custom: []
         status: 428
@@ -868,21 +775,10 @@ endpoints:
         headers: []
         description: 'The request has no If-Match.'
     responseFields:
-      data.organization_id:
-        custom: []
-        name: data.organization_id
-        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-        required: true
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
       data.email:
         custom: []
         name: data.email
-        description: "The contact's email address, or null."
+        description: "The organisation's email address, or null."
         required: true
         example: null
         type: string
@@ -978,15 +874,15 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'v1/contacts/{contact}'
+    uri: 'v1/organizations/{organization}'
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete Contact'
-      description: 'Delete a contact. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing.'
+      title: 'Delete Organization'
+      description: 'Delete an organisation. It is kept, marked deleted, and can be restored; listings leave it out unless asked. If-Match is required, so nothing is deleted on the strength of a stale read. Returns 204 with no body, and deleting it again changes nothing.'
       authenticated: true
       deprecated: false
     headers:
@@ -995,19 +891,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      contact:
+      organization:
         custom: []
-        name: contact
-        description: 'The contact ID, a ULID.'
+        name: organization
+        description: 'The organisation ID, a ULID.'
         required: true
-        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+      organization: 01jbd0x4qsm2cf4c8m3x6y1v7z
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1019,7 +915,7 @@ endpoints:
         status: 204
         content: null
         headers: []
-        description: 'Contact deleted.'
+        description: 'Organisation deleted.'
       -
         custom: []
         status: 401
@@ -1031,13 +927,13 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:write ability.'
+        description: 'Token is missing the organizations:write ability.'
       -
         custom: []
         status: 404
         content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
         headers: []
-        description: 'No contact with this ID belongs to the authenticated account.'
+        description: 'No organisation with this ID belongs to the authenticated account.'
       -
         custom: []
         status: 412
@@ -1062,15 +958,15 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'v1/contacts/{contact}/restore'
+    uri: 'v1/organizations/{organization}/restore'
     metadata:
       custom: []
-      groupName: Contacts
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Restore Contact'
-      description: 'Bring back a deleted contact, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the contact with its new ETag.'
+      title: 'Restore Organization'
+      description: 'Bring back a deleted organisation, so it is listed again. Restoring one that is not deleted changes nothing, so a retry is safe without an Idempotency-Key. Returns the organisation with its new ETag.'
       authenticated: true
       deprecated: false
     headers:
@@ -1078,19 +974,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      contact:
+      organization:
         custom: []
-        name: contact
-        description: 'The contact ID, a ULID.'
+        name: organization
+        description: 'The organisation ID, a ULID.'
         required: true
-        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      contact: 01jbd1k9r2w3x4y5z6a7b8c9d0
+      organization: 01jbd0x4qsm2cf4c8m3x6y1v7z
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1100,9 +996,9 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd1k9r2w3x4y5z6a7b8c9d0","organization_id":"01jbd0x4qsm2cf4c8m3x6y1v7z","first_name":"Ada","last_name":"Lovelace","email":"ada@rippin.example","phone":"+1 555 0101","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
         headers: []
-        description: 'The contact, restored.'
+        description: 'The organisation, restored.'
       -
         custom: []
         status: 401
@@ -1114,29 +1010,18 @@ endpoints:
         status: 403
         content: '{"type":"https:\/\/apiguide.dev\/errors\/forbidden","title":"Forbidden","status":403,"detail":"Forbidden."}'
         headers: []
-        description: 'Token is missing the contacts:write ability.'
+        description: 'Token is missing the organizations:write ability.'
       -
         custom: []
         status: 404
         content: '{"type":"https:\/\/apiguide.dev\/errors\/resource-not-found","title":"Resource Not Found","status":404,"detail":"The resource was not found."}'
         headers: []
-        description: 'No contact with this ID belongs to the authenticated account.'
+        description: 'No organisation with this ID belongs to the authenticated account.'
     responseFields:
-      data.organization_id:
-        custom: []
-        name: data.organization_id
-        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-        required: true
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
       data.email:
         custom: []
         name: data.email
-        description: "The contact's email address, or null."
+        description: "The organisation's email address, or null."
         required: true
         example: null
         type: string

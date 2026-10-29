@@ -49,16 +49,17 @@ return [
             'propagate_trace' => true,
         ]),
         Features::preferences(),
-        // Off until an endpoint returns 202 Accepted; turning it on adds the status monitor route.
-        // Features::asyncOperations([
-        //     // Where the status monitor lives, and the middleware it runs behind.
-        //     'path' => 'v1/operations',
-        //     'middleware' => ['api', 'auth:sanctum'],
-        //     // Seconds an operation's status is kept after its last change.
-        //     'ttl' => 86400,
-        //     // Retry-After, in seconds, while an operation is still running.
-        //     'retry_after' => 5,
-        // ]),
+        // The contact export answers 202 Accepted (ADR-0005). The monitor is documented by
+        // ShowOperationController, which registers the same URI over this one.
+        Features::asyncOperations([
+            // Where the status monitor lives, and the middleware it runs behind.
+            'path' => 'v1/operations',
+            'middleware' => ['api', 'auth:sanctum'],
+            // Seconds an operation's status is kept after its last change.
+            'ttl' => 86400,
+            // Retry-After, in seconds, while an operation is still running.
+            'retry_after' => 2,
+        ]),
         Features::mergePatch(),
         Features::digests(),
         Features::messageSignatures([

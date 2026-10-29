@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Contact;
+use App\Models\Export;
 use App\Models\Organization;
 use App\Models\User;
 use App\Support\ProductionSecurityChecks;
@@ -115,6 +116,16 @@ final class AppServiceProvider extends ServiceProvider
             }
 
             return $account->contacts()->withTrashed()->whereKey($id)->firstOrFail();
+        });
+
+        Route::bind('export', static function (string $id): Export {
+            $account = request()->user()?->account;
+
+            if (null === $account) {
+                throw new ModelNotFoundException()->setModel(Export::class);
+            }
+
+            return $account->exports()->whereKey($id)->firstOrFail();
         });
     }
 }

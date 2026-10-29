@@ -28,6 +28,9 @@ return [
     'contacts' => [
         'organization_unknown' => 'La organizacion no es de esta cuenta, o esta eliminada.',
     ],
+    'exports' => [
+        'expired' => 'Esta exportacion ha caducado. Inicia otra.',
+    ],
     'organizations' => [
         'country_format' => 'Los paises son codigos ISO 3166-1 de dos letras en mayusculas, como GB.',
     ],
