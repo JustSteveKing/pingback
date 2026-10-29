@@ -1,0 +1,82 @@
+name: sdk
+
+# The SDK's own checks, and the contract suite (ADR-0006): the SDK against the running API, so a
+# change to either end that the other doesn't follow fails here, on the same commit.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sdk
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+
+      - run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Check code style
+        run: composer lint
+
+      - name: Run static analysis
+        run: composer analyse
+
+      # With no API to call, the contract suite replays its recorded fixtures.
+      - name: Run the tests, contract suite replayed
+        run: vendor/bin/pest
+
+  contract:
+    name: contract, against the running API
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: composer:v2
+          extensions: mbstring, dom, curl, sqlite3, pdo_sqlite
+          coverage: none
+
+      # Before install: Composer's post-autoload-dump boots the app, which without a .env runs as
+      # production and fails ProductionSecurityChecks.
+      - name: Boot the API with the demo account
+        working-directory: api
+        run: |
+          cp .env.example .env
+          composer install --no-interaction --no-progress --prefer-dist
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan migrate --seed --force
+          php artisan serve --port=8000 > ../serve.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl --silent --fail http://127.0.0.1:8000/up > /dev/null && break
+            sleep 1
+          done
+          curl --silent --fail http://127.0.0.1:8000/up > /dev/null
+
+      - name: Run the contract suite against it
+        working-directory: sdk
+        env:
+          PINGBACK_BASE_URI: http://127.0.0.1:8000/v1
+        run: |
+          composer install --no-interaction --no-progress --prefer-dist
+          vendor/bin/pest --testsuite=Contract
+
+      - name: Show the API's log
+        if: failure()
+        run: cat serve.log
