@@ -1,0 +1,84 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/contacts",
+                "uri": "http://127.0.0.1:8000/v1/contacts",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"a65f07e3-0b90-4d77-ba35-80f57bc3b7ce\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"organization_id\":\"01m63qkk8hpzyykpyy4xmzhp7j\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\"}"
+            },
+            "response": {
+                "status": 422,
+                "reason": "Unprocessable Content",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:28 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "48"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cd22-70da-a37c-1b6d2194d274"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/validation-failed\",\"title\":\"Validation Failed\",\"status\":422,\"detail\":\"The organisation is not one of this account's, or it is deleted.\",\"instance\":\"urn:uuid:01a18779-cd22-70da-a37c-1b6d2194d274\",\"errors\":{\"organization_id\":[\"The organisation is not one of this account's, or it is deleted.\"]}}"
+            }
+        }
+    ]
+}

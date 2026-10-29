@@ -1,0 +1,573 @@
+{
+    "interactions": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/contacts",
+                "uri": "http://127.0.0.1:8000/v1/contacts",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Idempotency-Key": [
+                        "\"c0a17d1b-f8bf-4890-922c-cba9251d98ea\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"first_name\":\"Ada\",\"last_name\":\"Lovelace\"}"
+            },
+            "response": {
+                "status": 201,
+                "reason": "Created",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"f5b50ed83fd0da4403df94f7185451fb\""
+                    ],
+                    "location": [
+                        "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "43"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cd9e-70f0-abcf-bbad90dcaa0b"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63qkkd94m7b2yyz58jt94dq\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:44:29+00:00\",\"updated_at\":\"2026-10-29T11:44:29+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "PATCH",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/merge-patch+json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"f5b50ed83fd0da4403df94f7185451fb\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"city\":\"London\"}"
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"34bfb5fcec48751e8818ef58d27f1bbd\""
+                    ],
+                    "accept-patch": [
+                        "application/merge-patch+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "42"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cdba-72d9-b242-578b560cae68"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63qkkd94m7b2yyz58jt94dq\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:44:29+00:00\",\"updated_at\":\"2026-10-29T11:44:29+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "PATCH",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Content-Type": [
+                        "application/merge-patch+json"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"f5b50ed83fd0da4403df94f7185451fb\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": "{\"city\":\"Paris\"}"
+            },
+            "response": {
+                "status": 412,
+                "reason": "Precondition Failed",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "etag": [
+                        "\"34bfb5fcec48751e8818ef58d27f1bbd\""
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/problem+json"
+                    ],
+                    "accept-patch": [
+                        "application/merge-patch+json"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "41"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cdd0-720b-a0bd-0590c27523b3"
+                    ]
+                },
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-failed\",\"title\":\"Precondition Failed\",\"status\":412,\"detail\":\"The resource has changed since you last fetched it. Fetch it again and retry with its current ETag.\",\"instance\":\"urn:uuid:01a18779-cdd0-720b-a0bd-0590c27523b3\"}"
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "private, must-revalidate"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"34bfb5fcec48751e8818ef58d27f1bbd\""
+                    ],
+                    "last-modified": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "40"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cde1-700b-8e85-2a4e2e79db2a"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63qkkd94m7b2yyz58jt94dq\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:44:29+00:00\",\"updated_at\":\"2026-10-29T11:44:29+00:00\",\"deleted_at\":null}}"
+            }
+        },
+        {
+            "request": {
+                "method": "DELETE",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "If-Match": [
+                        "\"34bfb5fcec48751e8818ef58d27f1bbd\""
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 204,
+                "reason": "No Content",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "39"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-cdf4-706f-bfcc-d2be5cae6c1d"
+                    ]
+                },
+                "body": ""
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "private, must-revalidate"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"c6e01484f28e78ccce8442f835993c4f\""
+                    ],
+                    "last-modified": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "38"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-ce05-7262-becc-09f38ec558d3"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63qkkd94m7b2yyz58jt94dq\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:44:29+00:00\",\"updated_at\":\"2026-10-29T11:44:29+00:00\",\"deleted_at\":\"2026-10-29T11:44:29+00:00\"}}"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/contacts/01m63qkkd94m7b2yyz58jt94dq/restore",
+                "uri": "http://127.0.0.1:8000/v1/contacts/01m63qkkd94m7b2yyz58jt94dq/restore",
+                "headers": {
+                    "Host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "Accept": [
+                        "application/json, application/problem+json"
+                    ],
+                    "User-Agent": [
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.3 php/8.5.12"
+                    ],
+                    "Authorization": [
+                        "[redacted]"
+                    ]
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "reason": "OK",
+                "headers": {
+                    "host": [
+                        "127.0.0.1:8000"
+                    ],
+                    "connection": [
+                        "close"
+                    ],
+                    "x-powered-by": [
+                        "PHP/8.5.12"
+                    ],
+                    "cache-control": [
+                        "no-cache, private"
+                    ],
+                    "date": [
+                        "Thu, 29 Oct 2026 11:44:29 GMT"
+                    ],
+                    "content-type": [
+                        "application/json"
+                    ],
+                    "etag": [
+                        "\"974989de51d087bf8585a8478c141f02\""
+                    ],
+                    "x-ratelimit-limit": [
+                        "60"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "37"
+                    ],
+                    "x-content-type-options": [
+                        "nosniff"
+                    ],
+                    "x-frame-options": [
+                        "DENY"
+                    ],
+                    "referrer-policy": [
+                        "no-referrer"
+                    ],
+                    "content-language": [
+                        "en"
+                    ],
+                    "access-control-allow-origin": [
+                        "http://localhost:3000"
+                    ],
+                    "access-control-expose-headers": [
+                        "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
+                    ],
+                    "x-request-id": [
+                        "01a18779-ce1b-70f9-802b-1903a7623d10"
+                    ]
+                },
+                "body": "{\"data\":{\"id\":\"01m63qkkd94m7b2yyz58jt94dq\",\"organization_id\":null,\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"London\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T11:44:29+00:00\",\"updated_at\":\"2026-10-29T11:44:29+00:00\",\"deleted_at\":null}}"
+            }
+        }
+    ]
+}
