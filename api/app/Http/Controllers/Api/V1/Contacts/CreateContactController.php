@@ -7,9 +7,13 @@ namespace App\Http\Controllers\Api\V1\Contacts;
 use App\Http\Payloads\V1\CreateContactPayload;
 use App\Http\Requests\Contacts\CreateContactRequest;
 use App\Http\Resources\ContactResource;
+use App\Models\Contact;
 use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -78,11 +82,16 @@ use Knuckles\Scribe\Attributes\ResponseField;
 )]
 final class CreateContactController
 {
-    public function __invoke(CreateContactRequest $request, #[CurrentUser] User $user): JsonResponse
+    public function __invoke(CreateContactRequest $request, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         $payload = CreateContactPayload::fromRequest($request);
 
-        $contact = $user->account()->firstOrFail()->contacts()->create($payload->attributes());
+        $contact = DB::transaction(static function () use ($user, $payload, $webhooks): Contact {
+            $contact = $user->account()->firstOrFail()->contacts()->create($payload->attributes());
+            $webhooks->dispatch($user, RecordChanged::contact('created', $contact));
+
+            return $contact;
+        });
 
         return ContactResource::make($contact)
             ->response()

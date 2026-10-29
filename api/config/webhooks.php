@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Webhooks\Events\RecordChanged;
+
 return [
 
     /*
@@ -16,7 +18,7 @@ return [
     */
 
     'events' => [
-        // 'project.created',
+        ...RecordChanged::TYPES,
     ],
 
     /*

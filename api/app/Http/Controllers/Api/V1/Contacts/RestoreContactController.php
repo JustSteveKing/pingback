@@ -6,7 +6,12 @@ namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
+use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
@@ -63,10 +68,13 @@ use Knuckles\Scribe\Attributes\UrlParam;
 )]
 final class RestoreContactController
 {
-    public function __invoke(Contact $contact): JsonResponse
+    public function __invoke(Contact $contact, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         if ($contact->trashed()) {
-            $contact->restore();
+            DB::transaction(static function () use ($contact, $user, $webhooks): void {
+                $contact->restore();
+                $webhooks->dispatch($user, RecordChanged::contact('restored', $contact));
+            });
         }
 
         return ContactResource::make($contact)->response();

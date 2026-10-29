@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "be9eb09d-e361-46d3-adab-5186d8fe9551",
+        "_postman_id": "c6d31c7f-d233-41e9-8fbb-e381197bf75f",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -108,7 +108,7 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63qs4tfpfdwwpa2x6d979m9\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T11:47:30+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63rn5s52wwngdzj8h67kt9a\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Registration succeeded."
                                 },
                                 {
@@ -152,7 +152,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63qs4trt5me45gs1wbf1yhg\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T11:47:30+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63rn5sdnjftpj5zm62fwqzj\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
                                     "name": "Login succeeded."
                                 },
                                 {
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63qs4vrn6ra1014pej7v71s\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T11:47:30+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"data\":{\"id\":\"01m63rn5temmjcwapz7cdsft8n\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T12:02:49+00:00\",\"created_at\":null,\"updated_at\":null}}",
                                     "name": "Authenticated user profile."
                                 },
                                 {

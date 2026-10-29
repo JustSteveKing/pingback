@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1\Contacts;
 
 use App\Models\Contact;
+use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
@@ -74,10 +79,13 @@ use Knuckles\Scribe\Attributes\UrlParam;
 )]
 final class DeleteContactController
 {
-    public function __invoke(Contact $contact): Response
+    public function __invoke(Contact $contact, #[CurrentUser] User $user, Webhooks $webhooks): Response
     {
         if ( ! $contact->trashed()) {
-            $contact->delete();
+            DB::transaction(static function () use ($contact, $user, $webhooks): void {
+                $contact->delete();
+                $webhooks->dispatch($user, RecordChanged::contact('deleted', $contact));
+            });
         }
 
         return response()->noContent();

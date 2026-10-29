@@ -6,7 +6,12 @@ namespace App\Http\Controllers\Api\V1\Organizations;
 
 use App\Http\Resources\OrganizationResource;
 use App\Models\Organization;
+use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
@@ -62,10 +67,13 @@ use Knuckles\Scribe\Attributes\UrlParam;
 )]
 final class RestoreOrganizationController
 {
-    public function __invoke(Organization $organization): JsonResponse
+    public function __invoke(Organization $organization, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         if ($organization->trashed()) {
-            $organization->restore();
+            DB::transaction(static function () use ($organization, $user, $webhooks): void {
+                $organization->restore();
+                $webhooks->dispatch($user, RecordChanged::organization('restored', $organization));
+            });
         }
 
         return OrganizationResource::make($organization)->response();

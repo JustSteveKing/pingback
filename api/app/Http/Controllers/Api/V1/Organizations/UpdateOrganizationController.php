@@ -8,7 +8,12 @@ use App\Http\Payloads\V1\UpdateOrganizationPayload;
 use App\Http\Requests\Organizations\UpdateOrganizationRequest;
 use App\Http\Resources\OrganizationResource;
 use App\Models\Organization;
+use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -117,11 +122,18 @@ use Knuckles\Scribe\Attributes\UrlParam;
 )]
 final class UpdateOrganizationController
 {
-    public function __invoke(UpdateOrganizationRequest $request, Organization $organization): JsonResponse
+    public function __invoke(UpdateOrganizationRequest $request, Organization $organization, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         $payload = UpdateOrganizationPayload::fromRequest($request);
 
-        $organization->update($payload->attributes());
+        DB::transaction(static function () use ($organization, $payload, $user, $webhooks): void {
+            $organization->update($payload->attributes());
+
+            // A patch that changes nothing is no change to announce.
+            if ($organization->wasChanged()) {
+                $webhooks->dispatch($user, RecordChanged::organization('updated', $organization));
+            }
+        });
 
         return OrganizationResource::make($organization)->response();
     }

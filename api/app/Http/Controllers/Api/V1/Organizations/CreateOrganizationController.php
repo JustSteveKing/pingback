@@ -7,9 +7,13 @@ namespace App\Http\Controllers\Api\V1\Organizations;
 use App\Http\Payloads\V1\CreateOrganizationPayload;
 use App\Http\Requests\Organizations\CreateOrganizationRequest;
 use App\Http\Resources\OrganizationResource;
+use App\Models\Organization;
 use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -75,11 +79,16 @@ use Knuckles\Scribe\Attributes\ResponseField;
 )]
 final class CreateOrganizationController
 {
-    public function __invoke(CreateOrganizationRequest $request, #[CurrentUser] User $user): JsonResponse
+    public function __invoke(CreateOrganizationRequest $request, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         $payload = CreateOrganizationPayload::fromRequest($request);
 
-        $organization = $user->account()->firstOrFail()->organizations()->create($payload->attributes());
+        $organization = DB::transaction(static function () use ($user, $payload, $webhooks): Organization {
+            $organization = $user->account()->firstOrFail()->organizations()->create($payload->attributes());
+            $webhooks->dispatch($user, RecordChanged::organization('created', $organization));
+
+            return $organization;
+        });
 
         return OrganizationResource::make($organization)
             ->response()

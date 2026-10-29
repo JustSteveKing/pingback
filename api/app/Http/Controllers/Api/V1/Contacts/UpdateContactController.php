@@ -8,7 +8,12 @@ use App\Http\Payloads\V1\UpdateContactPayload;
 use App\Http\Requests\Contacts\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
+use App\Models\User;
+use App\Webhooks\Events\RecordChanged;
+use App\Webhooks\Webhooks;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\Endpoint;
@@ -120,11 +125,18 @@ use Knuckles\Scribe\Attributes\UrlParam;
 )]
 final class UpdateContactController
 {
-    public function __invoke(UpdateContactRequest $request, Contact $contact): JsonResponse
+    public function __invoke(UpdateContactRequest $request, Contact $contact, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse
     {
         $payload = UpdateContactPayload::fromRequest($request);
 
-        $contact->update($payload->attributes());
+        DB::transaction(static function () use ($contact, $payload, $user, $webhooks): void {
+            $contact->update($payload->attributes());
+
+            // A patch that changes nothing is no change to announce.
+            if ($contact->wasChanged()) {
+                $webhooks->dispatch($user, RecordChanged::contact('updated', $contact));
+            }
+        });
 
         return ContactResource::make($contact)->response();
     }
