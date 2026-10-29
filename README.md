@@ -32,6 +32,7 @@ both were fixed upstream (see [What it found](#what-it-found)).
 | Errors | RFC 9457 | typed problems from apiguide.dev | an exception per status, carrying the problem |
 | A slow export | RFC 7240 `Prefer`, RFC 9110 §15.3.3 | `202`, a monitor, `303` to the file | `await()` |
 | Webhooks | RFC 9421, RFC 9530 | Kit's signed CloudEvents | `WebhookReceiver` |
+| Retiring a resource | RFC 9745 `Deprecation`, RFC 8594 `Sunset` | headers, then `410` after the sunset | `Deprecations::strict()` fails the build |
 
 ## One change, both ends
 
@@ -147,6 +148,41 @@ Each step above is a test in the SDK's contract suite, run against the real API 
 the API changed its ETags, its problem types or its signatures without the SDK following, the
 build would fail on the same commit.
 
+## Changing the contract
+
+v1 shipped with nothing deprecated. The first change after it deprecates two things, and they
+needed two different signals, because RFC 9745's `Deprecation` header applies to a resource,
+never to a field.
+
+**A field: `phone`.** A contact's single `phone` became `phones`, a list. The contact resource
+isn't going anywhere, so a `Deprecation` header on it would have told every client the wrong
+thing. Instead `phone` stays, as the first number on the list, and the deprecation is said where
+fields are described: `deprecated: true` on the property in the OpenAPI document, and
+`@deprecated` on `Contact::$phone` in the SDK ([ADR-0007](architecture/adr/0007-a-field-is-deprecated-in-the-contract-not-on-the-wire.md)).
+
+**A resource: `/contacts?organization_id=`.** The contacts at one organisation became their own
+resource, `/organizations/{id}/contacts`. A URI's query is part of what identifies it, so the old
+filter is a resource of its own, and it is deprecated alone, with `Deprecation`, `Sunset` and a
+`Link` to why ([ADR-0008](architecture/adr/0008-the-organisation-filter-becomes-a-resource-and-is-deprecated.md)):
+
+```http
+HTTP/1.1 200 OK
+Deprecation: @1793232000
+Sunset: Sun, 31 Jan 2027 23:59:59 GMT
+Link: <https://github.com/JustSteveKing/pingback/blob/main/architecture/adr/0008-the-organisation-filter-becomes-a-resource-and-is-deprecated.md>; rel="deprecation"
+```
+
+The SDK's contract suite runs with `Deprecations::strict()`, so the day the API deprecated the
+filter, the suite went red:
+
+```
+GET http://127.0.0.1:8000/v1/contacts?organization_id=01m63w2hv6whz62cy099nd3rqa is deprecated
+as of 2026-10-29 and stops responding after 2027-01-31 (see https://github.com/JustSteveKing/pingback/blob/main/architecture/adr/0008-the-organisation-filter-becomes-a-resource-and-is-deprecated.md).
+```
+
+`contacts()->all(at: $organization)` moved to the new resource in the next commit, three months
+before the sunset rather than the day after it.
+
 ## Running both ends
 
 The API is a Kit application in `api/`, seeded with Ping CRM's demo account (Acme Corporation, owned
@@ -224,5 +260,9 @@ Building both ends against each other found disagreements that neither end's own
 - **An HTTP client that follows redirects itself** hides the `303` from `await()`, and drops the
   token when the redirect changes host. The contract suite uses one that doesn't; the SDK copes
   either way.
+- **There's no header for deprecating a field,** so RFC-0001's own plan for `phone` would have
+  misused one. See [Changing the contract](#changing-the-contract).
+- **Kit's sunset check read the system clock,** so no test could travel past a sunset; it reads
+  Laravel's now.
 
 The record of what was decided and why is in [`architecture/`](architecture/README.md).
