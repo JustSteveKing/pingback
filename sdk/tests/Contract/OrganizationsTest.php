@@ -94,7 +94,7 @@ it('refuses an update made against a stale read: PreconditionFailedException, no
 it('refuses an update with no ETag to send: PreconditionRequiredException', function (): void {
     $organizations = pingback('organizations/unconditional')->organizations();
     $organizations->create(new NewOrganization('Contract Unconditional Ltd'));
-    $listed = $organizations->all(search: 'contract unconditional')->take(1)[0];
+    $listed = $organizations->all(search: 'contract unconditional')->first();
 
     expect(fn () => $organizations->update($listed, $listed->with(city: 'Leeds')))
         ->toThrow(PreconditionRequiredException::class);

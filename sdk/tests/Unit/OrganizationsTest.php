@@ -69,7 +69,7 @@ it('sends an update with no If-Match when the organisation came from a list', fu
     $http = new FakeClient(FakeResponse::json([organizationJson()]), FakeResponse::json(['data' => organizationJson()]));
     $organizations = sdk($http)->organizations();
 
-    $listed = $organizations->all()->take(1)[0];
+    $listed = $organizations->all()->first();
     $organizations->update($listed, $listed->with(city: 'Leeds'));
 
     expect($listed->etag)->toBeNull()
