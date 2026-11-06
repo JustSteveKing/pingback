@@ -34,7 +34,7 @@ beforeEach(function (): void {
 });
 
 it('announces every change to a record, with the record as it is after it', function (string $resource, array $body, string $field): void {
-    $id = $this->withToken($this->token)->postJson("/v1/{$resource}", $body)->assertCreated()->json('data.id');
+    $id = $this->withToken($this->token)->postJson("/v1/{$resource}", $body)->assertCreated()->json('id');
     $etag = fn(): string => (string) $this->withToken($this->token)->getJson("/v1/{$resource}/{$id}")->headers->get('ETag');
 
     mergePatch("/v1/{$resource}/{$id}", ['city' => 'York'], $this->token, ['If-Match' => $etag()])->assertOk();

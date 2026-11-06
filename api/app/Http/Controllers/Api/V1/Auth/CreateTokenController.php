@@ -18,13 +18,14 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Header;
 use Knuckles\Scribe\Attributes\Response;
+use Knuckles\Scribe\Attributes\ResponseField;
 use Knuckles\Scribe\Attributes\Subgroup;
 
 #[Group(name: 'Authentication')]
 #[Subgroup(name: 'Token Authentication')]
 #[Endpoint(
     title: 'Create API Key',
-    description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in meta.token, which is shown once and cannot be read again.',
+    description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in its token field, which appears in this response only and cannot be read again.',
 )]
 #[Authenticated]
 #[Header('Idempotency-Key', '"token-retry-1"')]
@@ -33,20 +34,19 @@ use Knuckles\Scribe\Attributes\Subgroup;
 #[BodyParam('expires_at', type: 'string', description: 'ISO 8601 expiry, in the future and no later than the configured maximum (365 days by default). Leave it out for the default (90 days).', required: false, example: '2027-01-01T00:00:00+00:00')]
 #[Response(
     content: [
-        'data' => [
-            'id' => '7',
-            'name' => 'deploy-bot',
-            'abilities' => ['auth:me', 'auth:tokens:read'],
-            'last_used_at' => null,
-            'expires_at' => '2027-01-01T00:00:00+00:00',
-            'created_at' => '2026-10-20T12:00:00+00:00',
-            'updated_at' => '2026-10-20T12:00:00+00:00',
-            'is_current' => false,
-        ],
-        'meta' => ['token' => '7|example-token', 'token_type' => 'Bearer'],
+        'id' => '7',
+        'name' => 'deploy-bot',
+        'abilities' => ['auth:me', 'auth:tokens:read'],
+        'last_used_at' => null,
+        'expires_at' => '2027-01-01T00:00:00+00:00',
+        'created_at' => '2026-10-20T12:00:00+00:00',
+        'updated_at' => '2026-10-20T12:00:00+00:00',
+        'is_current' => false,
+        'token' => '7|example-token',
+        'token_type' => 'Bearer',
     ],
     status: 201,
-    description: 'API key created. meta.token is the only time its value is returned.',
+    description: 'API key created. This is the only response that carries its value.',
 )]
 #[Response(
     content: [
@@ -79,6 +79,7 @@ use Knuckles\Scribe\Attributes\Subgroup;
     status: 401,
     description: 'Authentication failed.',
 )]
+#[ResponseField('token', 'string', 'The API key\'s plain-text value. It appears in this response only and cannot be read again.')]
 final class CreateTokenController
 {
     public function __invoke(CreateTokenRequest $request, #[CurrentUser] User $user, AccessTokens $tokens): JsonResponse
@@ -99,11 +100,11 @@ final class CreateTokenController
             'expires_at' => $token->accessToken->expires_at?->toAtomString(),
         ]);
 
-        return PersonalAccessTokenResource::make($token->accessToken)->additional([
-            'meta' => [
-                'token' => $token->plainTextToken,
-                'token_type' => 'Bearer',
-            ],
-        ])->response()->setStatusCode(201);
+        // The plain-text value is part of this one representation, and never of any other.
+        return new JsonResponse([
+            ...PersonalAccessTokenResource::make($token->accessToken)->resolve($request),
+            'token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+        ], 201);
     }
 }

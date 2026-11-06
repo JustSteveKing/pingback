@@ -37,26 +37,37 @@ skeleton; `LoginController` is a finished example.
 #[Subgroup(name: 'Token Authentication')]
 #[Endpoint(
     title: 'Login',
-    description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user with the token, its type and expiry in meta; wrong credentials are a 422 on the email field.',
+    description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user, with the token, its type and its expiry beside the user fields; wrong credentials are a 422 on the email field.',
 )]
 #[Unauthenticated]
 #[BodyParam('email', type: 'string', description: 'User email address.', required: true, example: 'jane@example.com')]
-#[ResponseFromApiResource(
-    name: UserResource::class,
-    model: User::class,
+#[Response(
+    content: [
+        'id' => '01jb8x0k2m4n6p8q0r2s4t6v8w',
+        'name' => 'Jane Doe',
+        // ...the rest of the user's fields
+        'token' => '1|example-token',
+        'token_type' => 'Bearer',
+        'token_expires_at' => null,
+    ],
     status: 200,
-    description: 'Login succeeded.',
-    additional: ['meta' => ['token' => '1|example-token', 'token_type' => 'Bearer', 'expires_at' => null]],
+    description: 'Login succeeded. This is the only response that carries the token.',
 )]
+#[ResponseField('token', 'string', 'The bearer token. It appears in this response only and cannot be read again.')]
 // ...a #[Response] for each error status
 final class LoginController
 ```
+
+An endpoint that returns a resource as it is, such as `MeController`, documents it with
+`#[ResponseFromApiResource]` instead. Login cannot: it returns fields beside the user's, and
+Scribe's `additional:` puts the resource back in a `data` wrapper, which Pingback's bodies do not
+have (ADR-0009).
 
 | Attribute | What goes in it |
 | --- | --- |
 | `#[Endpoint]` | A description in three sentences: what the endpoint does, when to call it, and what it returns |
 | `#[BodyParam]`, `#[QueryParam]`, `#[UrlParam]` | One per input, with a realistic example |
-| `#[ResponseFromApiResource]` | The success response, built from the real resource |
+| `#[ResponseFromApiResource]` | The success response, built from the real resource, when the body is that resource and nothing else |
 | `#[Response]` | One per error status, written as a problem details document |
 | `#[ResponseField]` | A field's type when the example cannot show it, such as a nullable integer whose example is `null` |
 

@@ -39,7 +39,7 @@ curl -X POST http://127.0.0.1:8000/v1/webhooks \
 ```
 
 `events` lists the types to receive, or `*` for everything. The signing secret comes back in
-`meta.secret`, and this is the only response that ever contains it. Rotating the secret returns the
+`secret`, and this is the only response that ever contains it. Rotating the secret returns the
 new one the same way.
 
 Send a ping next, then look at `GET /v1/webhooks/{webhook}/deliveries` to see what the endpoint

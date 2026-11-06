@@ -26,7 +26,7 @@ use Knuckles\Scribe\Attributes\UrlParam;
 #[Authenticated]
 #[UrlParam('webhook', type: 'string', description: 'The webhook subscription ID.', required: true, example: '01jb8x2m4k5n6p7q8r9s0t1v2w')]
 #[UrlParam('delivery', type: 'string', description: 'The delivery to send again.', required: true, example: '01jb8x3a4b5c6d7e8f9g0h1j2k')]
-#[Response(content: ['data' => [
+#[Response(content: [
     'id' => '01jb8x3a4b5c6d7e8f9g0h1j2k',
     'event' => ['id' => '01jb8x3a1b2c3d4e5f6g7h8j9k', 'type' => 'webhook.ping'],
     'state' => 'retrying',
@@ -40,7 +40,7 @@ use Knuckles\Scribe\Attributes\UrlParam;
         'duration_ms' => 182,
         'attempted_at' => '2026-10-20T12:01:00+00:00',
     ]],
-]], status: 202, description: 'Redelivery queued.')]
+], status: 202, description: 'Redelivery queued.')]
 #[Response(
     content: [
         'type' => 'https://apiguide.dev/errors/resource-not-found',
@@ -71,11 +71,11 @@ use Knuckles\Scribe\Attributes\UrlParam;
     status: 403,
     description: 'Token is missing the webhooks:write ability.',
 )]
-#[ResponseField('data.next_attempt_at', 'string', 'When the next attempt is due, or null when none is.', nullable: true)]
-#[ResponseField('data.attempts[].response_status', 'integer', 'The endpoint\'s status code, or null when no response arrived.', nullable: true)]
-#[ResponseField('data.attempts[].response_body', 'string', 'The start of the response body, or null.', nullable: true)]
-#[ResponseField('data.attempts[].error', 'string', 'Why the attempt failed without a response, or null.', nullable: true)]
-#[ResponseField('data.attempts[].duration_ms', 'integer', 'How long the attempt took, or null.', nullable: true)]
+#[ResponseField('next_attempt_at', 'string', 'When the next attempt is due, or null when none is.', nullable: true)]
+#[ResponseField('attempts[].response_status', 'integer', 'The endpoint\'s status code, or null when no response arrived.', nullable: true)]
+#[ResponseField('attempts[].response_body', 'string', 'The start of the response body, or null.', nullable: true)]
+#[ResponseField('attempts[].error', 'string', 'Why the attempt failed without a response, or null.', nullable: true)]
+#[ResponseField('attempts[].duration_ms', 'integer', 'How long the attempt took, or null.', nullable: true)]
 final class RedeliverWebhookController
 {
     public function __invoke(Request $request, #[CurrentUser] User $user, Webhooks $webhooks): JsonResponse

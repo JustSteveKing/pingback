@@ -56,30 +56,26 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: null
-                    name: 'Price Ltd'
-                    created_at: null
-                    updated_at: null
+                  id: null
+                  name: 'Price Ltd'
+                  created_at: null
+                  updated_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: null
-                        nullable: true
-                      name:
-                        type: string
-                        example: 'Price Ltd'
-                      created_at:
-                        type: string
-                        example: null
-                        nullable: true
-                      updated_at:
-                        type: string
-                        example: null
-                        nullable: true
+                  id:
+                    type: string
+                    example: null
+                    nullable: true
+                  name:
+                    type: string
+                    example: 'Price Ltd'
+                  created_at:
+                    type: string
+                    example: null
+                    nullable: true
+                  updated_at:
+                    type: string
+                    example: null
+                    nullable: true
         401:
           description: 'Authentication failed.'
           content:
@@ -110,7 +106,7 @@ paths:
     post:
       summary: Register
       operationId: register
-      description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user with the token, its type and expiry in meta, and sends a verification email.'
+      description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user, with the token, its type and its expiry beside the user fields, and sends a verification email.'
       parameters:
         -
           in: header
@@ -121,60 +117,58 @@ paths:
             type: string
       responses:
         201:
-          description: 'Registration succeeded.'
+          description: 'Registration succeeded. This is the only response that carries the token.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01m63xxg5jvzscwssjy2ea9fpk
-                    name: 'Justina Gaylord'
-                    email: lafayette.considine@example.com
-                    email_verified_at: '2026-10-29T13:34:44+00:00'
-                    created_at: null
-                    updated_at: null
-                  meta:
-                    token: 1|example-token
-                    token_type: Bearer
-                    expires_at: null
+                  id: 01jb8x0k2m4n6p8q0r2s4t6v8w
+                  name: 'Jane Doe'
+                  email: jane@example.com
+                  email_verified_at: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
+                  token: 1|example-token
+                  token_type: Bearer
+                  token_expires_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01m63xxg5jvzscwssjy2ea9fpk
-                      name:
-                        type: string
-                        example: 'Justina Gaylord'
-                      email:
-                        type: string
-                        example: lafayette.considine@example.com
-                      email_verified_at:
-                        type: string
-                        example: '2026-10-29T13:34:44+00:00'
-                      created_at:
-                        type: string
-                        example: null
-                        nullable: true
-                      updated_at:
-                        type: string
-                        example: null
-                        nullable: true
-                  meta:
-                    type: object
-                    properties:
-                      token:
-                        type: string
-                        example: 1|example-token
-                      token_type:
-                        type: string
-                        example: Bearer
-                      expires_at:
-                        type: string
-                        example: null
-                        nullable: true
+                  id:
+                    type: string
+                    example: 01jb8x0k2m4n6p8q0r2s4t6v8w
+                  name:
+                    type: string
+                    example: 'Jane Doe'
+                  email:
+                    type: string
+                    example: jane@example.com
+                  email_verified_at:
+                    type: string
+                    example: null
+                    description: 'When the user verified their email address, or null if they have not.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  token:
+                    type: string
+                    example: 1|example-token
+                    description: 'The bearer token. It appears in this response only and cannot be read again.'
+                  token_type:
+                    type: string
+                    example: Bearer
+                  token_expires_at:
+                    type: string
+                    example: null
+                    description: 'When the token expires, or null if it does not.'
+                    nullable: true
+                required:
+                  - email_verified_at
+                  - token
+                  - token_expires_at
         422:
           description: 'Validation failed.'
           content:
@@ -245,64 +239,62 @@ paths:
     post:
       summary: Login
       operationId: login
-      description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user with the token, its type and expiry in meta; wrong credentials are a 422 on the email field.'
+      description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user, with the token, its type and its expiry beside the user fields; wrong credentials are a 422 on the email field.'
       parameters: []
       responses:
         200:
-          description: 'Login succeeded.'
+          description: 'Login succeeded. This is the only response that carries the token.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01m63xxgaawnbhw7bv9qeb6m63
-                    name: 'Justina Gaylord'
-                    email: cormier.nick@example.com
-                    email_verified_at: '2026-10-29T13:34:45+00:00'
-                    created_at: null
-                    updated_at: null
-                  meta:
-                    token: 1|example-token
-                    token_type: Bearer
-                    expires_at: null
+                  id: 01jb8x0k2m4n6p8q0r2s4t6v8w
+                  name: 'Jane Doe'
+                  email: jane@example.com
+                  email_verified_at: '2026-10-20T12:00:00+00:00'
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
+                  token: 1|example-token
+                  token_type: Bearer
+                  token_expires_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01m63xxgaawnbhw7bv9qeb6m63
-                      name:
-                        type: string
-                        example: 'Justina Gaylord'
-                      email:
-                        type: string
-                        example: cormier.nick@example.com
-                      email_verified_at:
-                        type: string
-                        example: '2026-10-29T13:34:45+00:00'
-                      created_at:
-                        type: string
-                        example: null
-                        nullable: true
-                      updated_at:
-                        type: string
-                        example: null
-                        nullable: true
-                  meta:
-                    type: object
-                    properties:
-                      token:
-                        type: string
-                        example: 1|example-token
-                      token_type:
-                        type: string
-                        example: Bearer
-                      expires_at:
-                        type: string
-                        example: null
-                        nullable: true
+                  id:
+                    type: string
+                    example: 01jb8x0k2m4n6p8q0r2s4t6v8w
+                  name:
+                    type: string
+                    example: 'Jane Doe'
+                  email:
+                    type: string
+                    example: jane@example.com
+                  email_verified_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                    description: 'When the user verified their email address, or null if they have not.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  token:
+                    type: string
+                    example: 1|example-token
+                    description: 'The bearer token. It appears in this response only and cannot be read again.'
+                  token_type:
+                    type: string
+                    example: Bearer
+                  token_expires_at:
+                    type: string
+                    example: null
+                    description: 'When the token expires, or null if it does not.'
+                    nullable: true
+                required:
+                  - email_verified_at
+                  - token
+                  - token_expires_at
         422:
           description: 'Credentials were invalid.'
           content:
@@ -718,37 +710,33 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01m63xxgmht1hb7735t1ndsk7m
-                    name: 'Morgan Hirthe'
-                    email: dare.emelie@example.com
-                    email_verified_at: '2026-10-29T13:34:45+00:00'
-                    created_at: null
-                    updated_at: null
+                  id: 01m6rbsaarnkth16zd4yrpj146
+                  name: 'Morgan Hirthe'
+                  email: dare.emelie@example.com
+                  email_verified_at: '2026-11-06T12:01:56+00:00'
+                  created_at: null
+                  updated_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01m63xxgmht1hb7735t1ndsk7m
-                      name:
-                        type: string
-                        example: 'Morgan Hirthe'
-                      email:
-                        type: string
-                        example: dare.emelie@example.com
-                      email_verified_at:
-                        type: string
-                        example: '2026-10-29T13:34:45+00:00'
-                      created_at:
-                        type: string
-                        example: null
-                        nullable: true
-                      updated_at:
-                        type: string
-                        example: null
-                        nullable: true
+                  id:
+                    type: string
+                    example: 01m6rbsaarnkth16zd4yrpj146
+                  name:
+                    type: string
+                    example: 'Morgan Hirthe'
+                  email:
+                    type: string
+                    example: dare.emelie@example.com
+                  email_verified_at:
+                    type: string
+                    example: '2026-11-06T12:01:56+00:00'
+                  created_at:
+                    type: string
+                    example: null
+                    nullable: true
+                  updated_at:
+                    type: string
+                    example: null
+                    nullable: true
         401:
           description: 'Authentication failed.'
           content:
@@ -930,7 +918,7 @@ paths:
     post:
       summary: 'Create API Key'
       operationId: createAPIKey
-      description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in meta.token, which is shown once and cannot be read again.'
+      description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in its token field, which appears in this response only and cannot be read again.'
       parameters:
         -
           in: header
@@ -941,68 +929,63 @@ paths:
             type: string
       responses:
         201:
-          description: 'API key created. meta.token is the only time its value is returned.'
+          description: 'API key created. This is the only response that carries its value.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  data:
-                    id: '7'
-                    name: deploy-bot
-                    abilities:
+                  id: '7'
+                  name: deploy-bot
+                  abilities:
+                    - 'auth:me'
+                    - 'auth:tokens:read'
+                  last_used_at: null
+                  expires_at: '2027-01-01T00:00:00+00:00'
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
+                  is_current: false
+                  token: 7|example-token
+                  token_type: Bearer
+                properties:
+                  id:
+                    type: string
+                    example: '7'
+                  name:
+                    type: string
+                    example: deploy-bot
+                  abilities:
+                    type: array
+                    example:
                       - 'auth:me'
                       - 'auth:tokens:read'
-                    last_used_at: null
-                    expires_at: '2027-01-01T00:00:00+00:00'
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
-                    is_current: false
-                  meta:
-                    token: 7|example-token
-                    token_type: Bearer
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: '7'
-                      name:
-                        type: string
-                        example: deploy-bot
-                      abilities:
-                        type: array
-                        example:
-                          - 'auth:me'
-                          - 'auth:tokens:read'
-                        items:
-                          type: string
-                      last_used_at:
-                        type: string
-                        example: null
-                        nullable: true
-                      expires_at:
-                        type: string
-                        example: '2027-01-01T00:00:00+00:00'
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      is_current:
-                        type: boolean
-                        example: false
-                  meta:
-                    type: object
-                    properties:
-                      token:
-                        type: string
-                        example: 7|example-token
-                      token_type:
-                        type: string
-                        example: Bearer
+                    items:
+                      type: string
+                  last_used_at:
+                    type: string
+                    example: null
+                    nullable: true
+                  expires_at:
+                    type: string
+                    example: '2027-01-01T00:00:00+00:00'
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  is_current:
+                    type: boolean
+                    example: false
+                  token:
+                    type: string
+                    example: 7|example-token
+                    description: "The API key's plain-text value. It appears in this response only and cannot be read again."
+                  token_type:
+                    type: string
+                    example: Bearer
+                required:
+                  - token
         401:
           description: 'Authentication failed.'
           content:
@@ -1581,123 +1564,119 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    first_name: Ada
-                    last_name: Lovelace
-                    email: ada@rippin.example
-                    phone: '+1 555 0101'
-                    phones:
+                  id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  first_name: Ada
+                  last_name: Lovelace
+                  email: ada@rippin.example
+                  phone: '+1 555 0101'
+                  phones:
+                    -
+                      number: '+1 555 0101'
+                      label: work
+                    -
+                      number: '+1 555 0102'
+                      label: mobile
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
+                properties:
+                  id:
+                    type: string
+                    example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                    nullable: true
+                  first_name:
+                    type: string
+                    example: Ada
+                  last_name:
+                    type: string
+                    example: Lovelace
+                  email:
+                    type: string
+                    example: ada@rippin.example
+                    description: "The contact's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0101'
+                    description: 'Deprecated: the first of phones, or null. Read phones instead.'
+                    nullable: true
+                    deprecated: true
+                  phones:
+                    type: array
+                    example:
                       -
                         number: '+1 555 0101'
                         label: work
                       -
                         number: '+1 555 0102'
                         label: mobile
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                      organization_id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-                        nullable: true
-                      first_name:
-                        type: string
-                        example: Ada
-                      last_name:
-                        type: string
-                        example: Lovelace
-                      email:
-                        type: string
-                        example: ada@rippin.example
-                        description: "The contact's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0101'
-                        description: 'Deprecated: the first of phones, or null. Read phones instead.'
-                        nullable: true
-                        deprecated: true
-                      phones:
-                        type: array
-                        example:
-                          -
-                            number: '+1 555 0101'
-                            label: work
-                          -
-                            number: '+1 555 0102'
-                            label: mobile
-                        description: "The contact's phone numbers, each with an optional label."
-                        items:
-                          type: object
-                          properties:
-                            number:
-                              type: string
-                              example: '+1 555 0101'
-                            label:
-                              type: string
-                              example: work
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - organization_id
-                      - email
-                      - phone
-                      - phones
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                    description: "The contact's phone numbers, each with an optional label."
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: string
+                          example: '+1 555 0101'
+                        label:
+                          type: string
+                          example: work
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - organization_id
+                  - email
+                  - phone
+                  - phones
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -1874,123 +1853,119 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    first_name: Ada
-                    last_name: Lovelace
-                    email: ada@rippin.example
-                    phone: '+1 555 0101'
-                    phones:
+                  id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  first_name: Ada
+                  last_name: Lovelace
+                  email: ada@rippin.example
+                  phone: '+1 555 0101'
+                  phones:
+                    -
+                      number: '+1 555 0101'
+                      label: work
+                    -
+                      number: '+1 555 0102'
+                      label: mobile
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
+                properties:
+                  id:
+                    type: string
+                    example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                    nullable: true
+                  first_name:
+                    type: string
+                    example: Ada
+                  last_name:
+                    type: string
+                    example: Lovelace
+                  email:
+                    type: string
+                    example: ada@rippin.example
+                    description: "The contact's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0101'
+                    description: 'Deprecated: the first of phones, or null. Read phones instead.'
+                    nullable: true
+                    deprecated: true
+                  phones:
+                    type: array
+                    example:
                       -
                         number: '+1 555 0101'
                         label: work
                       -
                         number: '+1 555 0102'
                         label: mobile
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                      organization_id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-                        nullable: true
-                      first_name:
-                        type: string
-                        example: Ada
-                      last_name:
-                        type: string
-                        example: Lovelace
-                      email:
-                        type: string
-                        example: ada@rippin.example
-                        description: "The contact's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0101'
-                        description: 'Deprecated: the first of phones, or null. Read phones instead.'
-                        nullable: true
-                        deprecated: true
-                      phones:
-                        type: array
-                        example:
-                          -
-                            number: '+1 555 0101'
-                            label: work
-                          -
-                            number: '+1 555 0102'
-                            label: mobile
-                        description: "The contact's phone numbers, each with an optional label."
-                        items:
-                          type: object
-                          properties:
-                            number:
-                              type: string
-                              example: '+1 555 0101'
-                            label:
-                              type: string
-                              example: work
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - organization_id
-                      - email
-                      - phone
-                      - phones
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                    description: "The contact's phone numbers, each with an optional label."
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: string
+                          example: '+1 555 0101'
+                        label:
+                          type: string
+                          example: work
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - organization_id
+                  - email
+                  - phone
+                  - phones
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -2085,123 +2060,119 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    first_name: Ada
-                    last_name: Lovelace
-                    email: ada@rippin.example
-                    phone: '+1 555 0101'
-                    phones:
+                  id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  first_name: Ada
+                  last_name: Lovelace
+                  email: ada@rippin.example
+                  phone: '+1 555 0101'
+                  phones:
+                    -
+                      number: '+1 555 0101'
+                      label: work
+                    -
+                      number: '+1 555 0102'
+                      label: mobile
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
+                properties:
+                  id:
+                    type: string
+                    example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                    nullable: true
+                  first_name:
+                    type: string
+                    example: Ada
+                  last_name:
+                    type: string
+                    example: Lovelace
+                  email:
+                    type: string
+                    example: ada@rippin.example
+                    description: "The contact's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0101'
+                    description: 'Deprecated: the first of phones, or null. Read phones instead.'
+                    nullable: true
+                    deprecated: true
+                  phones:
+                    type: array
+                    example:
                       -
                         number: '+1 555 0101'
                         label: work
                       -
                         number: '+1 555 0102'
                         label: mobile
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                      organization_id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-                        nullable: true
-                      first_name:
-                        type: string
-                        example: Ada
-                      last_name:
-                        type: string
-                        example: Lovelace
-                      email:
-                        type: string
-                        example: ada@rippin.example
-                        description: "The contact's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0101'
-                        description: 'Deprecated: the first of phones, or null. Read phones instead.'
-                        nullable: true
-                        deprecated: true
-                      phones:
-                        type: array
-                        example:
-                          -
-                            number: '+1 555 0101'
-                            label: work
-                          -
-                            number: '+1 555 0102'
-                            label: mobile
-                        description: "The contact's phone numbers, each with an optional label."
-                        items:
-                          type: object
-                          properties:
-                            number:
-                              type: string
-                              example: '+1 555 0101'
-                            label:
-                              type: string
-                              example: work
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - organization_id
-                      - email
-                      - phone
-                      - phones
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                    description: "The contact's phone numbers, each with an optional label."
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: string
+                          example: '+1 555 0101'
+                        label:
+                          type: string
+                          example: work
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - organization_id
+                  - email
+                  - phone
+                  - phones
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -2358,6 +2329,8 @@ paths:
                           - "The organisation is not one of this account's, or it is deleted."
                         items:
                           type: string
+                    required:
+                      - organization_id
         428:
           description: 'The request has no If-Match.'
           content:
@@ -2610,123 +2583,119 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                    organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    first_name: Ada
-                    last_name: Lovelace
-                    email: ada@rippin.example
-                    phone: '+1 555 0101'
-                    phones:
+                  id: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  first_name: Ada
+                  last_name: Lovelace
+                  email: ada@rippin.example
+                  phone: '+1 555 0101'
+                  phones:
+                    -
+                      number: '+1 555 0101'
+                      label: work
+                    -
+                      number: '+1 555 0102'
+                      label: mobile
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
+                properties:
+                  id:
+                    type: string
+                    example: 01jbd1k9r2w3x4y5z6a7b8c9d0
+                  organization_id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                    description: 'The organisation the contact is at, or null. It may since have been deleted.'
+                    nullable: true
+                  first_name:
+                    type: string
+                    example: Ada
+                  last_name:
+                    type: string
+                    example: Lovelace
+                  email:
+                    type: string
+                    example: ada@rippin.example
+                    description: "The contact's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0101'
+                    description: 'Deprecated: the first of phones, or null. Read phones instead.'
+                    nullable: true
+                    deprecated: true
+                  phones:
+                    type: array
+                    example:
                       -
                         number: '+1 555 0101'
                         label: work
                       -
                         number: '+1 555 0102'
                         label: mobile
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd1k9r2w3x4y5z6a7b8c9d0
-                      organization_id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                        description: 'The organisation the contact is at, or null. It may since have been deleted.'
-                        nullable: true
-                      first_name:
-                        type: string
-                        example: Ada
-                      last_name:
-                        type: string
-                        example: Lovelace
-                      email:
-                        type: string
-                        example: ada@rippin.example
-                        description: "The contact's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0101'
-                        description: 'Deprecated: the first of phones, or null. Read phones instead.'
-                        nullable: true
-                        deprecated: true
-                      phones:
-                        type: array
-                        example:
-                          -
-                            number: '+1 555 0101'
-                            label: work
-                          -
-                            number: '+1 555 0102'
-                            label: mobile
-                        description: "The contact's phone numbers, each with an optional label."
-                        items:
-                          type: object
-                          properties:
-                            number:
-                              type: string
-                              example: '+1 555 0101'
-                            label:
-                              type: string
-                              example: work
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - organization_id
-                      - email
-                      - phone
-                      - phones
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                    description: "The contact's phone numbers, each with an optional label."
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: string
+                          example: '+1 555 0101'
+                        label:
+                          type: string
+                          example: work
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - organization_id
+                  - email
+                  - phone
+                  - phones
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -3357,84 +3326,80 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    name: 'Rippin, Kovacek and Bins'
-                    email: info@rippin.example
-                    phone: '+1 555 0100'
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
+                  id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name: 'Rippin, Kovacek and Bins'
+                  email: info@rippin.example
+                  phone: '+1 555 0100'
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                      name:
-                        type: string
-                        example: 'Rippin, Kovacek and Bins'
-                      email:
-                        type: string
-                        example: info@rippin.example
-                        description: "The organisation's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0100'
-                        description: 'A phone number, or null.'
-                        nullable: true
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - email
-                      - phone
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                  id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name:
+                    type: string
+                    example: 'Rippin, Kovacek and Bins'
+                  email:
+                    type: string
+                    example: info@rippin.example
+                    description: "The organisation's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0100'
+                    description: 'A phone number, or null.'
+                    nullable: true
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - email
+                  - phone
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -3583,84 +3548,80 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    name: 'Rippin, Kovacek and Bins'
-                    email: info@rippin.example
-                    phone: '+1 555 0100'
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
+                  id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name: 'Rippin, Kovacek and Bins'
+                  email: info@rippin.example
+                  phone: '+1 555 0100'
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                      name:
-                        type: string
-                        example: 'Rippin, Kovacek and Bins'
-                      email:
-                        type: string
-                        example: info@rippin.example
-                        description: "The organisation's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0100'
-                        description: 'A phone number, or null.'
-                        nullable: true
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - email
-                      - phone
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                  id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name:
+                    type: string
+                    example: 'Rippin, Kovacek and Bins'
+                  email:
+                    type: string
+                    example: info@rippin.example
+                    description: "The organisation's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0100'
+                    description: 'A phone number, or null.'
+                    nullable: true
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - email
+                  - phone
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -3755,84 +3716,80 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    name: 'Rippin, Kovacek and Bins'
-                    email: info@rippin.example
-                    phone: '+1 555 0100'
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
+                  id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name: 'Rippin, Kovacek and Bins'
+                  email: info@rippin.example
+                  phone: '+1 555 0100'
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                      name:
-                        type: string
-                        example: 'Rippin, Kovacek and Bins'
-                      email:
-                        type: string
-                        example: info@rippin.example
-                        description: "The organisation's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0100'
-                        description: 'A phone number, or null.'
-                        nullable: true
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - email
-                      - phone
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                  id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name:
+                    type: string
+                    example: 'Rippin, Kovacek and Bins'
+                  email:
+                    type: string
+                    example: info@rippin.example
+                    description: "The organisation's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0100'
+                    description: 'A phone number, or null.'
+                    nullable: true
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - email
+                  - phone
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -4214,84 +4171,80 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                    name: 'Rippin, Kovacek and Bins'
-                    email: info@rippin.example
-                    phone: '+1 555 0100'
-                    address: '742 Evergreen Terrace'
-                    city: Springfield
-                    region: Oregon
-                    country: US
-                    postal_code: '97403'
-                    created_at: '2026-10-29T09:00:00+00:00'
-                    updated_at: '2026-10-29T09:00:00+00:00'
-                    deleted_at: null
+                  id: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name: 'Rippin, Kovacek and Bins'
+                  email: info@rippin.example
+                  phone: '+1 555 0100'
+                  address: '742 Evergreen Terrace'
+                  city: Springfield
+                  region: Oregon
+                  country: US
+                  postal_code: '97403'
+                  created_at: '2026-10-29T09:00:00+00:00'
+                  updated_at: '2026-10-29T09:00:00+00:00'
+                  deleted_at: null
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jbd0x4qsm2cf4c8m3x6y1v7z
-                      name:
-                        type: string
-                        example: 'Rippin, Kovacek and Bins'
-                      email:
-                        type: string
-                        example: info@rippin.example
-                        description: "The organisation's email address, or null."
-                        nullable: true
-                      phone:
-                        type: string
-                        example: '+1 555 0100'
-                        description: 'A phone number, or null.'
-                        nullable: true
-                      address:
-                        type: string
-                        example: '742 Evergreen Terrace'
-                        description: 'The street address, or null.'
-                        nullable: true
-                      city:
-                        type: string
-                        example: Springfield
-                        description: 'The city, or null.'
-                        nullable: true
-                      region:
-                        type: string
-                        example: Oregon
-                        description: 'The state, province or county, or null.'
-                        nullable: true
-                      country:
-                        type: string
-                        example: US
-                        description: 'A two-letter ISO 3166-1 code, or null.'
-                        nullable: true
-                      postal_code:
-                        type: string
-                        example: '97403'
-                        description: 'The postal code, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-29T09:00:00+00:00'
-                      deleted_at:
-                        type: string
-                        example: null
-                        description: 'When it was deleted, or null if it is not.'
-                        nullable: true
-                    required:
-                      - email
-                      - phone
-                      - address
-                      - city
-                      - region
-                      - country
-                      - postal_code
-                      - deleted_at
+                  id:
+                    type: string
+                    example: 01jbd0x4qsm2cf4c8m3x6y1v7z
+                  name:
+                    type: string
+                    example: 'Rippin, Kovacek and Bins'
+                  email:
+                    type: string
+                    example: info@rippin.example
+                    description: "The organisation's email address, or null."
+                    nullable: true
+                  phone:
+                    type: string
+                    example: '+1 555 0100'
+                    description: 'A phone number, or null.'
+                    nullable: true
+                  address:
+                    type: string
+                    example: '742 Evergreen Terrace'
+                    description: 'The street address, or null.'
+                    nullable: true
+                  city:
+                    type: string
+                    example: Springfield
+                    description: 'The city, or null.'
+                    nullable: true
+                  region:
+                    type: string
+                    example: Oregon
+                    description: 'The state, province or county, or null.'
+                    nullable: true
+                  country:
+                    type: string
+                    example: US
+                    description: 'A two-letter ISO 3166-1 code, or null.'
+                    nullable: true
+                  postal_code:
+                    type: string
+                    example: '97403'
+                    description: 'The postal code, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-29T09:00:00+00:00'
+                  deleted_at:
+                    type: string
+                    example: null
+                    description: 'When it was deleted, or null if it is not.'
+                    nullable: true
+                required:
+                  - email
+                  - phone
+                  - address
+                  - city
+                  - region
+                  - country
+                  - postal_code
+                  - deleted_at
         401:
           description: 'Authentication failed.'
           content:
@@ -5046,7 +4999,7 @@ paths:
     post:
       summary: 'Create Webhook'
       operationId: createWebhook
-      description: 'Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in meta.secret, shown only this once: deliveries are signed with it using RFC 9421 HTTP Message Signatures.'
+      description: 'Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in its secret field, which appears in this response only: deliveries are signed with it using RFC 9421 HTTP Message Signatures.'
       parameters:
         -
           in: header
@@ -5057,89 +5010,83 @@ paths:
             type: string
       responses:
         201:
-          description: 'Subscription created. meta.secret is the only time the secret is returned.'
+          description: 'Subscription created. This is the only response that carries the secret.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                    url: 'https://hooks.example.com/kit'
-                    description: 'Production receiver'
-                    events:
-                      - '*'
-                    enabled: true
-                    validated_at: '2026-10-20T12:00:05+00:00'
-                    allowed_rate: null
-                    disabled_at: null
-                    disabled_reason: null
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
-                  meta:
-                    secret: whsec_8f3c...
+                  id: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url: 'https://hooks.example.com/kit'
+                  description: 'Production receiver'
+                  events:
+                    - '*'
+                  enabled: true
+                  validated_at: '2026-10-20T12:00:05+00:00'
+                  allowed_rate: null
+                  disabled_at: null
+                  disabled_reason: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
+                  secret: whsec_8f3c...
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                      url:
-                        type: string
-                        example: 'https://hooks.example.com/kit'
-                      description:
-                        type: string
-                        example: 'Production receiver'
-                        description: 'The label given to the subscription.'
-                        nullable: true
-                      events:
-                        type: array
-                        example:
-                          - '*'
-                        items:
-                          type: string
-                      enabled:
-                        type: boolean
-                        example: true
-                      validated_at:
-                        type: string
-                        example: '2026-10-20T12:00:05+00:00'
-                        description: 'When the endpoint consented to deliveries, or null if it has not.'
-                        nullable: true
-                      allowed_rate:
-                        type: integer
-                        example: null
-                        description: 'Deliveries a minute the endpoint granted, or null for no limit.'
-                        nullable: true
-                      disabled_at:
-                        type: string
-                        example: null
-                        description: 'When the subscription was disabled, or null while it is enabled.'
-                        nullable: true
-                      disabled_reason:
-                        type: string
-                        example: null
-                        description: 'Why it was disabled, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                    required:
-                      - description
-                      - validated_at
-                      - allowed_rate
-                      - disabled_at
-                      - disabled_reason
-                  meta:
-                    type: object
-                    properties:
-                      secret:
-                        type: string
-                        example: whsec_8f3c...
+                  id:
+                    type: string
+                    example: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url:
+                    type: string
+                    example: 'https://hooks.example.com/kit'
+                  description:
+                    type: string
+                    example: 'Production receiver'
+                    description: 'The label given to the subscription.'
+                    nullable: true
+                  events:
+                    type: array
+                    example:
+                      - '*'
+                    items:
+                      type: string
+                  enabled:
+                    type: boolean
+                    example: true
+                  validated_at:
+                    type: string
+                    example: '2026-10-20T12:00:05+00:00'
+                    description: 'When the endpoint consented to deliveries, or null if it has not.'
+                    nullable: true
+                  allowed_rate:
+                    type: integer
+                    example: null
+                    description: 'Deliveries a minute the endpoint granted, or null for no limit.'
+                    nullable: true
+                  disabled_at:
+                    type: string
+                    example: null
+                    description: 'When the subscription was disabled, or null while it is enabled.'
+                    nullable: true
+                  disabled_reason:
+                    type: string
+                    example: null
+                    description: 'Why it was disabled, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  secret:
+                    type: string
+                    example: whsec_8f3c...
+                    description: 'The signing secret for deliveries. It appears in this response only and cannot be read again.'
+                required:
+                  - description
+                  - validated_at
+                  - allowed_rate
+                  - disabled_at
+                  - disabled_reason
+                  - secret
         401:
           description: 'Authentication failed.'
           content:
@@ -5265,75 +5212,71 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                    url: 'https://hooks.example.com/kit'
-                    description: 'Production receiver'
-                    events:
-                      - '*'
-                    enabled: true
-                    validated_at: '2026-10-20T12:00:05+00:00'
-                    allowed_rate: null
-                    disabled_at: null
-                    disabled_reason: null
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
+                  id: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url: 'https://hooks.example.com/kit'
+                  description: 'Production receiver'
+                  events:
+                    - '*'
+                  enabled: true
+                  validated_at: '2026-10-20T12:00:05+00:00'
+                  allowed_rate: null
+                  disabled_at: null
+                  disabled_reason: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                      url:
-                        type: string
-                        example: 'https://hooks.example.com/kit'
-                      description:
-                        type: string
-                        example: 'Production receiver'
-                        description: 'The label given to the subscription.'
-                        nullable: true
-                      events:
-                        type: array
-                        example:
-                          - '*'
-                        items:
-                          type: string
-                      enabled:
-                        type: boolean
-                        example: true
-                      validated_at:
-                        type: string
-                        example: '2026-10-20T12:00:05+00:00'
-                        description: 'When the endpoint consented to deliveries, or null if it has not.'
-                        nullable: true
-                      allowed_rate:
-                        type: integer
-                        example: null
-                        description: 'Deliveries a minute the endpoint granted, or null for no limit.'
-                        nullable: true
-                      disabled_at:
-                        type: string
-                        example: null
-                        description: 'When the subscription was disabled, or null while it is enabled.'
-                        nullable: true
-                      disabled_reason:
-                        type: string
-                        example: null
-                        description: 'Why it was disabled, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                    required:
-                      - description
-                      - validated_at
-                      - allowed_rate
-                      - disabled_at
-                      - disabled_reason
+                  id:
+                    type: string
+                    example: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url:
+                    type: string
+                    example: 'https://hooks.example.com/kit'
+                  description:
+                    type: string
+                    example: 'Production receiver'
+                    description: 'The label given to the subscription.'
+                    nullable: true
+                  events:
+                    type: array
+                    example:
+                      - '*'
+                    items:
+                      type: string
+                  enabled:
+                    type: boolean
+                    example: true
+                  validated_at:
+                    type: string
+                    example: '2026-10-20T12:00:05+00:00'
+                    description: 'When the endpoint consented to deliveries, or null if it has not.'
+                    nullable: true
+                  allowed_rate:
+                    type: integer
+                    example: null
+                    description: 'Deliveries a minute the endpoint granted, or null for no limit.'
+                    nullable: true
+                  disabled_at:
+                    type: string
+                    example: null
+                    description: 'When the subscription was disabled, or null while it is enabled.'
+                    nullable: true
+                  disabled_reason:
+                    type: string
+                    example: null
+                    description: 'Why it was disabled, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                required:
+                  - description
+                  - validated_at
+                  - allowed_rate
+                  - disabled_at
+                  - disabled_reason
         401:
           description: 'Authentication failed.'
           content:
@@ -5421,75 +5364,71 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                    url: 'https://hooks.example.com/kit'
-                    description: 'Production receiver'
-                    events:
-                      - '*'
-                    enabled: true
-                    validated_at: '2026-10-20T12:00:05+00:00'
-                    allowed_rate: null
-                    disabled_at: null
-                    disabled_reason: null
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
+                  id: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url: 'https://hooks.example.com/kit'
+                  description: 'Production receiver'
+                  events:
+                    - '*'
+                  enabled: true
+                  validated_at: '2026-10-20T12:00:05+00:00'
+                  allowed_rate: null
+                  disabled_at: null
+                  disabled_reason: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                      url:
-                        type: string
-                        example: 'https://hooks.example.com/kit'
-                      description:
-                        type: string
-                        example: 'Production receiver'
-                        description: 'The label given to the subscription.'
-                        nullable: true
-                      events:
-                        type: array
-                        example:
-                          - '*'
-                        items:
-                          type: string
-                      enabled:
-                        type: boolean
-                        example: true
-                      validated_at:
-                        type: string
-                        example: '2026-10-20T12:00:05+00:00'
-                        description: 'When the endpoint consented to deliveries, or null if it has not.'
-                        nullable: true
-                      allowed_rate:
-                        type: integer
-                        example: null
-                        description: 'Deliveries a minute the endpoint granted, or null for no limit.'
-                        nullable: true
-                      disabled_at:
-                        type: string
-                        example: null
-                        description: 'When the subscription was disabled, or null while it is enabled.'
-                        nullable: true
-                      disabled_reason:
-                        type: string
-                        example: null
-                        description: 'Why it was disabled, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                    required:
-                      - description
-                      - validated_at
-                      - allowed_rate
-                      - disabled_at
-                      - disabled_reason
+                  id:
+                    type: string
+                    example: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url:
+                    type: string
+                    example: 'https://hooks.example.com/kit'
+                  description:
+                    type: string
+                    example: 'Production receiver'
+                    description: 'The label given to the subscription.'
+                    nullable: true
+                  events:
+                    type: array
+                    example:
+                      - '*'
+                    items:
+                      type: string
+                  enabled:
+                    type: boolean
+                    example: true
+                  validated_at:
+                    type: string
+                    example: '2026-10-20T12:00:05+00:00'
+                    description: 'When the endpoint consented to deliveries, or null if it has not.'
+                    nullable: true
+                  allowed_rate:
+                    type: integer
+                    example: null
+                    description: 'Deliveries a minute the endpoint granted, or null for no limit.'
+                    nullable: true
+                  disabled_at:
+                    type: string
+                    example: null
+                    description: 'When the subscription was disabled, or null while it is enabled.'
+                    nullable: true
+                  disabled_reason:
+                    type: string
+                    example: null
+                    description: 'Why it was disabled, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                required:
+                  - description
+                  - validated_at
+                  - allowed_rate
+                  - disabled_at
+                  - disabled_reason
         401:
           description: 'Authentication failed.'
           content:
@@ -5721,93 +5660,87 @@ paths:
     post:
       summary: 'Rotate Webhook Secret'
       operationId: rotateWebhookSecret
-      description: "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in meta.secret, shown only this once."
+      description: "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in its secret field, which appears in this response only."
       parameters: []
       responses:
         200:
-          description: 'Secret rotated. meta.secret is the only time the new secret is returned.'
+          description: 'Secret rotated. This is the only response that carries the new secret.'
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                    url: 'https://hooks.example.com/kit'
-                    description: 'Production receiver'
-                    events:
-                      - '*'
-                    enabled: true
-                    validated_at: '2026-10-20T12:00:05+00:00'
-                    allowed_rate: null
-                    disabled_at: null
-                    disabled_reason: null
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
-                  meta:
-                    secret: whsec_2b9e...
+                  id: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url: 'https://hooks.example.com/kit'
+                  description: 'Production receiver'
+                  events:
+                    - '*'
+                  enabled: true
+                  validated_at: '2026-10-20T12:00:05+00:00'
+                  allowed_rate: null
+                  disabled_at: null
+                  disabled_reason: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
+                  secret: whsec_2b9e...
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                      url:
-                        type: string
-                        example: 'https://hooks.example.com/kit'
-                      description:
-                        type: string
-                        example: 'Production receiver'
-                        description: 'The label given to the subscription.'
-                        nullable: true
-                      events:
-                        type: array
-                        example:
-                          - '*'
-                        items:
-                          type: string
-                      enabled:
-                        type: boolean
-                        example: true
-                      validated_at:
-                        type: string
-                        example: '2026-10-20T12:00:05+00:00'
-                        description: 'When the endpoint consented to deliveries, or null if it has not.'
-                        nullable: true
-                      allowed_rate:
-                        type: integer
-                        example: null
-                        description: 'Deliveries a minute the endpoint granted, or null for no limit.'
-                        nullable: true
-                      disabled_at:
-                        type: string
-                        example: null
-                        description: 'When the subscription was disabled, or null while it is enabled.'
-                        nullable: true
-                      disabled_reason:
-                        type: string
-                        example: null
-                        description: 'Why it was disabled, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                    required:
-                      - description
-                      - validated_at
-                      - allowed_rate
-                      - disabled_at
-                      - disabled_reason
-                  meta:
-                    type: object
-                    properties:
-                      secret:
-                        type: string
-                        example: whsec_2b9e...
+                  id:
+                    type: string
+                    example: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url:
+                    type: string
+                    example: 'https://hooks.example.com/kit'
+                  description:
+                    type: string
+                    example: 'Production receiver'
+                    description: 'The label given to the subscription.'
+                    nullable: true
+                  events:
+                    type: array
+                    example:
+                      - '*'
+                    items:
+                      type: string
+                  enabled:
+                    type: boolean
+                    example: true
+                  validated_at:
+                    type: string
+                    example: '2026-10-20T12:00:05+00:00'
+                    description: 'When the endpoint consented to deliveries, or null if it has not.'
+                    nullable: true
+                  allowed_rate:
+                    type: integer
+                    example: null
+                    description: 'Deliveries a minute the endpoint granted, or null for no limit.'
+                    nullable: true
+                  disabled_at:
+                    type: string
+                    example: null
+                    description: 'When the subscription was disabled, or null while it is enabled.'
+                    nullable: true
+                  disabled_reason:
+                    type: string
+                    example: null
+                    description: 'Why it was disabled, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  secret:
+                    type: string
+                    example: whsec_2b9e...
+                    description: 'The new signing secret for deliveries. It appears in this response only and cannot be read again.'
+                required:
+                  - description
+                  - validated_at
+                  - allowed_rate
+                  - disabled_at
+                  - disabled_reason
+                  - secret
         401:
           description: 'Authentication failed.'
           content:
@@ -5905,75 +5838,71 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                    url: 'https://hooks.example.com/kit'
-                    description: 'Production receiver'
-                    events:
-                      - '*'
-                    enabled: true
-                    validated_at: null
-                    allowed_rate: null
-                    disabled_at: null
-                    disabled_reason: null
-                    created_at: '2026-10-20T12:00:00+00:00'
-                    updated_at: '2026-10-20T12:00:00+00:00'
+                  id: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url: 'https://hooks.example.com/kit'
+                  description: 'Production receiver'
+                  events:
+                    - '*'
+                  enabled: true
+                  validated_at: null
+                  allowed_rate: null
+                  disabled_at: null
+                  disabled_reason: null
+                  created_at: '2026-10-20T12:00:00+00:00'
+                  updated_at: '2026-10-20T12:00:00+00:00'
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x2m4k5n6p7q8r9s0t1v2w
-                      url:
-                        type: string
-                        example: 'https://hooks.example.com/kit'
-                      description:
-                        type: string
-                        example: 'Production receiver'
-                        description: 'The label given to the subscription.'
-                        nullable: true
-                      events:
-                        type: array
-                        example:
-                          - '*'
-                        items:
-                          type: string
-                      enabled:
-                        type: boolean
-                        example: true
-                      validated_at:
-                        type: string
-                        example: null
-                        description: 'When the endpoint consented to deliveries, or null if it has not.'
-                        nullable: true
-                      allowed_rate:
-                        type: integer
-                        example: null
-                        description: 'Deliveries a minute the endpoint granted, or null for no limit.'
-                        nullable: true
-                      disabled_at:
-                        type: string
-                        example: null
-                        description: 'When the subscription was disabled, or null while it is enabled.'
-                        nullable: true
-                      disabled_reason:
-                        type: string
-                        example: null
-                        description: 'Why it was disabled, or null.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                      updated_at:
-                        type: string
-                        example: '2026-10-20T12:00:00+00:00'
-                    required:
-                      - description
-                      - validated_at
-                      - allowed_rate
-                      - disabled_at
-                      - disabled_reason
+                  id:
+                    type: string
+                    example: 01jb8x2m4k5n6p7q8r9s0t1v2w
+                  url:
+                    type: string
+                    example: 'https://hooks.example.com/kit'
+                  description:
+                    type: string
+                    example: 'Production receiver'
+                    description: 'The label given to the subscription.'
+                    nullable: true
+                  events:
+                    type: array
+                    example:
+                      - '*'
+                    items:
+                      type: string
+                  enabled:
+                    type: boolean
+                    example: true
+                  validated_at:
+                    type: string
+                    example: null
+                    description: 'When the endpoint consented to deliveries, or null if it has not.'
+                    nullable: true
+                  allowed_rate:
+                    type: integer
+                    example: null
+                    description: 'Deliveries a minute the endpoint granted, or null for no limit.'
+                    nullable: true
+                  disabled_at:
+                    type: string
+                    example: null
+                    description: 'When the subscription was disabled, or null while it is enabled.'
+                    nullable: true
+                  disabled_reason:
+                    type: string
+                    example: null
+                    description: 'Why it was disabled, or null.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                  updated_at:
+                    type: string
+                    example: '2026-10-20T12:00:00+00:00'
+                required:
+                  - description
+                  - validated_at
+                  - allowed_rate
+                  - disabled_at
+                  - disabled_reason
         401:
           description: 'Authentication failed.'
           content:
@@ -6071,15 +6000,48 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x3a4b5c6d7e8f9g0h1j2k
-                    event:
-                      id: 01jb8x3a1b2c3d4e5f6g7h8j9k
-                      type: webhook.ping
-                    state: retrying
-                    next_attempt_at: '2026-10-20T12:01:10+00:00'
-                    created_at: '2026-10-20T12:01:00+00:00'
-                    attempts:
+                  id: 01jb8x3a4b5c6d7e8f9g0h1j2k
+                  event:
+                    id: 01jb8x3a1b2c3d4e5f6g7h8j9k
+                    type: webhook.ping
+                  state: retrying
+                  next_attempt_at: '2026-10-20T12:01:10+00:00'
+                  created_at: '2026-10-20T12:01:00+00:00'
+                  attempts:
+                    -
+                      attempt: 1
+                      response_status: 503
+                      response_body: 'Service Unavailable'
+                      error: null
+                      duration_ms: 182
+                      attempted_at: '2026-10-20T12:01:00+00:00'
+                properties:
+                  id:
+                    type: string
+                    example: 01jb8x3a4b5c6d7e8f9g0h1j2k
+                  event:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jb8x3a1b2c3d4e5f6g7h8j9k
+                      type:
+                        type: string
+                        example: webhook.ping
+                  state:
+                    type: string
+                    example: retrying
+                  next_attempt_at:
+                    type: string
+                    example: '2026-10-20T12:01:10+00:00'
+                    description: 'When the next attempt is due, or null when none is.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:01:00+00:00'
+                  attempts:
+                    type: array
+                    example:
                       -
                         attempt: 1
                         response_status: 503
@@ -6087,70 +6049,33 @@ paths:
                         error: null
                         duration_ms: 182
                         attempted_at: '2026-10-20T12:01:00+00:00'
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x3a4b5c6d7e8f9g0h1j2k
-                      event:
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            example: 01jb8x3a1b2c3d4e5f6g7h8j9k
-                          type:
-                            type: string
-                            example: webhook.ping
-                      state:
-                        type: string
-                        example: retrying
-                      next_attempt_at:
-                        type: string
-                        example: '2026-10-20T12:01:10+00:00'
-                        description: 'When the next attempt is due, or null when none is.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:01:00+00:00'
-                      attempts:
-                        type: array
-                        example:
-                          -
-                            attempt: 1
-                            response_status: 503
-                            response_body: 'Service Unavailable'
-                            error: null
-                            duration_ms: 182
-                            attempted_at: '2026-10-20T12:01:00+00:00'
-                        items:
-                          type: object
-                          properties:
-                            attempt:
-                              type: integer
-                              example: 1
-                            response_status:
-                              type: integer
-                              example: 503
-                              nullable: true
-                            response_body:
-                              type: string
-                              example: 'Service Unavailable'
-                              nullable: true
-                            error:
-                              type: string
-                              example: null
-                              nullable: true
-                            duration_ms:
-                              type: integer
-                              example: 182
-                              nullable: true
-                            attempted_at:
-                              type: string
-                              example: '2026-10-20T12:01:00+00:00'
-                    required:
-                      - next_attempt_at
+                    items:
+                      type: object
+                      properties:
+                        attempt:
+                          type: integer
+                          example: 1
+                        response_status:
+                          type: integer
+                          example: 503
+                          nullable: true
+                        response_body:
+                          type: string
+                          example: 'Service Unavailable'
+                          nullable: true
+                        error:
+                          type: string
+                          example: null
+                          nullable: true
+                        duration_ms:
+                          type: integer
+                          example: 182
+                          nullable: true
+                        attempted_at:
+                          type: string
+                          example: '2026-10-20T12:01:00+00:00'
+                required:
+                  - next_attempt_at
         401:
           description: 'Authentication failed.'
           content:
@@ -6455,15 +6380,48 @@ paths:
               schema:
                 type: object
                 example:
-                  data:
-                    id: 01jb8x3a4b5c6d7e8f9g0h1j2k
-                    event:
-                      id: 01jb8x3a1b2c3d4e5f6g7h8j9k
-                      type: webhook.ping
-                    state: retrying
-                    next_attempt_at: '2026-10-20T12:01:10+00:00'
-                    created_at: '2026-10-20T12:01:00+00:00'
-                    attempts:
+                  id: 01jb8x3a4b5c6d7e8f9g0h1j2k
+                  event:
+                    id: 01jb8x3a1b2c3d4e5f6g7h8j9k
+                    type: webhook.ping
+                  state: retrying
+                  next_attempt_at: '2026-10-20T12:01:10+00:00'
+                  created_at: '2026-10-20T12:01:00+00:00'
+                  attempts:
+                    -
+                      attempt: 1
+                      response_status: 503
+                      response_body: 'Service Unavailable'
+                      error: null
+                      duration_ms: 182
+                      attempted_at: '2026-10-20T12:01:00+00:00'
+                properties:
+                  id:
+                    type: string
+                    example: 01jb8x3a4b5c6d7e8f9g0h1j2k
+                  event:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 01jb8x3a1b2c3d4e5f6g7h8j9k
+                      type:
+                        type: string
+                        example: webhook.ping
+                  state:
+                    type: string
+                    example: retrying
+                  next_attempt_at:
+                    type: string
+                    example: '2026-10-20T12:01:10+00:00'
+                    description: 'When the next attempt is due, or null when none is.'
+                    nullable: true
+                  created_at:
+                    type: string
+                    example: '2026-10-20T12:01:00+00:00'
+                  attempts:
+                    type: array
+                    example:
                       -
                         attempt: 1
                         response_status: 503
@@ -6471,70 +6429,33 @@ paths:
                         error: null
                         duration_ms: 182
                         attempted_at: '2026-10-20T12:01:00+00:00'
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 01jb8x3a4b5c6d7e8f9g0h1j2k
-                      event:
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            example: 01jb8x3a1b2c3d4e5f6g7h8j9k
-                          type:
-                            type: string
-                            example: webhook.ping
-                      state:
-                        type: string
-                        example: retrying
-                      next_attempt_at:
-                        type: string
-                        example: '2026-10-20T12:01:10+00:00'
-                        description: 'When the next attempt is due, or null when none is.'
-                        nullable: true
-                      created_at:
-                        type: string
-                        example: '2026-10-20T12:01:00+00:00'
-                      attempts:
-                        type: array
-                        example:
-                          -
-                            attempt: 1
-                            response_status: 503
-                            response_body: 'Service Unavailable'
-                            error: null
-                            duration_ms: 182
-                            attempted_at: '2026-10-20T12:01:00+00:00'
-                        items:
-                          type: object
-                          properties:
-                            attempt:
-                              type: integer
-                              example: 1
-                            response_status:
-                              type: integer
-                              example: 503
-                              nullable: true
-                            response_body:
-                              type: string
-                              example: 'Service Unavailable'
-                              nullable: true
-                            error:
-                              type: string
-                              example: null
-                              nullable: true
-                            duration_ms:
-                              type: integer
-                              example: 182
-                              nullable: true
-                            attempted_at:
-                              type: string
-                              example: '2026-10-20T12:01:00+00:00'
-                    required:
-                      - next_attempt_at
+                    items:
+                      type: object
+                      properties:
+                        attempt:
+                          type: integer
+                          example: 1
+                        response_status:
+                          type: integer
+                          example: 503
+                          nullable: true
+                        response_body:
+                          type: string
+                          example: 'Service Unavailable'
+                          nullable: true
+                        error:
+                          type: string
+                          example: null
+                          nullable: true
+                        duration_ms:
+                          type: integer
+                          example: 182
+                          nullable: true
+                        attempted_at:
+                          type: string
+                          example: '2026-10-20T12:01:00+00:00'
+                required:
+                  - next_attempt_at
         401:
           description: 'Authentication failed.'
           content:

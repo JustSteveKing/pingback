@@ -22,19 +22,19 @@ it('keeps a list of phones, and shows the first as the deprecated phone', functi
             ['number' => '+44 7700 900000'],
         ]])
         ->assertCreated()
-        ->assertJsonPath('data.phones', [
+        ->assertJsonPath('phones', [
             ['number' => '+44 20 7946 0000', 'label' => 'work'],
             ['number' => '+44 7700 900000', 'label' => null],
         ])
-        ->assertJsonPath('data.phone', '+44 20 7946 0000');
+        ->assertJsonPath('phone', '+44 20 7946 0000');
 });
 
 it('still takes the deprecated phone, as a list of one', function (): void {
     $this->withToken($this->token)
         ->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace', 'phone' => '+44 20 7946 0000'])
         ->assertCreated()
-        ->assertJsonPath('data.phones', [['number' => '+44 20 7946 0000', 'label' => null]])
-        ->assertJsonPath('data.phone', '+44 20 7946 0000');
+        ->assertJsonPath('phones', [['number' => '+44 20 7946 0000', 'label' => null]])
+        ->assertJsonPath('phone', '+44 20 7946 0000');
 });
 
 it('refuses phone and phones together', function (): void {
@@ -49,12 +49,12 @@ it('replaces the list when a patch sets phone, and empties it when phone is null
 
     mergePatch("/v1/contacts/{$contact->id}", ['phone' => '+1 555 0199'], $this->token, ['If-Match' => contactEtag($contact, $this->token)])
         ->assertOk()
-        ->assertJsonPath('data.phones', [['number' => '+1 555 0199', 'label' => null]]);
+        ->assertJsonPath('phones', [['number' => '+1 555 0199', 'label' => null]]);
 
     mergePatch("/v1/contacts/{$contact->id}", ['phone' => null], $this->token, ['If-Match' => contactEtag($contact, $this->token)])
         ->assertOk()
-        ->assertJsonPath('data.phones', [])
-        ->assertJsonPath('data.phone', null);
+        ->assertJsonPath('phones', [])
+        ->assertJsonPath('phone', null);
 });
 
 it('replaces the whole list when a patch sets phones, as merge patch replaces arrays', function (): void {
@@ -62,8 +62,8 @@ it('replaces the whole list when a patch sets phones, as merge patch replaces ar
 
     mergePatch("/v1/contacts/{$contact->id}", ['phones' => [['number' => '+1 555 0177', 'label' => 'mobile']]], $this->token, ['If-Match' => contactEtag($contact, $this->token)])
         ->assertOk()
-        ->assertJsonPath('data.phones', [['number' => '+1 555 0177', 'label' => 'mobile']])
-        ->assertJsonPath('data.phone', '+1 555 0177');
+        ->assertJsonPath('phones', [['number' => '+1 555 0177', 'label' => 'mobile']])
+        ->assertJsonPath('phone', '+1 555 0177');
 });
 
 it('refuses phone and phones together in a patch', function (): void {

@@ -548,10 +548,10 @@ it('marks a contact\'s phone deprecated in the contract, and nothing else (ADR-0
     $organization = documentedResponseSchema($spec, '/v1/organizations/{organization}', 'GET', 200);
     $body = $spec['paths']['/v1/contacts']['post']['requestBody']['content']['application/json']['schema']['properties'] ?? [];
 
-    expect($contact['properties']['data']['properties']['phone']['deprecated'] ?? null)->toBeTrue()
-        ->and($contact['properties']['data']['properties']['phones'] ?? null)->not->toHaveKey('deprecated')
+    expect($contact['properties']['phone']['deprecated'] ?? null)->toBeTrue()
+        ->and($contact['properties']['phones'] ?? null)->not->toHaveKey('deprecated')
         ->and($body['phone']['deprecated'] ?? null)->toBeTrue()
-        ->and($organization['properties']['data']['properties']['phone'] ?? null)->not->toHaveKey('deprecated');
+        ->and($organization['properties']['phone'] ?? null)->not->toHaveKey('deprecated');
 });
 
 it('marks the deprecated organisation filter deprecated in the contract too (ADR-0008)', function (): void {

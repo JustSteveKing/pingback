@@ -14,13 +14,13 @@ it('creates an organisation in the account', function (): void {
     $response = $this->withToken(ownerToken($account))
         ->postJson('/v1/organizations', ['name' => 'Rippin Group', 'country' => 'GB', 'city' => 'Leeds'])
         ->assertCreated()
-        ->assertJsonPath('data.name', 'Rippin Group')
-        ->assertJsonPath('data.country', 'GB')
-        ->assertJsonPath('data.email', null)
-        ->assertJsonPath('data.deleted_at', null)
+        ->assertJsonPath('name', 'Rippin Group')
+        ->assertJsonPath('country', 'GB')
+        ->assertJsonPath('email', null)
+        ->assertJsonPath('deleted_at', null)
         ->assertETag();
 
-    $organization = Organization::query()->findOrFail($response->json('data.id'));
+    $organization = Organization::query()->findOrFail($response->json('id'));
 
     expect($organization->account_id)->toBe($account->id)
         ->and($response->headers->get('Location'))->toBe(route('v1.organizations.show', $organization));
@@ -33,7 +33,7 @@ it('gives the ETag a read would give', function (): void {
     $created = $this->withToken($token)->postJson('/v1/organizations', ['name' => 'Rippin Group'])->assertCreated();
 
     expect($created->headers->get('ETag'))
-        ->toBe(etagOf(Organization::query()->findOrFail($created->json('data.id')), $token));
+        ->toBe(etagOf(Organization::query()->findOrFail($created->json('id')), $token));
 });
 
 it('replays a retry with the same Idempotency-Key rather than creating twice', function (): void {

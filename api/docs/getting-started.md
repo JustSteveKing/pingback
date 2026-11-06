@@ -35,7 +35,7 @@ link turns up after you register.
 
 Routes are versioned and have no `/api` prefix: everything lives under `/v1`.
 
-Register, which signs you in and returns a session token in `meta.token`:
+Register, which signs you in and returns a session token in `token`:
 
 ```bash
 curl -X POST http://127.0.0.1:8000/v1/auth/register \

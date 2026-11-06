@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "dee6d4a2-5d34-4960-acb9-6b373c96472f",
+        "_postman_id": "e9f8c1ba-24ee-4d03-b60d-7e3ac4ce0699",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -50,7 +50,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":null,\"name\":\"Price Ltd\",\"created_at\":null,\"updated_at\":null}}",
+                            "body": "{\"id\":null,\"name\":\"Price Ltd\",\"created_at\":null,\"updated_at\":null}",
                             "name": "The account."
                         },
                         {
@@ -99,7 +99,7 @@
                                     "mode": "raw",
                                     "raw": "{\"name\":\"Jane Doe\",\"email\":\"jane@example.com\",\"password\":\"password123\",\"device_name\":\"ios-app\"}"
                                 },
-                                "description": "Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user with the token, its type and expiry in meta, and sends a verification email.",
+                                "description": "Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user, with the token, its type and its expiry beside the user fields, and sends a verification email.",
                                 "auth": {
                                     "type": "noauth"
                                 }
@@ -108,8 +108,8 @@
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"01m63xxg5jvzscwssjy2ea9fpk\",\"name\":\"Justina Gaylord\",\"email\":\"lafayette.considine@example.com\",\"email_verified_at\":\"2026-10-29T13:34:44+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
-                                    "name": "Registration succeeded."
+                                    "body": "{\"id\":\"01jb8x0k2m4n6p8q0r2s4t6v8w\",\"name\":\"Jane Doe\",\"email\":\"jane@example.com\",\"email_verified_at\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"token_expires_at\":null}",
+                                    "name": "Registration succeeded. This is the only response that carries the token."
                                 },
                                 {
                                     "header": [],
@@ -143,7 +143,7 @@
                                     "mode": "raw",
                                     "raw": "{\"email\":\"jane@example.com\",\"password\":\"password123\",\"device_name\":\"ios-app\"}"
                                 },
-                                "description": "Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user with the token, its type and expiry in meta; wrong credentials are a 422 on the email field.",
+                                "description": "Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user, with the token, its type and its expiry beside the user fields; wrong credentials are a 422 on the email field.",
                                 "auth": {
                                     "type": "noauth"
                                 }
@@ -152,8 +152,8 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63xxgaawnbhw7bv9qeb6m63\",\"name\":\"Justina Gaylord\",\"email\":\"cormier.nick@example.com\",\"email_verified_at\":\"2026-10-29T13:34:45+00:00\",\"created_at\":null,\"updated_at\":null},\"meta\":{\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"expires_at\":null}}",
-                                    "name": "Login succeeded."
+                                    "body": "{\"id\":\"01jb8x0k2m4n6p8q0r2s4t6v8w\",\"name\":\"Jane Doe\",\"email\":\"jane@example.com\",\"email_verified_at\":\"2026-10-20T12:00:00+00:00\",\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"token\":\"1|example-token\",\"token_type\":\"Bearer\",\"token_expires_at\":null}",
+                                    "name": "Login succeeded. This is the only response that carries the token."
                                 },
                                 {
                                     "header": [],
@@ -194,7 +194,7 @@
                                 {
                                     "header": [],
                                     "code": 200,
-                                    "body": "{\"data\":{\"id\":\"01m63xxgmht1hb7735t1ndsk7m\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-10-29T13:34:45+00:00\",\"created_at\":null,\"updated_at\":null}}",
+                                    "body": "{\"id\":\"01m6rbsaarnkth16zd4yrpj146\",\"name\":\"Morgan Hirthe\",\"email\":\"dare.emelie@example.com\",\"email_verified_at\":\"2026-11-06T12:01:56+00:00\",\"created_at\":null,\"updated_at\":null}",
                                     "name": "Authenticated user profile."
                                 },
                                 {
@@ -322,14 +322,14 @@
                                     "mode": "raw",
                                     "raw": "{\"name\":\"deploy-bot\",\"abilities\":[\"auth:me\",\"auth:tokens:read\"],\"expires_at\":\"2027-01-01T00:00:00+00:00\"}"
                                 },
-                                "description": "Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in meta.token, which is shown once and cannot be read again."
+                                "description": "Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in its token field, which appears in this response only and cannot be read again."
                             },
                             "response": [
                                 {
                                     "header": [],
                                     "code": 201,
-                                    "body": "{\"data\":{\"id\":\"7\",\"name\":\"deploy-bot\",\"abilities\":[\"auth:me\",\"auth:tokens:read\"],\"last_used_at\":null,\"expires_at\":\"2027-01-01T00:00:00+00:00\",\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"is_current\":false},\"meta\":{\"token\":\"7|example-token\",\"token_type\":\"Bearer\"}}",
-                                    "name": "API key created. meta.token is the only time its value is returned."
+                                    "body": "{\"id\":\"7\",\"name\":\"deploy-bot\",\"abilities\":[\"auth:me\",\"auth:tokens:read\"],\"last_used_at\":null,\"expires_at\":\"2027-01-01T00:00:00+00:00\",\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"is_current\":false,\"token\":\"7|example-token\",\"token_type\":\"Bearer\"}",
+                                    "name": "API key created. This is the only response that carries its value."
                                 },
                                 {
                                     "header": [],
@@ -835,7 +835,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "Contact created."
                         },
                         {
@@ -897,7 +897,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The contact, with its ETag."
                         },
                         {
@@ -962,7 +962,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The contact after the change."
                         },
                         {
@@ -1118,7 +1118,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd1k9r2w3x4y5z6a7b8c9d0\",\"organization_id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"first_name\":\"Ada\",\"last_name\":\"Lovelace\",\"email\":\"ada@rippin.example\",\"phone\":\"+1 555 0101\",\"phones\":[{\"number\":\"+1 555 0101\",\"label\":\"work\"},{\"number\":\"+1 555 0102\",\"label\":\"mobile\"}],\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The contact, restored."
                         },
                         {
@@ -1442,7 +1442,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "Organisation created."
                         },
                         {
@@ -1504,7 +1504,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The organisation, with its ETag."
                         },
                         {
@@ -1569,7 +1569,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The organisation after the change."
                         },
                         {
@@ -1725,7 +1725,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}}",
+                            "body": "{\"id\":\"01jbd0x4qsm2cf4c8m3x6y1v7z\",\"name\":\"Rippin, Kovacek and Bins\",\"email\":\"info@rippin.example\",\"phone\":\"+1 555 0100\",\"address\":\"742 Evergreen Terrace\",\"city\":\"Springfield\",\"region\":\"Oregon\",\"country\":\"US\",\"postal_code\":\"97403\",\"created_at\":\"2026-10-29T09:00:00+00:00\",\"updated_at\":\"2026-10-29T09:00:00+00:00\",\"deleted_at\":null}",
                             "name": "The organisation, restored."
                         },
                         {
@@ -2088,14 +2088,14 @@
                             "mode": "raw",
                             "raw": "{\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"]}"
                         },
-                        "description": "Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in meta.secret, shown only this once: deliveries are signed with it using RFC 9421 HTTP Message Signatures."
+                        "description": "Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in its secret field, which appears in this response only: deliveries are signed with it using RFC 9421 HTTP Message Signatures."
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\"data\":{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"},\"meta\":{\"secret\":\"whsec_8f3c...\"}}",
-                            "name": "Subscription created. meta.secret is the only time the secret is returned."
+                            "body": "{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"secret\":\"whsec_8f3c...\"}",
+                            "name": "Subscription created. This is the only response that carries the secret."
                         },
                         {
                             "header": [],
@@ -2152,7 +2152,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}}",
+                            "body": "{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}",
                             "name": "The subscription."
                         },
                         {
@@ -2213,7 +2213,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}}",
+                            "body": "{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}",
                             "name": "The updated subscription."
                         },
                         {
@@ -2329,14 +2329,14 @@
                             }
                         ],
                         "body": null,
-                        "description": "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in meta.secret, shown only this once."
+                        "description": "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in its secret field, which appears in this response only."
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"},\"meta\":{\"secret\":\"whsec_2b9e...\"}}",
-                            "name": "Secret rotated. meta.secret is the only time the new secret is returned."
+                            "body": "{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":\"2026-10-20T12:00:05+00:00\",\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\",\"secret\":\"whsec_2b9e...\"}",
+                            "name": "Secret rotated. This is the only response that carries the new secret."
                         },
                         {
                             "header": [],
@@ -2393,7 +2393,7 @@
                         {
                             "header": [],
                             "code": 202,
-                            "body": "{\"data\":{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":null,\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}}",
+                            "body": "{\"id\":\"01jb8x2m4k5n6p7q8r9s0t1v2w\",\"url\":\"https:\\\/\\\/hooks.example.com\\\/kit\",\"description\":\"Production receiver\",\"events\":[\"*\"],\"enabled\":true,\"validated_at\":null,\"allowed_rate\":null,\"disabled_at\":null,\"disabled_reason\":null,\"created_at\":\"2026-10-20T12:00:00+00:00\",\"updated_at\":\"2026-10-20T12:00:00+00:00\"}",
                             "name": "Validation queued."
                         },
                         {
@@ -2451,7 +2451,7 @@
                         {
                             "header": [],
                             "code": 202,
-                            "body": "{\"data\":{\"id\":\"01jb8x3a4b5c6d7e8f9g0h1j2k\",\"event\":{\"id\":\"01jb8x3a1b2c3d4e5f6g7h8j9k\",\"type\":\"webhook.ping\"},\"state\":\"retrying\",\"next_attempt_at\":\"2026-10-20T12:01:10+00:00\",\"created_at\":\"2026-10-20T12:01:00+00:00\",\"attempts\":[{\"attempt\":1,\"response_status\":503,\"response_body\":\"Service Unavailable\",\"error\":null,\"duration_ms\":182,\"attempted_at\":\"2026-10-20T12:01:00+00:00\"}]}}",
+                            "body": "{\"id\":\"01jb8x3a4b5c6d7e8f9g0h1j2k\",\"event\":{\"id\":\"01jb8x3a1b2c3d4e5f6g7h8j9k\",\"type\":\"webhook.ping\"},\"state\":\"retrying\",\"next_attempt_at\":\"2026-10-20T12:01:10+00:00\",\"created_at\":\"2026-10-20T12:01:00+00:00\",\"attempts\":[{\"attempt\":1,\"response_status\":503,\"response_body\":\"Service Unavailable\",\"error\":null,\"duration_ms\":182,\"attempted_at\":\"2026-10-20T12:01:00+00:00\"}]}",
                             "name": "Ping queued."
                         },
                         {
@@ -2586,7 +2586,7 @@
                         {
                             "header": [],
                             "code": 202,
-                            "body": "{\"data\":{\"id\":\"01jb8x3a4b5c6d7e8f9g0h1j2k\",\"event\":{\"id\":\"01jb8x3a1b2c3d4e5f6g7h8j9k\",\"type\":\"webhook.ping\"},\"state\":\"retrying\",\"next_attempt_at\":\"2026-10-20T12:01:10+00:00\",\"created_at\":\"2026-10-20T12:01:00+00:00\",\"attempts\":[{\"attempt\":1,\"response_status\":503,\"response_body\":\"Service Unavailable\",\"error\":null,\"duration_ms\":182,\"attempted_at\":\"2026-10-20T12:01:00+00:00\"}]}}",
+                            "body": "{\"id\":\"01jb8x3a4b5c6d7e8f9g0h1j2k\",\"event\":{\"id\":\"01jb8x3a1b2c3d4e5f6g7h8j9k\",\"type\":\"webhook.ping\"},\"state\":\"retrying\",\"next_attempt_at\":\"2026-10-20T12:01:10+00:00\",\"created_at\":\"2026-10-20T12:01:00+00:00\",\"attempts\":[{\"attempt\":1,\"response_status\":503,\"response_body\":\"Service Unavailable\",\"error\":null,\"duration_ms\":182,\"attempted_at\":\"2026-10-20T12:01:00+00:00\"}]}",
                             "name": "Redelivery queued."
                         },
                         {

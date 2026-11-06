@@ -163,8 +163,9 @@ Errors are thrown, never returned as JSON. See [Errors](errors.md).
 
 ## The resource
 
-Kit's resources are plain `JsonResource` classes, wrapped in `data`. Make one in
-`app/Http/Resources/` and list every field:
+Resources are plain `JsonResource` classes. Kit wraps them in `data`, but Pingback switches the
+wrapper off in `AppServiceProvider` (ADR-0009), so the body is the representation itself, as it is
+for a list. Make one in `app/Http/Resources/` and list every field:
 
 ```php
 final class ProjectResource extends JsonResource
@@ -209,7 +210,7 @@ it('creates a project', function (): void {
     $this->withToken($token)
         ->postJson('/v1/projects', ['name' => 'Kit'])
         ->assertCreated()
-        ->assertJsonPath('data.name', 'Kit');
+        ->assertJsonPath('name', 'Kit');
 });
 
 it('refuses a project without a name', function (): void {

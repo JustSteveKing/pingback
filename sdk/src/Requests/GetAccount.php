@@ -28,6 +28,6 @@ final readonly class GetAccount implements Request
 
     public function result(Response $response): Account
     {
-        return $response->map(Account::class, at: 'data');
+        return $response->map(Account::class);
     }
 }

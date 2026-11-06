@@ -35,12 +35,11 @@ it('creates a subscription and shows its secret only once', function (): void {
     $response = $this->withToken(webhookToken($user))
         ->postJson('/v1/webhooks', ['url' => 'https://hooks.example.com/kit', 'events' => ['*']])
         ->assertCreated()
-        ->assertJsonPath('data.url', 'https://hooks.example.com/kit')
-        ->assertJsonPath('data.enabled', true)
-        ->assertJsonMissingPath('data.secret');
+        ->assertJsonPath('url', 'https://hooks.example.com/kit')
+        ->assertJsonPath('enabled', true);
 
-    $secret = (string) $response->json('meta.secret');
-    $subscription = WebhookSubscription::query()->findOrFail($response->json('data.id'));
+    $secret = (string) $response->json('secret');
+    $subscription = WebhookSubscription::query()->findOrFail($response->json('id'));
 
     expect($secret)->toStartWith('whsec_');
     expect($subscription->secret)->toBe($secret);
@@ -49,8 +48,7 @@ it('creates a subscription and shows its secret only once', function (): void {
     $this->withToken(webhookToken($user))
         ->getJson('/v1/webhooks/' . $subscription->id)
         ->assertOk()
-        ->assertJsonMissingPath('meta.secret')
-        ->assertJsonMissingPath('data.secret');
+        ->assertJsonMissingPath('secret');
 });
 
 it('refuses urls that are not https or resolve to a private address', function (): void {
@@ -120,17 +118,17 @@ it('updates only the fields sent, and re-enabling resets the failure count', fun
     $this->withToken(webhookToken($user))
         ->patchJson('/v1/webhooks/' . $subscription->id, ['url' => 'https://hooks.example.com/v2', 'enabled' => true])
         ->assertOk()
-        ->assertJsonPath('data.url', 'https://hooks.example.com/v2')
-        ->assertJsonPath('data.description', 'keep me')
-        ->assertJsonPath('data.enabled', true)
-        ->assertJsonPath('data.disabled_reason', null);
+        ->assertJsonPath('url', 'https://hooks.example.com/v2')
+        ->assertJsonPath('description', 'keep me')
+        ->assertJsonPath('enabled', true)
+        ->assertJsonPath('disabled_reason', null);
 
     expect($subscription->refresh()->consecutive_failures)->toBe(0);
 
     $this->withToken(webhookToken($user))
         ->patchJson('/v1/webhooks/' . $subscription->id, ['enabled' => false])
         ->assertOk()
-        ->assertJsonPath('data.enabled', false);
+        ->assertJsonPath('enabled', false);
 });
 
 it('deletes a subscription', function (): void {
@@ -153,8 +151,8 @@ it('rotates the secret and shows the new one once', function (): void {
         ->postJson('/v1/webhooks/' . $subscription->id . '/secret')
         ->assertOk();
 
-    expect($response->json('meta.secret'))->toStartWith('whsec_')->not->toBe($old);
-    expect($subscription->refresh()->secret)->toBe($response->json('meta.secret'));
+    expect($response->json('secret'))->toStartWith('whsec_')->not->toBe($old);
+    expect($subscription->refresh()->secret)->toBe($response->json('secret'));
 });
 
 it('requires the webhooks abilities', function (): void {

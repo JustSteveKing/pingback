@@ -45,7 +45,7 @@ function subscribe(User $user, string $url = 'https://hooks.example.com/kit'): W
     $id = test()->withToken($user->createToken('t', ['webhooks:write'])->plainTextToken)
         ->postJson('/v1/webhooks', ['url' => $url, 'events' => ['*']])
         ->assertCreated()
-        ->json('data.id');
+        ->json('id');
 
     return WebhookSubscription::query()->findOrFail($id);
 }
@@ -87,7 +87,7 @@ it('needs consent again when the url changes, and can be asked again', function 
     $this->withToken($token)
         ->patchJson('/v1/webhooks/' . $subscription->id, ['url' => 'https://hooks.example.com/moved'])
         ->assertOk()
-        ->assertJsonPath('data.validated_at', null);
+        ->assertJsonPath('validated_at', null);
 
     consentingEndpoint('api.example.test');
 

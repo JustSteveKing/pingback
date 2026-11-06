@@ -34,7 +34,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":null,"name":"Price Ltd","created_at":null,"updated_at":null}}'
+        content: '{"id":null,"name":"Price Ltd","created_at":null,"updated_at":null}'
         headers: []
         description: 'The account.'
       -

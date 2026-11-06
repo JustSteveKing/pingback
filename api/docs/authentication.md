@@ -27,8 +27,8 @@ It caps every token, so with it on no API key could outlive a session.
 | GET | `/v1/auth/password/reset/{token}` | None | Read the token and email from a reset link |
 | POST | `/v1/auth/password/reset` | None | Set a new password |
 
-Register and login return the user, with the token in `meta.token` and its expiry in
-`meta.expires_at`. Name the client in `device_name`. That is how a user tells their tokens apart in
+Register and login return the user, with the token in `token` and its expiry in
+`token_expires_at`, beside the user's own fields. Name the client in `device_name`. That is how a user tells their tokens apart in
 `GET /v1/auth/tokens`, where `is_current` marks the one making the request.
 
 ## Abilities
@@ -70,7 +70,7 @@ hand an agent a key that can only read webhooks.
 `expires_at` is optional. Without it the key lasts `API_KEY_DEFAULT_DAYS`, 90 by default, and it
 can never be more than `API_KEY_MAX_DAYS` (a year) away.
 
-The key itself comes back in `meta.token`, once. Store it then, because no endpoint returns it
+The key itself comes back in `token`, once. Store it then, because no endpoint returns it
 again. Send an `Idempotency-Key` and a retried request gets the same key back, so a dropped
 connection does not leave a stray key behind.
 

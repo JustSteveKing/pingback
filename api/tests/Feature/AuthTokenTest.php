@@ -24,11 +24,11 @@ it('registers a user and returns a bearer token', function (): void {
         ->assertCreated()
         ->assertHeader('Content-Type', 'application/json')
         ->assertJsonStructure([
-            'meta' => ['token', 'token_type', 'expires_at'],
-            'data' => ['id', 'name', 'email', 'email_verified_at', 'created_at', 'updated_at'],
+            'id', 'name', 'email', 'email_verified_at', 'created_at', 'updated_at',
+            'token', 'token_type', 'token_expires_at',
         ])
-        ->assertJsonPath('meta.token_type', 'Bearer')
-        ->assertJsonPath('data.email', 'jane@example.com');
+        ->assertJsonPath('token_type', 'Bearer')
+        ->assertJsonPath('email', 'jane@example.com');
 
     $user = User::query()->where('email', 'jane@example.com')->first();
 
@@ -52,8 +52,8 @@ it('logs in and returns a bearer token', function (): void {
     $response
         ->assertOk()
         ->assertHeader('Content-Type', 'application/json')
-        ->assertJsonPath('meta.token_type', 'Bearer')
-        ->assertJsonPath('data.email', 'john@example.com');
+        ->assertJsonPath('token_type', 'Bearer')
+        ->assertJsonPath('email', 'john@example.com');
 
     expect(PersonalAccessToken::query()->count())->toBe(1);
 });
@@ -66,7 +66,7 @@ it('issues scoped tokens without wildcard ability', function (): void {
         'device_name' => 'ios-app',
     ])->assertCreated();
 
-    $plainToken = (string) $response->json('meta.token');
+    $plainToken = (string) $response->json('token');
     $tokenId = explode('|', $plainToken, 2)[0] ?? null;
 
     expect($tokenId)->not->toBeNull();
@@ -103,7 +103,7 @@ it('returns the authenticated user for me endpoint', function (): void {
         ->getJson('/v1/auth/me')
         ->assertOk()
         ->assertHeader('Content-Type', 'application/json')
-        ->assertJsonPath('data.email', 'me@example.com');
+        ->assertJsonPath('email', 'me@example.com');
 });
 
 it('answers a repeat me request with 304 when the etag still matches', function (): void {

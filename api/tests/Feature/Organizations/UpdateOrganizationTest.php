@@ -15,8 +15,8 @@ it('changes only the fields in the patch, and gives the new ETag', function (): 
 
     $response = mergePatch("/v1/organizations/{$organization->id}", ['name' => 'Rippin and Sons'], $token, ['If-Match' => $etag])
         ->assertOk()
-        ->assertJsonPath('data.name', 'Rippin and Sons')
-        ->assertJsonPath('data.city', 'Leeds')
+        ->assertJsonPath('name', 'Rippin and Sons')
+        ->assertJsonPath('city', 'Leeds')
         ->assertETag();
 
     expect($response->headers->get('ETag'))
@@ -30,7 +30,7 @@ it('clears a nullable field patched to null', function (): void {
 
     mergePatch("/v1/organizations/{$organization->id}", ['email' => null], $token, ['If-Match' => etagOf($organization, $token)])
         ->assertOk()
-        ->assertJsonPath('data.email', null);
+        ->assertJsonPath('email', null);
 });
 
 it('refuses to clear the name', function (): void {

@@ -17,7 +17,7 @@ it('restores a deleted organisation, with a new ETag', function (): void {
     $response = $this->withToken($token)
         ->postJson("/v1/organizations/{$organization->id}/restore")
         ->assertOk()
-        ->assertJsonPath('data.deleted_at', null)
+        ->assertJsonPath('deleted_at', null)
         ->assertETag();
 
     expect($organization->refresh()->trashed())->toBeFalse()

@@ -16,8 +16,8 @@ it('changes only the fields in the patch, and gives the new ETag', function (): 
 
     $response = mergePatch("/v1/contacts/{$contact->id}", ['first_name' => 'Augusta'], $token, ['If-Match' => $etag])
         ->assertOk()
-        ->assertJsonPath('data.first_name', 'Augusta')
-        ->assertJsonPath('data.city', 'Leeds')
+        ->assertJsonPath('first_name', 'Augusta')
+        ->assertJsonPath('city', 'Leeds')
         ->assertETag();
 
     expect($response->headers->get('ETag'))
@@ -31,7 +31,7 @@ it('clears a nullable field patched to null', function (): void {
 
     mergePatch("/v1/contacts/{$contact->id}", ['email' => null], $token, ['If-Match' => contactEtag($contact, $token)])
         ->assertOk()
-        ->assertJsonPath('data.email', null);
+        ->assertJsonPath('email', null);
 });
 
 it('refuses to clear a name', function (): void {
@@ -98,11 +98,11 @@ it('moves a contact to another organisation, or to none', function (): void {
 
     mergePatch("/v1/contacts/{$contact->id}", ['organization_id' => $organization->id], $token, ['If-Match' => contactEtag($contact, $token)])
         ->assertOk()
-        ->assertJsonPath('data.organization_id', $organization->id);
+        ->assertJsonPath('organization_id', $organization->id);
 
     mergePatch("/v1/contacts/{$contact->id}", ['organization_id' => null], $token, ['If-Match' => contactEtag($contact, $token)])
         ->assertOk()
-        ->assertJsonPath('data.organization_id', null);
+        ->assertJsonPath('organization_id', null);
 });
 
 it('refuses to move a contact to another account\'s organisation', function (): void {
@@ -122,6 +122,6 @@ it('still edits a contact whose organisation has since been deleted', function (
 
     mergePatch("/v1/contacts/{$contact->id}", ['city' => 'York'], $token, ['If-Match' => contactEtag($contact, $token)])
         ->assertOk()
-        ->assertJsonPath('data.organization_id', $organization->id)
-        ->assertJsonPath('data.city', 'York');
+        ->assertJsonPath('organization_id', $organization->id)
+        ->assertJsonPath('city', 'York');
 });

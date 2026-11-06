@@ -17,7 +17,7 @@ it('restores a deleted contact, with a new ETag', function (): void {
     $response = $this->withToken($token)
         ->postJson("/v1/contacts/{$contact->id}/restore")
         ->assertOk()
-        ->assertJsonPath('data.deleted_at', null)
+        ->assertJsonPath('deleted_at', null)
         ->assertETag();
 
     expect($contact->refresh()->trashed())->toBeFalse()

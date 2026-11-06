@@ -16,6 +16,6 @@ final readonly class ContactResult
 {
     public static function from(Response $response): Contact
     {
-        return $response->map(Contact::class, at: 'data')->withEtag($response->etag());
+        return $response->map(Contact::class)->withEtag($response->etag());
     }
 }

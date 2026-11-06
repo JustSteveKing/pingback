@@ -17,7 +17,7 @@ use Knuckles\Scribe\Attributes\Endpoint;
 use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\Header;
 use Knuckles\Scribe\Attributes\Response;
-use Knuckles\Scribe\Attributes\ResponseFromApiResource;
+use Knuckles\Scribe\Attributes\ResponseField;
 use Knuckles\Scribe\Attributes\Subgroup;
 use Knuckles\Scribe\Attributes\Unauthenticated;
 
@@ -25,7 +25,7 @@ use Knuckles\Scribe\Attributes\Unauthenticated;
 #[Subgroup(name: 'Token Authentication')]
 #[Endpoint(
     title: 'Register',
-    description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user with the token, its type and expiry in meta, and sends a verification email.',
+    description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user, with the token, its type and its expiry beside the user fields, and sends a verification email.',
 )]
 #[Unauthenticated]
 #[Header('Idempotency-Key', '"register-retry-1"')]
@@ -33,13 +33,24 @@ use Knuckles\Scribe\Attributes\Unauthenticated;
 #[BodyParam('email', type: 'string', description: 'Unique email address for login.', required: true, example: 'jane@example.com')]
 #[BodyParam('password', type: 'string', description: 'Account password.', required: true, example: 'password123')]
 #[BodyParam('device_name', type: 'string', description: 'Client device label for token tracking.', required: false, example: 'ios-app')]
-#[ResponseFromApiResource(
-    name: UserResource::class,
-    model: User::class,
+#[Response(
+    content: [
+        'id' => '01jb8x0k2m4n6p8q0r2s4t6v8w',
+        'name' => 'Jane Doe',
+        'email' => 'jane@example.com',
+        'email_verified_at' => null,
+        'created_at' => '2026-10-20T12:00:00+00:00',
+        'updated_at' => '2026-10-20T12:00:00+00:00',
+        'token' => '1|example-token',
+        'token_type' => 'Bearer',
+        'token_expires_at' => null,
+    ],
     status: 201,
-    description: 'Registration succeeded.',
-    additional: ['meta' => ['token' => '1|example-token', 'token_type' => 'Bearer', 'expires_at' => null]],
+    description: 'Registration succeeded. This is the only response that carries the token.',
 )]
+#[ResponseField('email_verified_at', 'string', 'When the user verified their email address, or null if they have not.', nullable: true)]
+#[ResponseField('token', 'string', 'The bearer token. It appears in this response only and cannot be read again.')]
+#[ResponseField('token_expires_at', 'string', 'When the token expires, or null if it does not.', nullable: true)]
 #[Response(
     content: [
         'type' => 'https://apiguide.dev/errors/validation-failed',
@@ -75,12 +86,12 @@ final class RegisterController
             'token_expires_at' => $expiresAt?->toAtomString(),
         ]);
 
-        return UserResource::make($user)->additional([
-            'meta' => [
-                'token' => $token->plainTextToken,
-                'token_type' => 'Bearer',
-                'expires_at' => $expiresAt?->toAtomString(),
-            ],
-        ])->response()->setStatusCode(201);
+        // The plain-text token is part of this one representation, and never of any other.
+        return new JsonResponse([
+            ...UserResource::make($user)->resolve($request),
+            'token' => $token->plainTextToken,
+            'token_type' => 'Bearer',
+            'token_expires_at' => $expiresAt?->toAtomString(),
+        ], 201);
     }
 }

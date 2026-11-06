@@ -22,11 +22,11 @@ use Knuckles\Scribe\Attributes\UrlParam;
 #[Group(name: 'Webhooks')]
 #[Endpoint(
     title: 'Rotate Webhook Secret',
-    description: 'Replace a webhook subscription\'s signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in meta.secret, shown only this once.',
+    description: 'Replace a webhook subscription\'s signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in its secret field, which appears in this response only.',
 )]
 #[Authenticated]
 #[UrlParam('webhook', type: 'string', description: 'The webhook subscription ID.', required: true, example: '01jb8x2m4k5n6p7q8r9s0t1v2w')]
-#[Response(content: ['data' => [
+#[Response(content: [
     'id' => '01jb8x2m4k5n6p7q8r9s0t1v2w',
     'url' => 'https://hooks.example.com/kit',
     'description' => 'Production receiver',
@@ -38,7 +38,8 @@ use Knuckles\Scribe\Attributes\UrlParam;
     'disabled_reason' => null,
     'created_at' => '2026-10-20T12:00:00+00:00',
     'updated_at' => '2026-10-20T12:00:00+00:00',
-], 'meta' => ['secret' => 'whsec_2b9e...']], status: 200, description: 'Secret rotated. meta.secret is the only time the new secret is returned.')]
+    'secret' => 'whsec_2b9e...',
+], status: 200, description: 'Secret rotated. This is the only response that carries the new secret.')]
 #[Response(
     content: [
         'type' => 'https://apiguide.dev/errors/resource-not-found',
@@ -69,11 +70,12 @@ use Knuckles\Scribe\Attributes\UrlParam;
     status: 403,
     description: 'Token is missing the webhooks:write ability.',
 )]
-#[ResponseField('data.description', 'string', 'The label given to the subscription.', nullable: true)]
-#[ResponseField('data.validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
-#[ResponseField('data.allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
-#[ResponseField('data.disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
-#[ResponseField('data.disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
+#[ResponseField('description', 'string', 'The label given to the subscription.', nullable: true)]
+#[ResponseField('validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
+#[ResponseField('allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
+#[ResponseField('disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
+#[ResponseField('disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
+#[ResponseField('secret', 'string', 'The new signing secret for deliveries. It appears in this response only and cannot be read again.')]
 final class RotateWebhookSecretController
 {
     public function __invoke(Request $request, #[CurrentUser] User $user): JsonResponse
@@ -87,8 +89,10 @@ final class RotateWebhookSecretController
             'webhook_id' => $subscription->id,
         ]);
 
-        return WebhookSubscriptionResource::make($subscription)
-            ->additional(['meta' => ['secret' => $secret]])
-            ->response();
+        // The secret is part of this one representation, and never of any other.
+        return new JsonResponse([
+            ...WebhookSubscriptionResource::make($subscription)->resolve($request),
+            'secret' => $secret,
+        ]);
     }
 }

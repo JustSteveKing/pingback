@@ -15,8 +15,8 @@ it('shows an contact with its ETag', function (): void {
     $this->withToken(contactToken($contact->account))
         ->getJson("/v1/contacts/{$contact->id}")
         ->assertOk()
-        ->assertJsonPath('data.id', $contact->id)
-        ->assertJsonPath('data.first_name', 'Ada')
+        ->assertJsonPath('id', $contact->id)
+        ->assertJsonPath('first_name', 'Ada')
         ->assertETag();
 });
 
@@ -36,7 +36,7 @@ it('shows a deleted contact, marked deleted', function (): void {
     $this->withToken(contactToken($contact->account))
         ->getJson("/v1/contacts/{$contact->id}")
         ->assertOk()
-        ->assertJsonPath('data.deleted_at', $contact->deleted_at?->toAtomString());
+        ->assertJsonPath('deleted_at', $contact->deleted_at?->toAtomString());
 });
 
 it('treats another account\'s contact as missing (ADR-0003)', function (): void {

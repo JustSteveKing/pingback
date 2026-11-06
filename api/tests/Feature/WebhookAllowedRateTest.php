@@ -48,7 +48,7 @@ function subscribeFor(User $user): WebhookSubscription
     $id = test()->withToken($user->createToken('t', ['webhooks:write'])->plainTextToken)
         ->postJson('/v1/webhooks', ['url' => 'https://hooks.example.com/kit', 'events' => ['*']])
         ->assertCreated()
-        ->json('data.id');
+        ->json('id');
 
     return WebhookSubscription::query()->findOrFail($id);
 }
@@ -129,7 +129,7 @@ it('forgets the granted rate when the url changes', function (): void {
     $this->withToken($user->createToken('t', ['webhooks:write'])->plainTextToken)
         ->patchJson('/v1/webhooks/' . $subscription->id, ['url' => 'https://hooks.example.com/moved'])
         ->assertOk()
-        ->assertJsonPath('data.allowed_rate', null);
+        ->assertJsonPath('allowed_rate', null);
 });
 
 it('postpones a delivery over the granted rate without spending an attempt', function (): void {

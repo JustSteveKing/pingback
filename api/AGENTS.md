@@ -87,6 +87,12 @@ TODO before calling the endpoint done. The pieces, and what to put in each:
    `/** @var Model $model */ $model = $this->resource;`, list every field explicitly, send IDs as
    strings and dates with `->toAtomString()`. No JSON:API: Kit removed it on purpose.
 
+   The body is the representation itself, with no `data` wrapper (ADR-0009):
+   `AppServiceProvider` calls `JsonResource::withoutWrapping()`, and metadata goes in headers.
+   Never call `->additional()`, which brings the wrapper back. A value returned once beside the
+   resource, such as a new secret, goes at the root:
+   `new JsonResponse([...ProjectResource::make($project)->resolve($request), 'secret' => $secret], 201)`.
+
 6. **Tests** in `tests/Feature/`, in Pest, using factories. Cover the success path, validation,
    authentication, the missing ability, and anything the endpoint does with the standards below. Add
    the endpoint to the runtime checks in `OpenApiContractTest` so its real responses are validated

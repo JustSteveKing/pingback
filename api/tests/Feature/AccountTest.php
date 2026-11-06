@@ -33,8 +33,8 @@ it('returns the account the token works in', function (): void {
     $this->getJson('/v1/account')
         ->assertOk()
         ->assertHeader('Content-Type', 'application/json')
-        ->assertJsonPath('data.id', $account->id)
-        ->assertJsonPath('data.name', 'Acme Corporation')
+        ->assertJsonPath('id', $account->id)
+        ->assertJsonPath('name', 'Acme Corporation')
         ->assertHeader('ETag');
 });
 

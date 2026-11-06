@@ -52,10 +52,10 @@ it('issues expiring sanctum tokens by default', function (): void {
         'device_name' => 'ios-app',
     ])->assertCreated();
 
-    $plainToken = (string) $response->json('meta.token');
+    $plainToken = (string) $response->json('token');
     $tokenId = explode('|', $plainToken, 2)[0] ?? null;
 
-    expect($response->json('meta.expires_at'))->not->toBeNull();
+    expect($response->json('token_expires_at'))->not->toBeNull();
     expect($tokenId)->not->toBeNull();
 
     $token = PersonalAccessToken::query()->findOrFail((int) $tokenId);

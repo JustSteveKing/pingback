@@ -16,6 +16,6 @@ final readonly class OrganizationResult
 {
     public static function from(Response $response): Organization
     {
-        return $response->map(Organization::class, at: 'data')->withEtag($response->etag());
+        return $response->map(Organization::class)->withEtag($response->etag());
     }
 }

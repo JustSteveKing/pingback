@@ -27,19 +27,17 @@ use Knuckles\Scribe\Attributes\UrlParam;
 #[UrlParam('webhook', type: 'string', description: 'The webhook subscription ID.', required: true, example: '01jb8x2m4k5n6p7q8r9s0t1v2w')]
 #[Response(
     content: [
-        'data' => [
-            'id' => '01jb8x2m4k5n6p7q8r9s0t1v2w',
-            'url' => 'https://hooks.example.com/kit',
-            'description' => 'Production receiver',
-            'events' => ['*'],
-            'enabled' => true,
-            'validated_at' => null,
-            'allowed_rate' => null,
-            'disabled_at' => null,
-            'disabled_reason' => null,
-            'created_at' => '2026-10-20T12:00:00+00:00',
-            'updated_at' => '2026-10-20T12:00:00+00:00',
-        ],
+        'id' => '01jb8x2m4k5n6p7q8r9s0t1v2w',
+        'url' => 'https://hooks.example.com/kit',
+        'description' => 'Production receiver',
+        'events' => ['*'],
+        'enabled' => true,
+        'validated_at' => null,
+        'allowed_rate' => null,
+        'disabled_at' => null,
+        'disabled_reason' => null,
+        'created_at' => '2026-10-20T12:00:00+00:00',
+        'updated_at' => '2026-10-20T12:00:00+00:00',
     ],
     status: 202,
     description: 'Validation queued.',
@@ -74,11 +72,11 @@ use Knuckles\Scribe\Attributes\UrlParam;
     status: 403,
     description: 'Token is missing the webhooks:write ability.',
 )]
-#[ResponseField('data.description', 'string', 'The label given to the subscription.', nullable: true)]
-#[ResponseField('data.validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
-#[ResponseField('data.allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
-#[ResponseField('data.disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
-#[ResponseField('data.disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
+#[ResponseField('description', 'string', 'The label given to the subscription.', nullable: true)]
+#[ResponseField('validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
+#[ResponseField('allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
+#[ResponseField('disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
+#[ResponseField('disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
 final class ValidateWebhookController
 {
     public function __invoke(Request $request, #[CurrentUser] User $user): JsonResponse

@@ -363,7 +363,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'Create Webhook'
-      description: 'Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in meta.secret, shown only this once: deliveries are signed with it using RFC 9421 HTTP Message Signatures.'
+      description: 'Subscribe an https endpoint to events. Use it once per receiving endpoint; send an Idempotency-Key so a retry does not create a second subscription. Returns the subscription with its signing secret in its secret field, which appears in this response only: deliveries are signed with it using RFC 9421 HTTP Message Signatures.'
       authenticated: true
       deprecated: false
     headers:
@@ -420,9 +420,9 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"},"meta":{"secret":"whsec_8f3c..."}}'
+        content: '{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","secret":"whsec_8f3c..."}'
         headers: []
-        description: 'Subscription created. meta.secret is the only time the secret is returned.'
+        description: 'Subscription created. This is the only response that carries the secret.'
       -
         custom: []
         status: 401
@@ -442,9 +442,9 @@ endpoints:
         headers: []
         description: 'The URL is not https, resolves to a private address, or an event type is unknown.'
     responseFields:
-      data.description:
+      description:
         custom: []
-        name: data.description
+        name: description
         description: 'The label given to the subscription.'
         required: true
         example: null
@@ -453,9 +453,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.validated_at:
+      validated_at:
         custom: []
-        name: data.validated_at
+        name: validated_at
         description: 'When the endpoint consented to deliveries, or null if it has not.'
         required: true
         example: null
@@ -464,9 +464,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.allowed_rate:
+      allowed_rate:
         custom: []
-        name: data.allowed_rate
+        name: allowed_rate
         description: 'Deliveries a minute the endpoint granted, or null for no limit.'
         required: true
         example: null
@@ -475,9 +475,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_at:
+      disabled_at:
         custom: []
-        name: data.disabled_at
+        name: disabled_at
         description: 'When the subscription was disabled, or null while it is enabled.'
         required: true
         example: null
@@ -486,9 +486,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_reason:
+      disabled_reason:
         custom: []
-        name: data.disabled_reason
+        name: disabled_reason
         description: 'Why it was disabled, or null.'
         required: true
         example: null
@@ -496,6 +496,17 @@ endpoints:
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      secret:
+        custom: []
+        name: secret
+        description: 'The signing secret for deliveries. It appears in this response only and cannot be read again.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
     auth:
       - headers
@@ -546,7 +557,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}}'
+        content: '{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}'
         headers: []
         description: 'The subscription.'
       -
@@ -568,9 +579,9 @@ endpoints:
         headers: []
         description: 'No webhook with this ID belongs to the authenticated user.'
     responseFields:
-      data.description:
+      description:
         custom: []
-        name: data.description
+        name: description
         description: 'The label given to the subscription.'
         required: true
         example: null
@@ -579,9 +590,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.validated_at:
+      validated_at:
         custom: []
-        name: data.validated_at
+        name: validated_at
         description: 'When the endpoint consented to deliveries, or null if it has not.'
         required: true
         example: null
@@ -590,9 +601,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.allowed_rate:
+      allowed_rate:
         custom: []
-        name: data.allowed_rate
+        name: allowed_rate
         description: 'Deliveries a minute the endpoint granted, or null for no limit.'
         required: true
         example: null
@@ -601,9 +612,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_at:
+      disabled_at:
         custom: []
-        name: data.disabled_at
+        name: disabled_at
         description: 'When the subscription was disabled, or null while it is enabled.'
         required: true
         example: null
@@ -612,9 +623,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_reason:
+      disabled_reason:
         custom: []
-        name: data.disabled_reason
+        name: disabled_reason
         description: 'Why it was disabled, or null.'
         required: true
         example: null
@@ -722,7 +733,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}}'
+        content: '{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}'
         headers: []
         description: 'The updated subscription.'
       -
@@ -750,9 +761,9 @@ endpoints:
         headers: []
         description: 'The URL is not https, resolves to a private address, or an event type is unknown.'
     responseFields:
-      data.description:
+      description:
         custom: []
-        name: data.description
+        name: description
         description: 'The label given to the subscription.'
         required: true
         example: null
@@ -761,9 +772,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.validated_at:
+      validated_at:
         custom: []
-        name: data.validated_at
+        name: validated_at
         description: 'When the endpoint consented to deliveries, or null if it has not.'
         required: true
         example: null
@@ -772,9 +783,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.allowed_rate:
+      allowed_rate:
         custom: []
-        name: data.allowed_rate
+        name: allowed_rate
         description: 'Deliveries a minute the endpoint granted, or null for no limit.'
         required: true
         example: null
@@ -783,9 +794,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_at:
+      disabled_at:
         custom: []
-        name: data.disabled_at
+        name: disabled_at
         description: 'When the subscription was disabled, or null while it is enabled.'
         required: true
         example: null
@@ -794,9 +805,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_reason:
+      disabled_reason:
         custom: []
-        name: data.disabled_reason
+        name: disabled_reason
         description: 'Why it was disabled, or null.'
         required: true
         example: null
@@ -895,7 +906,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'Rotate Webhook Secret'
-      description: "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in meta.secret, shown only this once."
+      description: "Replace a webhook subscription's signing secret. Use it when the secret may have leaked; deliveries are signed with the new secret from the next attempt, so update the receiver straight away. Returns the subscription with the new secret in its secret field, which appears in this response only."
       authenticated: true
       deprecated: false
     headers:
@@ -925,9 +936,9 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"},"meta":{"secret":"whsec_2b9e..."}}'
+        content: '{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":"2026-10-20T12:00:05+00:00","allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","secret":"whsec_2b9e..."}'
         headers: []
-        description: 'Secret rotated. meta.secret is the only time the new secret is returned.'
+        description: 'Secret rotated. This is the only response that carries the new secret.'
       -
         custom: []
         status: 401
@@ -947,9 +958,9 @@ endpoints:
         headers: []
         description: 'No webhook with this ID belongs to the authenticated user.'
     responseFields:
-      data.description:
+      description:
         custom: []
-        name: data.description
+        name: description
         description: 'The label given to the subscription.'
         required: true
         example: null
@@ -958,9 +969,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.validated_at:
+      validated_at:
         custom: []
-        name: data.validated_at
+        name: validated_at
         description: 'When the endpoint consented to deliveries, or null if it has not.'
         required: true
         example: null
@@ -969,9 +980,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.allowed_rate:
+      allowed_rate:
         custom: []
-        name: data.allowed_rate
+        name: allowed_rate
         description: 'Deliveries a minute the endpoint granted, or null for no limit.'
         required: true
         example: null
@@ -980,9 +991,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_at:
+      disabled_at:
         custom: []
-        name: data.disabled_at
+        name: disabled_at
         description: 'When the subscription was disabled, or null while it is enabled.'
         required: true
         example: null
@@ -991,9 +1002,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_reason:
+      disabled_reason:
         custom: []
-        name: data.disabled_reason
+        name: disabled_reason
         description: 'Why it was disabled, or null.'
         required: true
         example: null
@@ -1001,6 +1012,17 @@ endpoints:
         enumValues: []
         exampleWasSpecified: false
         nullable: true
+        deprecated: false
+      secret:
+        custom: []
+        name: secret
+        description: 'The new signing secret for deliveries. It appears in this response only and cannot be read again.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
         deprecated: false
     auth:
       - headers
@@ -1051,7 +1073,7 @@ endpoints:
       -
         custom: []
         status: 202
-        content: '{"data":{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":null,"allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}}'
+        content: '{"id":"01jb8x2m4k5n6p7q8r9s0t1v2w","url":"https:\/\/hooks.example.com\/kit","description":"Production receiver","events":["*"],"enabled":true,"validated_at":null,"allowed_rate":null,"disabled_at":null,"disabled_reason":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00"}'
         headers: []
         description: 'Validation queued.'
       -
@@ -1073,9 +1095,9 @@ endpoints:
         headers: []
         description: 'No webhook with this ID belongs to the authenticated user.'
     responseFields:
-      data.description:
+      description:
         custom: []
-        name: data.description
+        name: description
         description: 'The label given to the subscription.'
         required: true
         example: null
@@ -1084,9 +1106,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.validated_at:
+      validated_at:
         custom: []
-        name: data.validated_at
+        name: validated_at
         description: 'When the endpoint consented to deliveries, or null if it has not.'
         required: true
         example: null
@@ -1095,9 +1117,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.allowed_rate:
+      allowed_rate:
         custom: []
-        name: data.allowed_rate
+        name: allowed_rate
         description: 'Deliveries a minute the endpoint granted, or null for no limit.'
         required: true
         example: null
@@ -1106,9 +1128,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_at:
+      disabled_at:
         custom: []
-        name: data.disabled_at
+        name: disabled_at
         description: 'When the subscription was disabled, or null while it is enabled.'
         required: true
         example: null
@@ -1117,9 +1139,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.disabled_reason:
+      disabled_reason:
         custom: []
-        name: data.disabled_reason
+        name: disabled_reason
         description: 'Why it was disabled, or null.'
         required: true
         example: null
@@ -1177,7 +1199,7 @@ endpoints:
       -
         custom: []
         status: 202
-        content: '{"data":{"id":"01jb8x3a4b5c6d7e8f9g0h1j2k","event":{"id":"01jb8x3a1b2c3d4e5f6g7h8j9k","type":"webhook.ping"},"state":"retrying","next_attempt_at":"2026-10-20T12:01:10+00:00","created_at":"2026-10-20T12:01:00+00:00","attempts":[{"attempt":1,"response_status":503,"response_body":"Service Unavailable","error":null,"duration_ms":182,"attempted_at":"2026-10-20T12:01:00+00:00"}]}}'
+        content: '{"id":"01jb8x3a4b5c6d7e8f9g0h1j2k","event":{"id":"01jb8x3a1b2c3d4e5f6g7h8j9k","type":"webhook.ping"},"state":"retrying","next_attempt_at":"2026-10-20T12:01:10+00:00","created_at":"2026-10-20T12:01:00+00:00","attempts":[{"attempt":1,"response_status":503,"response_body":"Service Unavailable","error":null,"duration_ms":182,"attempted_at":"2026-10-20T12:01:00+00:00"}]}'
         headers: []
         description: 'Ping queued.'
       -
@@ -1205,9 +1227,9 @@ endpoints:
         headers: []
         description: 'The subscription is disabled, or its endpoint has not been validated.'
     responseFields:
-      data.next_attempt_at:
+      next_attempt_at:
         custom: []
-        name: data.next_attempt_at
+        name: next_attempt_at
         description: 'When the next attempt is due, or null when none is.'
         required: true
         example: null
@@ -1216,9 +1238,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].response_status':
+      'attempts[].response_status':
         custom: []
-        name: 'data.attempts[].response_status'
+        name: 'attempts[].response_status'
         description: "The endpoint's status code, or null when no response arrived."
         required: true
         example: null
@@ -1227,9 +1249,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].response_body':
+      'attempts[].response_body':
         custom: []
-        name: 'data.attempts[].response_body'
+        name: 'attempts[].response_body'
         description: 'The start of the response body, or null.'
         required: true
         example: null
@@ -1238,9 +1260,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].error':
+      'attempts[].error':
         custom: []
-        name: 'data.attempts[].error'
+        name: 'attempts[].error'
         description: 'Why the attempt failed without a response, or null.'
         required: true
         example: null
@@ -1249,9 +1271,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].duration_ms':
+      'attempts[].duration_ms':
         custom: []
-        name: 'data.attempts[].duration_ms'
+        name: 'attempts[].duration_ms'
         description: 'How long the attempt took, or null.'
         required: true
         example: null
@@ -1459,7 +1481,7 @@ endpoints:
       -
         custom: []
         status: 202
-        content: '{"data":{"id":"01jb8x3a4b5c6d7e8f9g0h1j2k","event":{"id":"01jb8x3a1b2c3d4e5f6g7h8j9k","type":"webhook.ping"},"state":"retrying","next_attempt_at":"2026-10-20T12:01:10+00:00","created_at":"2026-10-20T12:01:00+00:00","attempts":[{"attempt":1,"response_status":503,"response_body":"Service Unavailable","error":null,"duration_ms":182,"attempted_at":"2026-10-20T12:01:00+00:00"}]}}'
+        content: '{"id":"01jb8x3a4b5c6d7e8f9g0h1j2k","event":{"id":"01jb8x3a1b2c3d4e5f6g7h8j9k","type":"webhook.ping"},"state":"retrying","next_attempt_at":"2026-10-20T12:01:10+00:00","created_at":"2026-10-20T12:01:00+00:00","attempts":[{"attempt":1,"response_status":503,"response_body":"Service Unavailable","error":null,"duration_ms":182,"attempted_at":"2026-10-20T12:01:00+00:00"}]}'
         headers: []
         description: 'Redelivery queued.'
       -
@@ -1481,9 +1503,9 @@ endpoints:
         headers: []
         description: 'No webhook with this ID belongs to the authenticated user.'
     responseFields:
-      data.next_attempt_at:
+      next_attempt_at:
         custom: []
-        name: data.next_attempt_at
+        name: next_attempt_at
         description: 'When the next attempt is due, or null when none is.'
         required: true
         example: null
@@ -1492,9 +1514,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].response_status':
+      'attempts[].response_status':
         custom: []
-        name: 'data.attempts[].response_status'
+        name: 'attempts[].response_status'
         description: "The endpoint's status code, or null when no response arrived."
         required: true
         example: null
@@ -1503,9 +1525,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].response_body':
+      'attempts[].response_body':
         custom: []
-        name: 'data.attempts[].response_body'
+        name: 'attempts[].response_body'
         description: 'The start of the response body, or null.'
         required: true
         example: null
@@ -1514,9 +1536,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].error':
+      'attempts[].error':
         custom: []
-        name: 'data.attempts[].error'
+        name: 'attempts[].error'
         description: 'Why the attempt failed without a response, or null.'
         required: true
         example: null
@@ -1525,9 +1547,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      'data.attempts[].duration_ms':
+      'attempts[].duration_ms':
         custom: []
-        name: 'data.attempts[].duration_ms'
+        name: 'attempts[].duration_ms'
         description: 'How long the attempt took, or null.'
         required: true
         example: null

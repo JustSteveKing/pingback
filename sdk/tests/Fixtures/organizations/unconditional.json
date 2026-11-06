@@ -16,10 +16,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"2a2e458a-402c-412b-8e8b-d365197906e8\""
+                        "\"725a303b-7de2-4ecf-8b23-c0ebf8161baf\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:09 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"caa947b85d07e948bb4ec4902a7a291f\""
+                        "\"4366db728fad4462fcf34141dcc3ff21\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63w5famt5gcfd9hn49qdfng"
+                        "http://127.0.0.1:8000/v1/organizations/01m6rbwnchfkeyhamjtry7aw3h"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "540"
+                        "464"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,10 +80,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bd49-7336-b090-aca4c0395a19"
+                        "01a1b0be-558a-72a9-b57a-12b174f36002"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63w5famt5gcfd9hn49qdfng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:09+00:00\",\"updated_at\":\"2026-10-29T13:04:09+00:00\",\"deleted_at\":null}}"
+                "body": "{\"id\":\"01m6rbwnchfkeyhamjtry7aw3h\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:46+00:00\",\"updated_at\":\"2026-11-06T12:03:46+00:00\",\"deleted_at\":null}"
             }
         },
         {
@@ -99,7 +99,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -124,7 +124,7 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:09 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/json"
@@ -136,7 +136,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "539"
+                        "463"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -157,17 +157,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bd65-7012-895f-8126be0c7d40"
+                        "01a1b0be-559d-71e6-b592-0f749e0a29e4"
                     ]
                 },
-                "body": "[{\"id\":\"01m63w5famt5gcfd9hn49qdfng\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:09+00:00\",\"updated_at\":\"2026-10-29T13:04:09+00:00\",\"deleted_at\":null}]"
+                "body": "[{\"id\":\"01m6rbw902h93nrebyvv1n3tt6\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:33+00:00\",\"updated_at\":\"2026-11-06T12:03:33+00:00\",\"deleted_at\":null},{\"id\":\"01m6rbwnchfkeyhamjtry7aw3h\",\"name\":\"Contract Unconditional Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":null,\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:46+00:00\",\"updated_at\":\"2026-11-06T12:03:46+00:00\",\"deleted_at\":null}]"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63w5famt5gcfd9hn49qdfng",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5famt5gcfd9hn49qdfng",
+                "path": "/v1/organizations/01m6rbw902h93nrebyvv1n3tt6",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m6rbw902h93nrebyvv1n3tt6",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -179,7 +179,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -204,7 +204,7 @@
                         "no-store, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:09 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/problem+json"
@@ -216,7 +216,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "538"
+                        "462"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -237,10 +237,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bd7b-73a3-a43d-84ece0aaf032"
+                        "01a1b0be-55ae-70fe-804d-69aea923900c"
                     ]
                 },
-                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\",\"instance\":\"urn:uuid:01a187c2-bd7b-73a3-a43d-84ece0aaf032\"}"
+                "body": "{\"type\":\"https://apiguide.dev/errors/precondition-required\",\"title\":\"Precondition Required\",\"status\":428,\"detail\":\"This request must be conditional. Fetch the resource, then retry with its ETag in If-Match.\",\"instance\":\"urn:uuid:01a1b0be-55ae-70fe-804d-69aea923900c\"}"
             }
         }
     ]

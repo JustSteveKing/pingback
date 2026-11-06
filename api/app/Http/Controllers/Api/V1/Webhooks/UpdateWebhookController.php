@@ -33,7 +33,7 @@ use Knuckles\Scribe\Attributes\UrlParam;
 #[BodyParam('description', type: 'string', description: 'A new label, or null to clear it.', required: false, example: 'Staging receiver')]
 #[BodyParam('events', type: 'string[]', description: 'The event types to receive from now on.', required: false, example: ['*'])]
 #[BodyParam('enabled', type: 'boolean', description: 'false to pause deliveries, true to resume them.', required: false, example: true)]
-#[Response(content: ['data' => [
+#[Response(content: [
     'id' => '01jb8x2m4k5n6p7q8r9s0t1v2w',
     'url' => 'https://hooks.example.com/kit',
     'description' => 'Production receiver',
@@ -45,7 +45,7 @@ use Knuckles\Scribe\Attributes\UrlParam;
     'disabled_reason' => null,
     'created_at' => '2026-10-20T12:00:00+00:00',
     'updated_at' => '2026-10-20T12:00:00+00:00',
-]], status: 200, description: 'The updated subscription.')]
+], status: 200, description: 'The updated subscription.')]
 #[Response(
     content: [
         'type' => 'https://apiguide.dev/errors/validation-failed',
@@ -87,11 +87,11 @@ use Knuckles\Scribe\Attributes\UrlParam;
     status: 403,
     description: 'Token is missing the webhooks:write ability.',
 )]
-#[ResponseField('data.description', 'string', 'The label given to the subscription.', nullable: true)]
-#[ResponseField('data.validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
-#[ResponseField('data.allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
-#[ResponseField('data.disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
-#[ResponseField('data.disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
+#[ResponseField('description', 'string', 'The label given to the subscription.', nullable: true)]
+#[ResponseField('validated_at', 'string', 'When the endpoint consented to deliveries, or null if it has not.', nullable: true)]
+#[ResponseField('allowed_rate', 'integer', 'Deliveries a minute the endpoint granted, or null for no limit.', nullable: true)]
+#[ResponseField('disabled_at', 'string', 'When the subscription was disabled, or null while it is enabled.', nullable: true)]
+#[ResponseField('disabled_reason', 'string', 'Why it was disabled, or null.', nullable: true)]
 final class UpdateWebhookController
 {
     public function __invoke(UpdateWebhookRequest $request, #[CurrentUser] User $user): JsonResponse

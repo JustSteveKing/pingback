@@ -61,9 +61,9 @@ it('signs a ping so that an api-toolbox receiver verifies it', function (): void
     $response = $this->withToken($user->createToken('t', ['webhooks:write'])->plainTextToken)
         ->postJson('/v1/webhooks/' . $subscription->id . '/ping')
         ->assertAccepted()
-        ->assertJsonPath('data.event.type', 'webhook.ping');
+        ->assertJsonPath('event.type', 'webhook.ping');
 
-    $delivery = WebhookDelivery::query()->findOrFail($response->json('data.id'));
+    $delivery = WebhookDelivery::query()->findOrFail($response->json('id'));
 
     expect($delivery->state)->toBe(DeliveryState::Succeeded);
     expect($delivery->attempts()->sole()->response_status)->toBe(200);
@@ -278,10 +278,10 @@ it('redelivers an event as a new delivery with the same event', function (): voi
     $response = $this->withToken($user->createToken('t', ['webhooks:write'])->plainTextToken)
         ->postJson("/v1/webhooks/{$subscription->id}/deliveries/{$first->id}/redeliver")
         ->assertAccepted()
-        ->assertJsonPath('data.event.id', $first->webhook_event_id)
-        ->assertJsonPath('data.state', 'pending');
+        ->assertJsonPath('event.id', $first->webhook_event_id)
+        ->assertJsonPath('state', 'pending');
 
-    $redelivery = WebhookDelivery::query()->findOrFail($response->json('data.id'));
+    $redelivery = WebhookDelivery::query()->findOrFail($response->json('id'));
 
     expect($redelivery->id)->not->toBe($first->id);
     expect($redelivery->state)->toBe(DeliveryState::Succeeded);

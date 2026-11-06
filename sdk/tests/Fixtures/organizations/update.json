@@ -16,10 +16,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "Idempotency-Key": [
-                        "\"fc66b33f-f4ea-406b-b746-a9637b5d619a\""
+                        "\"890f4981-d47d-4ba8-bcaa-0b8df466a908\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -44,22 +44,22 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:08 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"363959b74078eb08ef6a26c697473789\""
+                        "\"2e9c3f1a798358b95a23d2a534d72f1b\""
                     ],
                     "location": [
-                        "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx"
+                        "http://127.0.0.1:8000/v1/organizations/01m6rbwn8pkatfzncq2c1y4wqe"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "547"
+                        "471"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -80,17 +80,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bca8-7218-8d20-b3ada51d4ad3"
+                        "01a1b0be-550f-73f1-b475-aa8083862bfe"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":\"hello@contract.example\",\"phone\":null,\"address\":null,\"city\":\"York\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"id\":\"01m6rbwn8pkatfzncq2c1y4wqe\",\"name\":\"Contract Update Ltd\",\"email\":\"hello@contract.example\",\"phone\":null,\"address\":null,\"city\":\"York\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:46+00:00\",\"updated_at\":\"2026-11-06T12:03:46+00:00\",\"deleted_at\":null}"
             }
         },
         {
             "request": {
                 "method": "PATCH",
-                "path": "/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
+                "path": "/v1/organizations/01m6rbwn8pkatfzncq2c1y4wqe",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m6rbwn8pkatfzncq2c1y4wqe",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -102,10 +102,10 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "If-Match": [
-                        "\"363959b74078eb08ef6a26c697473789\""
+                        "\"2e9c3f1a798358b95a23d2a534d72f1b\""
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -130,13 +130,13 @@
                         "no-cache, private"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:08 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"9912ab797a17f2c98ca445b784b73abd\""
+                        "\"44aabdd556cdddb383de99e54ace619d\""
                     ],
                     "accept-patch": [
                         "application/merge-patch+json"
@@ -145,7 +145,7 @@
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "546"
+                        "470"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -166,17 +166,17 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bcc3-7160-8eea-f6669ba34f87"
+                        "01a1b0be-5523-708b-ae69-348e13725618"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"id\":\"01m6rbwn8pkatfzncq2c1y4wqe\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:46+00:00\",\"updated_at\":\"2026-11-06T12:03:46+00:00\",\"deleted_at\":null}"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "path": "/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
-                "uri": "http://127.0.0.1:8000/v1/organizations/01m63w5f5j4mfc46wxb0mnbacx",
+                "path": "/v1/organizations/01m6rbwn8pkatfzncq2c1y4wqe",
+                "uri": "http://127.0.0.1:8000/v1/organizations/01m6rbwn8pkatfzncq2c1y4wqe",
                 "headers": {
                     "Host": [
                         "127.0.0.1:8000"
@@ -185,7 +185,7 @@
                         "application/json, application/problem+json"
                     ],
                     "User-Agent": [
-                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.4 php/8.5.12"
+                        "pingback-sdk-php/0.0.1-dev sdk-toolbox/0.0.8 php/8.5.12"
                     ],
                     "Authorization": [
                         "[redacted]"
@@ -210,22 +210,22 @@
                         "private, must-revalidate"
                     ],
                     "date": [
-                        "Thu, 29 Oct 2026 13:04:08 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "content-type": [
                         "application/json"
                     ],
                     "etag": [
-                        "\"9912ab797a17f2c98ca445b784b73abd\""
+                        "\"44aabdd556cdddb383de99e54ace619d\""
                     ],
                     "last-modified": [
-                        "Thu, 29 Oct 2026 13:04:08 GMT"
+                        "Fri, 06 Nov 2026 12:03:46 GMT"
                     ],
                     "x-ratelimit-limit": [
                         "600"
                     ],
                     "x-ratelimit-remaining": [
-                        "545"
+                        "469"
                     ],
                     "x-content-type-options": [
                         "nosniff"
@@ -246,10 +246,10 @@
                         "Content-Language, Deprecation, ETag, Idempotency-Key, Idempotency-Replayed, Last-Modified, Link, Retry-After, Sunset, X-Request-Id"
                     ],
                     "x-request-id": [
-                        "01a187c2-bcda-7322-a4bd-39d048f05c88"
+                        "01a1b0be-5535-721f-b2ff-f8d2efcfe49c"
                     ]
                 },
-                "body": "{\"data\":{\"id\":\"01m63w5f5j4mfc46wxb0mnbacx\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-10-29T13:04:08+00:00\",\"updated_at\":\"2026-10-29T13:04:08+00:00\",\"deleted_at\":null}}"
+                "body": "{\"id\":\"01m6rbwn8pkatfzncq2c1y4wqe\",\"name\":\"Contract Update Ltd\",\"email\":null,\"phone\":null,\"address\":null,\"city\":\"Leeds\",\"region\":null,\"country\":null,\"postal_code\":null,\"created_at\":\"2026-11-06T12:03:46+00:00\",\"updated_at\":\"2026-11-06T12:03:46+00:00\",\"deleted_at\":null}"
             }
         }
     ]

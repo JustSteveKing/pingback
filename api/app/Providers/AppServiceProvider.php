@@ -17,6 +17,7 @@ use Illuminate\Contracts\Http\Kernel as KernelContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,10 @@ final class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         ProductionSecurityChecks::assertForEnvironment((string) app()->environment());
+
+        // Every body is the representation itself, with its metadata in headers (ETag, Location,
+        // Link), as CursorPage already does for lists: ADR-0009.
+        JsonResource::withoutWrapping();
 
         // A token without the ability is refused before anything else looks at the request: before
         // idempotency, so the refusal is not stored and replayed to a retry with a better token, and

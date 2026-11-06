@@ -13,7 +13,7 @@ endpoints:
       subgroup: 'Token Authentication'
       subgroupDescription: ''
       title: Register
-      description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user with the token, its type and expiry in meta, and sends a verification email.'
+      description: 'Create an account and issue its first bearer token. Use it once per new user; send an Idempotency-Key so a retried request cannot create a second account. Returns the user, with the token, its type and its expiry beside the user fields, and sends a verification email.'
       authenticated: false
       deprecated: false
     headers:
@@ -79,16 +79,49 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01m63xxg5jvzscwssjy2ea9fpk","name":"Justina Gaylord","email":"lafayette.considine@example.com","email_verified_at":"2026-10-29T13:34:44+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
+        content: '{"id":"01jb8x0k2m4n6p8q0r2s4t6v8w","name":"Jane Doe","email":"jane@example.com","email_verified_at":null,"created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","token":"1|example-token","token_type":"Bearer","token_expires_at":null}'
         headers: []
-        description: 'Registration succeeded.'
+        description: 'Registration succeeded. This is the only response that carries the token.'
       -
         custom: []
         status: 422
         content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The email has already been taken.","errors":{"email":["The email has already been taken."]}}'
         headers: []
         description: 'Validation failed.'
-    responseFields: []
+    responseFields:
+      email_verified_at:
+        custom: []
+        name: email_verified_at
+        description: 'When the user verified their email address, or null if they have not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      token:
+        custom: []
+        name: token
+        description: 'The bearer token. It appears in this response only and cannot be read again.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      token_expires_at:
+        custom: []
+        name: token_expires_at
+        description: 'When the token expires, or null if it does not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
     auth: []
     controller: null
     method: null
@@ -105,7 +138,7 @@ endpoints:
       subgroup: 'Token Authentication'
       subgroupDescription: ''
       title: Login
-      description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user with the token, its type and expiry in meta; wrong credentials are a 422 on the email field.'
+      description: 'Exchange an email and password for a bearer token. Use it when a user signs in on a new device, naming the device in device_name. Returns the user, with the token, its type and its expiry beside the user fields; wrong credentials are a 422 on the email field.'
       authenticated: false
       deprecated: false
     headers:
@@ -158,16 +191,49 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01m63xxgaawnbhw7bv9qeb6m63","name":"Justina Gaylord","email":"cormier.nick@example.com","email_verified_at":"2026-10-29T13:34:45+00:00","created_at":null,"updated_at":null},"meta":{"token":"1|example-token","token_type":"Bearer","expires_at":null}}'
+        content: '{"id":"01jb8x0k2m4n6p8q0r2s4t6v8w","name":"Jane Doe","email":"jane@example.com","email_verified_at":"2026-10-20T12:00:00+00:00","created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","token":"1|example-token","token_type":"Bearer","token_expires_at":null}'
         headers: []
-        description: 'Login succeeded.'
+        description: 'Login succeeded. This is the only response that carries the token.'
       -
         custom: []
         status: 422
         content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"The provided credentials are incorrect.","errors":{"email":["The provided credentials are incorrect."]}}'
         headers: []
         description: 'Credentials were invalid.'
-    responseFields: []
+    responseFields:
+      email_verified_at:
+        custom: []
+        name: email_verified_at
+        description: 'When the user verified their email address, or null if they have not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      token:
+        custom: []
+        name: token
+        description: 'The bearer token. It appears in this response only and cannot be read again.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      token_expires_at:
+        custom: []
+        name: token_expires_at
+        description: 'When the token expires, or null if it does not.'
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
     auth: []
     controller: null
     method: null
@@ -490,7 +556,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01m63xxgmht1hb7735t1ndsk7m","name":"Morgan Hirthe","email":"dare.emelie@example.com","email_verified_at":"2026-10-29T13:34:45+00:00","created_at":null,"updated_at":null}}'
+        content: '{"id":"01m6rbsaarnkth16zd4yrpj146","name":"Morgan Hirthe","email":"dare.emelie@example.com","email_verified_at":"2026-11-06T12:01:56+00:00","created_at":null,"updated_at":null}'
         headers: []
         description: 'Authenticated user profile.'
       -
@@ -631,7 +697,7 @@ endpoints:
       subgroup: 'Token Authentication'
       subgroupDescription: ''
       title: 'Create API Key'
-      description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in meta.token, which is shown once and cannot be read again.'
+      description: 'Create a long-lived personal access token with chosen abilities, for a script, integration or agent that should not sign in with a password. It can only hold abilities the token making this request holds, and expires on expires_at, or after the configured default when that is left out. Returns the token with its plain-text value in its token field, which appears in this response only and cannot be read again.'
       authenticated: true
       deprecated: false
     headers:
@@ -690,9 +756,9 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"7","name":"deploy-bot","abilities":["auth:me","auth:tokens:read"],"last_used_at":null,"expires_at":"2027-01-01T00:00:00+00:00","created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","is_current":false},"meta":{"token":"7|example-token","token_type":"Bearer"}}'
+        content: '{"id":"7","name":"deploy-bot","abilities":["auth:me","auth:tokens:read"],"last_used_at":null,"expires_at":"2027-01-01T00:00:00+00:00","created_at":"2026-10-20T12:00:00+00:00","updated_at":"2026-10-20T12:00:00+00:00","is_current":false,"token":"7|example-token","token_type":"Bearer"}'
         headers: []
-        description: 'API key created. meta.token is the only time its value is returned.'
+        description: 'API key created. This is the only response that carries its value.'
       -
         custom: []
         status: 401
@@ -711,7 +777,18 @@ endpoints:
         content: '{"type":"https:\/\/apiguide.dev\/errors\/validation-failed","title":"Validation Failed","status":422,"detail":"You can only grant abilities your current token holds.","errors":{"abilities.0":["You can only grant abilities your current token holds."]}}'
         headers: []
         description: 'A requested ability is not held by this token, or the expiry is invalid.'
-    responseFields: []
+    responseFields:
+      token:
+        custom: []
+        name: token
+        description: "The API key's plain-text value. It appears in this response only and cannot be read again."
+        required: true
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     auth:
       - headers
       - Authorization

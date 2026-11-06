@@ -313,7 +313,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}'
         headers: []
         description: 'Organisation created.'
       -
@@ -335,9 +335,9 @@ endpoints:
         headers: []
         description: 'A field is missing, too long or malformed.'
     responseFields:
-      data.email:
+      email:
         custom: []
-        name: data.email
+        name: email
         description: "The organisation's email address, or null."
         required: true
         example: null
@@ -346,9 +346,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.phone:
+      phone:
         custom: []
-        name: data.phone
+        name: phone
         description: 'A phone number, or null.'
         required: true
         example: null
@@ -357,9 +357,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.address:
+      address:
         custom: []
-        name: data.address
+        name: address
         description: 'The street address, or null.'
         required: true
         example: null
@@ -368,9 +368,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.city:
+      city:
         custom: []
-        name: data.city
+        name: city
         description: 'The city, or null.'
         required: true
         example: null
@@ -379,9 +379,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.region:
+      region:
         custom: []
-        name: data.region
+        name: region
         description: 'The state, province or county, or null.'
         required: true
         example: null
@@ -390,9 +390,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.country:
+      country:
         custom: []
-        name: data.country
+        name: country
         description: 'A two-letter ISO 3166-1 code, or null.'
         required: true
         example: null
@@ -401,9 +401,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.postal_code:
+      postal_code:
         custom: []
-        name: data.postal_code
+        name: postal_code
         description: 'The postal code, or null.'
         required: true
         example: null
@@ -412,9 +412,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.deleted_at:
+      deleted_at:
         custom: []
-        name: data.deleted_at
+        name: deleted_at
         description: 'When it was deleted, or null if it is not.'
         required: true
         example: null
@@ -473,7 +473,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}'
         headers: []
         description: 'The organisation, with its ETag.'
       -
@@ -495,9 +495,9 @@ endpoints:
         headers: []
         description: 'No organisation with this ID belongs to the authenticated account.'
     responseFields:
-      data.email:
+      email:
         custom: []
-        name: data.email
+        name: email
         description: "The organisation's email address, or null."
         required: true
         example: null
@@ -506,9 +506,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.phone:
+      phone:
         custom: []
-        name: data.phone
+        name: phone
         description: 'A phone number, or null.'
         required: true
         example: null
@@ -517,9 +517,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.address:
+      address:
         custom: []
-        name: data.address
+        name: address
         description: 'The street address, or null.'
         required: true
         example: null
@@ -528,9 +528,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.city:
+      city:
         custom: []
-        name: data.city
+        name: city
         description: 'The city, or null.'
         required: true
         example: null
@@ -539,9 +539,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.region:
+      region:
         custom: []
-        name: data.region
+        name: region
         description: 'The state, province or county, or null.'
         required: true
         example: null
@@ -550,9 +550,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.country:
+      country:
         custom: []
-        name: data.country
+        name: country
         description: 'A two-letter ISO 3166-1 code, or null.'
         required: true
         example: null
@@ -561,9 +561,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.postal_code:
+      postal_code:
         custom: []
-        name: data.postal_code
+        name: postal_code
         description: 'The postal code, or null.'
         required: true
         example: null
@@ -572,9 +572,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.deleted_at:
+      deleted_at:
         custom: []
-        name: data.deleted_at
+        name: deleted_at
         description: 'When it was deleted, or null if it is not.'
         required: true
         example: null
@@ -729,7 +729,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}'
         headers: []
         description: 'The organisation after the change.'
       -
@@ -775,9 +775,9 @@ endpoints:
         headers: []
         description: 'The request has no If-Match.'
     responseFields:
-      data.email:
+      email:
         custom: []
-        name: data.email
+        name: email
         description: "The organisation's email address, or null."
         required: true
         example: null
@@ -786,9 +786,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.phone:
+      phone:
         custom: []
-        name: data.phone
+        name: phone
         description: 'A phone number, or null.'
         required: true
         example: null
@@ -797,9 +797,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.address:
+      address:
         custom: []
-        name: data.address
+        name: address
         description: 'The street address, or null.'
         required: true
         example: null
@@ -808,9 +808,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.city:
+      city:
         custom: []
-        name: data.city
+        name: city
         description: 'The city, or null.'
         required: true
         example: null
@@ -819,9 +819,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.region:
+      region:
         custom: []
-        name: data.region
+        name: region
         description: 'The state, province or county, or null.'
         required: true
         example: null
@@ -830,9 +830,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.country:
+      country:
         custom: []
-        name: data.country
+        name: country
         description: 'A two-letter ISO 3166-1 code, or null.'
         required: true
         example: null
@@ -841,9 +841,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.postal_code:
+      postal_code:
         custom: []
-        name: data.postal_code
+        name: postal_code
         description: 'The postal code, or null.'
         required: true
         example: null
@@ -852,9 +852,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.deleted_at:
+      deleted_at:
         custom: []
-        name: data.deleted_at
+        name: deleted_at
         description: 'When it was deleted, or null if it is not.'
         required: true
         example: null
@@ -996,7 +996,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}}'
+        content: '{"id":"01jbd0x4qsm2cf4c8m3x6y1v7z","name":"Rippin, Kovacek and Bins","email":"info@rippin.example","phone":"+1 555 0100","address":"742 Evergreen Terrace","city":"Springfield","region":"Oregon","country":"US","postal_code":"97403","created_at":"2026-10-29T09:00:00+00:00","updated_at":"2026-10-29T09:00:00+00:00","deleted_at":null}'
         headers: []
         description: 'The organisation, restored.'
       -
@@ -1018,9 +1018,9 @@ endpoints:
         headers: []
         description: 'No organisation with this ID belongs to the authenticated account.'
     responseFields:
-      data.email:
+      email:
         custom: []
-        name: data.email
+        name: email
         description: "The organisation's email address, or null."
         required: true
         example: null
@@ -1029,9 +1029,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.phone:
+      phone:
         custom: []
-        name: data.phone
+        name: phone
         description: 'A phone number, or null.'
         required: true
         example: null
@@ -1040,9 +1040,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.address:
+      address:
         custom: []
-        name: data.address
+        name: address
         description: 'The street address, or null.'
         required: true
         example: null
@@ -1051,9 +1051,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.city:
+      city:
         custom: []
-        name: data.city
+        name: city
         description: 'The city, or null.'
         required: true
         example: null
@@ -1062,9 +1062,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.region:
+      region:
         custom: []
-        name: data.region
+        name: region
         description: 'The state, province or county, or null.'
         required: true
         example: null
@@ -1073,9 +1073,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.country:
+      country:
         custom: []
-        name: data.country
+        name: country
         description: 'A two-letter ISO 3166-1 code, or null.'
         required: true
         example: null
@@ -1084,9 +1084,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.postal_code:
+      postal_code:
         custom: []
-        name: data.postal_code
+        name: postal_code
         description: 'The postal code, or null.'
         required: true
         example: null
@@ -1095,9 +1095,9 @@ endpoints:
         exampleWasSpecified: false
         nullable: true
         deprecated: false
-      data.deleted_at:
+      deleted_at:
         custom: []
-        name: data.deleted_at
+        name: deleted_at
         description: 'When it was deleted, or null if it is not.'
         required: true
         example: null

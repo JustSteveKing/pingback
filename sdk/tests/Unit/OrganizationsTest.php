@@ -37,7 +37,7 @@ function sdk(FakeClient $http): Pingback
 }
 
 it('reads an organisation with the ETag it came with', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => organizationJson()], headers: ['ETag' => '"v1"']));
+    $http = new FakeClient(FakeResponse::json(organizationJson(), headers: ['ETag' => '"v1"']));
 
     $organization = sdk($http)->organizations()->get('01m63p2z7qwssrw1x1p7fpxgvm');
 
@@ -49,8 +49,8 @@ it('reads an organisation with the ETag it came with', function (): void {
 
 it('sends only what changed, as a merge patch, with If-Match', function (): void {
     $http = new FakeClient(
-        FakeResponse::json(['data' => organizationJson()], headers: ['ETag' => '"v1"']),
-        FakeResponse::json(['data' => organizationJson(['city' => 'Leeds', 'email' => null])], headers: ['ETag' => '"v2"']),
+        FakeResponse::json(organizationJson(), headers: ['ETag' => '"v1"']),
+        FakeResponse::json(organizationJson(['city' => 'Leeds', 'email' => null]), headers: ['ETag' => '"v2"']),
     );
     $organizations = sdk($http)->organizations();
 
@@ -66,7 +66,7 @@ it('sends only what changed, as a merge patch, with If-Match', function (): void
 });
 
 it('sends an update with no If-Match when the organisation came from a list', function (): void {
-    $http = new FakeClient(FakeResponse::json([organizationJson()]), FakeResponse::json(['data' => organizationJson()]));
+    $http = new FakeClient(FakeResponse::json([organizationJson()]), FakeResponse::json(organizationJson()));
     $organizations = sdk($http)->organizations();
 
     $listed = $organizations->all()->first();
@@ -77,7 +77,7 @@ it('sends an update with no If-Match when the organisation came from a list', fu
 });
 
 it('deletes with If-Match', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => organizationJson()], headers: ['ETag' => '"v1"']), FakeResponse::empty());
+    $http = new FakeClient(FakeResponse::json(organizationJson(), headers: ['ETag' => '"v1"']), FakeResponse::empty());
     $organizations = sdk($http)->organizations();
 
     $organizations->delete($organizations->get('01m63p2z7qwssrw1x1p7fpxgvm'));
@@ -87,7 +87,7 @@ it('deletes with If-Match', function (): void {
 });
 
 it('creates with an Idempotency-Key, sending only the fields given', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => organizationJson()], 201, ['ETag' => '"v1"']));
+    $http = new FakeClient(FakeResponse::json(organizationJson(), 201, ['ETag' => '"v1"']));
 
     sdk($http)->organizations()->create(new NewOrganization('Rippin Group', city: 'York'), 'org-1');
 

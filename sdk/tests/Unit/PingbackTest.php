@@ -9,7 +9,7 @@ use JustSteveKing\SdkToolbox\Testing\FakeResponse;
 
 function account(): array
 {
-    return ['data' => ['id' => '01m63p2z7qwssrw1x1p7fpxgvm', 'name' => 'Acme Corporation', 'created_at' => '2026-10-29T11:17:55+00:00', 'updated_at' => '2026-10-29T11:17:55+00:00']];
+    return ['id' => '01m63p2z7qwssrw1x1p7fpxgvm', 'name' => 'Acme Corporation', 'created_at' => '2026-10-29T11:17:55+00:00', 'updated_at' => '2026-10-29T11:17:55+00:00'];
 }
 
 it('sends the token as a bearer token and says who it is', function (): void {

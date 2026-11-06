@@ -28,14 +28,14 @@ use Knuckles\Scribe\Attributes\ResponseField;
     description: 'Add an organisation to the account. Send an Idempotency-Key, so a retry after a timeout does not create it twice. Returns the organisation with its ETag, and its URL in Location.',
 )]
 #[Authenticated]
-#[ResponseField('data.email', 'string', 'The organisation\'s email address, or null.', nullable: true)]
-#[ResponseField('data.phone', 'string', 'A phone number, or null.', nullable: true)]
-#[ResponseField('data.address', 'string', 'The street address, or null.', nullable: true)]
-#[ResponseField('data.city', 'string', 'The city, or null.', nullable: true)]
-#[ResponseField('data.region', 'string', 'The state, province or county, or null.', nullable: true)]
-#[ResponseField('data.country', 'string', 'A two-letter ISO 3166-1 code, or null.', nullable: true)]
-#[ResponseField('data.postal_code', 'string', 'The postal code, or null.', nullable: true)]
-#[ResponseField('data.deleted_at', 'string', 'When it was deleted, or null if it is not.', nullable: true)]
+#[ResponseField('email', 'string', 'The organisation\'s email address, or null.', nullable: true)]
+#[ResponseField('phone', 'string', 'A phone number, or null.', nullable: true)]
+#[ResponseField('address', 'string', 'The street address, or null.', nullable: true)]
+#[ResponseField('city', 'string', 'The city, or null.', nullable: true)]
+#[ResponseField('region', 'string', 'The state, province or county, or null.', nullable: true)]
+#[ResponseField('country', 'string', 'A two-letter ISO 3166-1 code, or null.', nullable: true)]
+#[ResponseField('postal_code', 'string', 'The postal code, or null.', nullable: true)]
+#[ResponseField('deleted_at', 'string', 'When it was deleted, or null if it is not.', nullable: true)]
 #[Header('Idempotency-Key', '"organization-retry-1"')]
 #[BodyParam('name', type: 'string', description: 'Up to 100 characters.', required: true, example: 'Rippin, Kovacek and Bins')]
 #[BodyParam('email', type: 'string', description: 'An email address, up to 50 characters, or null.', required: false, example: 'info@rippin.example')]
@@ -45,7 +45,7 @@ use Knuckles\Scribe\Attributes\ResponseField;
 #[BodyParam('region', type: 'string', description: 'A state, province or county, up to 50 characters, or null.', required: false, example: 'Oregon')]
 #[BodyParam('country', type: 'string', description: 'A two-letter ISO 3166-1 code in capitals, or null.', required: false, example: 'US')]
 #[BodyParam('postal_code', type: 'string', description: 'Up to 25 characters, or null.', required: false, example: '97403')]
-#[Response(content: ['data' => OrganizationResource::EXAMPLE], status: 201, description: 'Organisation created.')]
+#[Response(content: OrganizationResource::EXAMPLE, status: 201, description: 'Organisation created.')]
 #[Response(
     content: [
         'type' => 'https://apiguide.dev/errors/validation-failed',

@@ -35,7 +35,7 @@ function contactJson(array $overrides = []): array
 }
 
 it('reads a contact with its organisation and ETag', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => contactJson()], headers: ['ETag' => '"v1"']));
+    $http = new FakeClient(FakeResponse::json(contactJson(), headers: ['ETag' => '"v1"']));
 
     $contact = sdk($http)->contacts()->get('01m63qf6c1yvphnafgx4qc8n2j');
 
@@ -46,8 +46,8 @@ it('reads a contact with its organisation and ETag', function (): void {
 
 it('takes a contact away from its organisation by patching it to null', function (): void {
     $http = new FakeClient(
-        FakeResponse::json(['data' => contactJson()], headers: ['ETag' => '"v1"']),
-        FakeResponse::json(['data' => contactJson(['organization_id' => null])], headers: ['ETag' => '"v2"']),
+        FakeResponse::json(contactJson(), headers: ['ETag' => '"v1"']),
+        FakeResponse::json(contactJson(['organization_id' => null]), headers: ['ETag' => '"v2"']),
     );
     $contacts = sdk($http)->contacts();
 
@@ -70,7 +70,7 @@ it('lists the contacts at an organisation', function (): void {
 });
 
 it('creates with the API\'s field names', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => contactJson()], 201));
+    $http = new FakeClient(FakeResponse::json(contactJson(), 201));
 
     sdk($http)->contacts()->create(new NewContact('Ada', 'Lovelace', organizationId: '01m63p2z7qwssrw1x1p7fpxgvm'));
 
@@ -84,7 +84,7 @@ it('never clears a name', function (string $field): void {
 })->with(['firstName', 'lastName']);
 
 it('reads the list of phones, and the deprecated phone beside it', function (): void {
-    $http = new FakeClient(FakeResponse::json(['data' => contactJson()], headers: ['ETag' => '"v1"']));
+    $http = new FakeClient(FakeResponse::json(contactJson(), headers: ['ETag' => '"v1"']));
 
     $contact = sdk($http)->contacts()->get('01m63qf6c1yvphnafgx4qc8n2j');
 
@@ -93,8 +93,8 @@ it('reads the list of phones, and the deprecated phone beside it', function (): 
 
 it('sends the whole list of phones when they change, as merge patch replaces arrays', function (): void {
     $http = new FakeClient(
-        FakeResponse::json(['data' => contactJson()], headers: ['ETag' => '"v1"']),
-        FakeResponse::json(['data' => contactJson()], headers: ['ETag' => '"v2"']),
+        FakeResponse::json(contactJson(), headers: ['ETag' => '"v1"']),
+        FakeResponse::json(contactJson(), headers: ['ETag' => '"v2"']),
     );
     $contacts = sdk($http)->contacts();
 

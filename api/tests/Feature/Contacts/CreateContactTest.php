@@ -15,13 +15,13 @@ it('creates a contact in the account', function (): void {
     $response = $this->withToken(contactToken($account))
         ->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace', 'country' => 'GB', 'city' => 'Leeds'])
         ->assertCreated()
-        ->assertJsonPath('data.first_name', 'Ada')
-        ->assertJsonPath('data.country', 'GB')
-        ->assertJsonPath('data.email', null)
-        ->assertJsonPath('data.deleted_at', null)
+        ->assertJsonPath('first_name', 'Ada')
+        ->assertJsonPath('country', 'GB')
+        ->assertJsonPath('email', null)
+        ->assertJsonPath('deleted_at', null)
         ->assertETag();
 
-    $contact = Contact::query()->findOrFail($response->json('data.id'));
+    $contact = Contact::query()->findOrFail($response->json('id'));
 
     expect($contact->account_id)->toBe($account->id)
         ->and($response->headers->get('Location'))->toBe(route('v1.contacts.show', $contact));
@@ -34,7 +34,7 @@ it('gives the ETag a read would give', function (): void {
     $created = $this->withToken($token)->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace'])->assertCreated();
 
     expect($created->headers->get('ETag'))
-        ->toBe(contactEtag(Contact::query()->findOrFail($created->json('data.id')), $token));
+        ->toBe(contactEtag(Contact::query()->findOrFail($created->json('id')), $token));
 });
 
 it('replays a retry with the same Idempotency-Key rather than creating twice', function (): void {
@@ -82,7 +82,7 @@ it('puts the contact at one of the account\'s organisations', function (): void 
     $this->withToken(contactToken($account))
         ->postJson('/v1/contacts', ['first_name' => 'Ada', 'last_name' => 'Lovelace', 'organization_id' => $organization->id])
         ->assertCreated()
-        ->assertJsonPath('data.organization_id', $organization->id);
+        ->assertJsonPath('organization_id', $organization->id);
 });
 
 it('refuses another account\'s organisation, or a deleted one, alike', function (bool $deleted): void {

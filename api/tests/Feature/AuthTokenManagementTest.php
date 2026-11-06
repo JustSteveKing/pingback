@@ -170,23 +170,23 @@ it('creates an api key holding a subset of the current token abilities', functio
             'abilities' => ['auth:me'],
         ])
         ->assertCreated()
-        ->assertJsonPath('data.name', 'deploy-bot')
-        ->assertJsonPath('data.abilities', ['auth:me'])
-        ->assertJsonPath('data.is_current', false)
-        ->assertJsonPath('meta.token_type', 'Bearer');
+        ->assertJsonPath('name', 'deploy-bot')
+        ->assertJsonPath('abilities', ['auth:me'])
+        ->assertJsonPath('is_current', false)
+        ->assertJsonPath('token_type', 'Bearer');
 
-    $key = PersonalAccessToken::findToken((string) $response->json('meta.token'));
+    $key = PersonalAccessToken::findToken((string) $response->json('token'));
 
     expect($key)->not->toBeNull();
     expect($key?->expires_at?->isSameDay(now()->addDays(90)))->toBeTrue();
 
     app('auth')->forgetGuards();
 
-    $this->withToken((string) $response->json('meta.token'))->getJson('/v1/auth/me')->assertOk();
+    $this->withToken((string) $response->json('token'))->getJson('/v1/auth/me')->assertOk();
 
     app('auth')->forgetGuards();
 
-    $this->withToken((string) $response->json('meta.token'))->getJson('/v1/auth/tokens')->assertProblem(403);
+    $this->withToken((string) $response->json('token'))->getJson('/v1/auth/tokens')->assertProblem(403);
 });
 
 it('refuses to grant an ability the current token does not hold', function (): void {
@@ -252,7 +252,7 @@ it('keeps an api key working after session tokens have expired', function (): vo
     $key = $this->withToken($session->plainTextToken)
         ->postJson('/v1/auth/tokens', ['name' => 'nightly-job', 'abilities' => ['auth:me']])
         ->assertCreated()
-        ->json('meta.token');
+        ->json('token');
 
     $this->travel(config()->integer('sanctum.lifetimes.session_minutes') + 1)->minutes();
     app('auth')->forgetGuards();

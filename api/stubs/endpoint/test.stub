@@ -9,6 +9,6 @@ uses(RefreshDatabase::class);
 
 it('{{ successDescription }}', function (): void {
     // Call {{ method }} {{ uri }} with a token holding {{ abilityOrNone }}, then assert the response, e.g.
-    // ->assertCreated()->assertJsonPath('data.id', ...).
+    // ->assertCreated()->assertJsonPath('id', ...).
 })->todo();
 {{ guardTests }}

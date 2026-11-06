@@ -122,10 +122,10 @@ function post(string $path, array $body, ?string $token = null): string
     }
 
     $response = http()->sendRequest($request);
-    /** @var array{meta?: array{token?: string}} $json */
+    /** @var array{token?: string} $json */
     $json = json_decode((string) $response->getBody(), true);
 
-    return $json['meta']['token'] ?? throw new RuntimeException("{$path} answered {$response->getStatusCode()}: {$response->getBody()}");
+    return $json['token'] ?? throw new RuntimeException("{$path} answered {$response->getStatusCode()}: {$response->getBody()}");
 }
 
 /**
@@ -191,7 +191,7 @@ function makeDelivery(string $fixture, string $type, Closure $trigger): array
         $delivered = json_decode((string) file_get_contents($files[0]), true, flags: JSON_THROW_ON_ERROR);
     } finally {
         if ($subscription !== null) {
-            sendJson('DELETE', '/webhooks/'.$subscription['data']['id'], null, demoToken());
+            sendJson('DELETE', '/webhooks/'.$subscription['id'], null, demoToken());
         }
 
         proc_terminate($server);
@@ -201,10 +201,10 @@ function makeDelivery(string $fixture, string $type, Closure $trigger): array
 
     if (RecordMode::fromEnvironment() === RecordMode::Record) {
         // A throwaway subscription on a local API, deleted above: its secret signs nothing else.
-        file_put_contents($file, json_encode(['subscription' => $subscription['data']['id'], 'secret' => $subscription['meta']['secret'], 'delivery' => $delivered], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n");
+        file_put_contents($file, json_encode(['subscription' => $subscription['id'], 'secret' => $subscription['secret'], 'delivery' => $delivered], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n");
     }
 
-    return ['result' => $result, 'request' => deliveredRequest($delivered), 'subscription' => $subscription['data']['id'], 'secret' => $subscription['meta']['secret'], 'received_at' => $delivered['received_at']];
+    return ['result' => $result, 'request' => deliveredRequest($delivered), 'subscription' => $subscription['id'], 'secret' => $subscription['secret'], 'received_at' => $delivered['received_at']];
 }
 
 /**

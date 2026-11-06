@@ -15,8 +15,8 @@ it('shows an organisation with its ETag', function (): void {
     $this->withToken(ownerToken($organization->account))
         ->getJson("/v1/organizations/{$organization->id}")
         ->assertOk()
-        ->assertJsonPath('data.id', $organization->id)
-        ->assertJsonPath('data.name', 'Rippin Group')
+        ->assertJsonPath('id', $organization->id)
+        ->assertJsonPath('name', 'Rippin Group')
         ->assertETag();
 });
 
@@ -36,7 +36,7 @@ it('shows a deleted organisation, marked deleted', function (): void {
     $this->withToken(ownerToken($organization->account))
         ->getJson("/v1/organizations/{$organization->id}")
         ->assertOk()
-        ->assertJsonPath('data.deleted_at', $organization->deleted_at?->toAtomString());
+        ->assertJsonPath('deleted_at', $organization->deleted_at?->toAtomString());
 });
 
 it('treats another account\'s organisation as missing (ADR-0003)', function (): void {
